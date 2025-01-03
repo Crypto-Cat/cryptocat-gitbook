@@ -1,3 +1,7 @@
+## CryptoCat's Challenge
+
+-   [Web: Summar-AI-ze](cryptocat/summaraize/summaraize.md)
+
 ## Intigriti 1337UPLIVE
 
 -   [Warmup: BabyFlow](intigriti_24/warmup/babyflow/babyflow.md)
