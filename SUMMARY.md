@@ -2,6 +2,8 @@
 
 -   [CryptoCat's CTF writeups](README.md)
 -   [2024](2024/README.md)
+    -   [CryptoCat](2024/cryptocat/)
+        -   [Summar-AI-ze](2024/cryptocat/summaraize/summaraize.md)
     -   [Intigriti](2024/intigriti_24/)
         -   [Warmup](2024/intigriti_24/warmup/)
             -   [BabyFlow](2024/intigriti_24/warmup/babyflow/babyflow.md)
