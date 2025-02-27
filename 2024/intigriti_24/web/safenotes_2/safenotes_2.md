@@ -26,6 +26,8 @@ layout:
 
 > After receiving numerous bug bounty reports through the intigriti platform, the developer has implemented some security fixes! They are inviting bug hunters to have another go, so do your thing..
 
+[DOWNLOAD DOCKER/SOURCE HERE](https://github.com/intigriti/CTF/blob/main/2024/web/SafeNotes2/safenotes2.zip)
+
 This one might have looked familiar if you play the monthly web challenges released by [Intigriti](https://intigriti.com). As the challenge name indicates, this is a new "secure" version of `Safe Notes`.
 
 I'm not going to recap the previous challenge - if you missed it, it's still [available to play](https://challenge-0824.intigriti.io). Alternatively, you might prefer to review the [official writeup](https://bugology.intigriti.io/intigriti-monthly-challenges/0824) or [video walkthrough](https://www.youtube.com/watch?v=yGRRGUtT9MU) 😇
