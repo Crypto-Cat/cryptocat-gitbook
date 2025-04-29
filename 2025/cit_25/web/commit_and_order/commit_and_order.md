@@ -18,6 +18,8 @@ layout:
 
 # Commit & Order: Version Control Unit
 
+[![](https://img.youtube.com/vi/ZBdApaw0r0M/0.jpg)](https://www.youtube.com/watch?v=ZBdApaw0r0M?t=140 "Commit & Order: Version Control Uni
+
 ## Description
 
 > In software development, the repository is represented by two separate yet equally important branches...
@@ -31,14 +33,17 @@ Description hints at `git`, so we can check `http://23.179.17.40:58002/.git/`
 It returns a `Forbidden` page, meaning that it exists _but_ we cant access it. Time to check out the [git-dumper](https://github.com/arthaud/git-dumper) tool! It takes the URL and directory to dump to.
 
 {% code overflow="wrap" %}
+
 ```bash
 git-dumper http://23.179.17.40:58002/.git/ .
 ```
+
 {% endcode %}
 
 It downloads the git repo, now we can check the log.
 
 {% code overflow="wrap" %}
+
 ```bash
 git log
 
@@ -78,11 +83,13 @@ Date:   Fri Apr 18 12:18:13 2025 -0400
 
     first commit
 ```
+
 {% endcode %}
 
 Hmmm `"putting chatgpt to work"`? Sounds like somebody has been vibe coding! Let's do a diff.
 
 {% code overflow="wrap" %}
+
 ```bash
 git diff 68f8fcdbebcca3c8fda1e91fcb842992d09a41d4
 
@@ -98,16 +105,19 @@ git diff 68f8fcdbebcca3c8fda1e91fcb842992d09a41d4
 +  <div class="container">
 +    <p>This admin page is under construction and currently has no functionality.</p>
 ```
+
 {% endcode %}
 
 Looks like a base64 encoded message, let's decode.
 
 {% code overflow="wrap" %}
+
 ```bash
 echo "Q0lUezVkODFmNzc0M2Y0YmMyYWJ9" | base64 -d
 
 CIT{5d81f7743f4bc2ab}
 ```
+
 {% endcode %}
 
 Flag: `CIT{5d81f7743f4bc2ab}`
