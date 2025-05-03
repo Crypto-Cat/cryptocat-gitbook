@@ -18,7 +18,7 @@ layout:
 
 # Keeping Up With The Credentials
 
-[![](https://img.youtube.com/vi/ZBdApaw0r0M/0.jpg)](https://www.youtube.com/watch?v=ZBdApaw0r0M?t=450 "Mr Chatbot (CIT
+[![](https://img.youtube.com/vi/ZBdApaw0r0M/0.jpg)](https://www.youtube.com/watch?v=ZBdApaw0r0M?t=879 "Keeping up with the Credentials (CIT CTF)")
 
 ## Description
 

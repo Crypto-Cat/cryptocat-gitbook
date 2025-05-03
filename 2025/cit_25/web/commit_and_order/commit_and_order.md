@@ -18,7 +18,7 @@ layout:
 
 # Commit & Order: Version Control Unit
 
-[![](https://img.youtube.com/vi/ZBdApaw0r0M/0.jpg)](https://www.youtube.com/watch?v=ZBdApaw0r0M?t=140 "Commit & Order: Version Control Uni
+[![](https://img.youtube.com/vi/ZBdApaw0r0M/0.jpg)](https://www.youtube.com/watch?v=ZBdApaw0r0M?t=140 "Commit & Order: Version Control Unit (CIT CTF)")
 
 ## Description
 
