@@ -2,6 +2,11 @@
 
 -   [CryptoCat's CTF writeups](README.md)
 -   [2025](2025/README.md)
+    -   [Tsuku](2025/tsuku_25/)
+        -   [Web](2025/tsuku_25/web/)
+            -   [len_len](2025/tsuku_25/web/len_len/len_len.md)
+            -   [Flash](2025/tsuku_25/web/flash/flash.md)
+            -   [YAMLwaf](2025/tsuku_25/web/yamlwaf/yamlwaf.md)
     -   [CTF@CIT](2025/cit_25/)
         -   [Web](2025/cit_25/web/)
             -   [Breaking Authentication](2025/cit_25/web/broken_authentication/broken_authentication.md)
