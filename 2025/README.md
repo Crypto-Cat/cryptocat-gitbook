@@ -1,15 +1,15 @@
 ## NahamCon
 
--   [SNAD](nahamcon_25/web/snad/snad.md)
--   [Infinite Queue](nahamcon_25/web/infinite_queue/infinite_queue.md)
--   [TMCB](nahamcon_25/web/tmcb/tmcb.md)
--   [Method in the Madness](nahamcon_25/web/method_in_the_madness/method_in_madness.md)
--   [No Sequel](nahamcon_25/web/no_sequel/no_sequel.md)
--   [Advanced Screening](nahamcon_25/web/advanced_screening/advanced_screening.md)
--   [My First CTF](nahamcon_25/web/my_first_ctf/my_first_ctf.md)
--   [My Second CTF](nahamcon_25/web/my_second_ctf/my_second_ctf.md)
--   [My Third CTF](nahamcon_25/web/my_third_ctf/my_third_ctf.md)
--   [The Mission](nahamcon_25/web/the_mission/the_mission.md)
+-   [Web: SNAD](nahamcon_25/web/snad/snad.md)
+-   [Web: Infinite Queue](nahamcon_25/web/infinite_queue/infinite_queue.md)
+-   [Web: TMCB](nahamcon_25/web/tmcb/tmcb.md)
+-   [Web: Method in the Madness](nahamcon_25/web/method_in_the_madness/method_in_madness.md)
+-   [Web: No Sequel](nahamcon_25/web/no_sequel/no_sequel.md)
+-   [Web: Advanced Screening](nahamcon_25/web/advanced_screening/advanced_screening.md)
+-   [Web: My First CTF](nahamcon_25/web/my_first_ctf/my_first_ctf.md)
+-   [Web: My Second CTF](nahamcon_25/web/my_second_ctf/my_second_ctf.md)
+-   [Web: My Third CTF](nahamcon_25/web/my_third_ctf/my_third_ctf.md)
+-   [Web: The Mission](nahamcon_25/web/the_mission/the_mission.md)
 
 ## Tsuku
 
