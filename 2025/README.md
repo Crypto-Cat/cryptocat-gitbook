@@ -1,6 +1,6 @@
 ## N0PS
 
--   [Web: Press Me If U Can](nop_25/web/press_me_if_you_can/press_me_if_you_can.md)
+-   [Web: Press Me If U Can](nops_25/web/press_me_if_you_can/press_me_if_you_can.md)
 
 ## NahamCon
 
