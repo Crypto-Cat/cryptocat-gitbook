@@ -2,6 +2,9 @@
 
 -   [CryptoCat's CTF writeups](README.md)
 -   [2025](2025/README.md)
+    -   [N0PS](2025/nops_25/)
+        -   [Web](2025/nops_25/web/)
+            -   [Press Me If U Can](2025/nops_25/web/press_me_if_you_can/press_me_if_you_can.md)
     -   [NahamCon](2025/nahamcon_25/)
         -   [Web](2025/nahamcon_25/web/)
             -   [SNAD](2025/nahamcon_25/web/snad/snad.md)
