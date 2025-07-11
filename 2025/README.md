@@ -1,3 +1,7 @@
+## YesWeHack Dojo
+
+-   [06-25: Hex Color Palette](ywh_25/june/hex_color_palette.md)
+
 ## N0PS
 
 -   [Web: Press Me If U Can](nops_25/web/press_me_if_you_can/press_me_if_you_can.md)
