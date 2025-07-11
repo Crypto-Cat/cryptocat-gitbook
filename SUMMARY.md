@@ -1,9 +1,12 @@
 # Table of contents
 
 -   [CryptoCat's CTF writeups](README.md)
+-   [Monthly Challenges](monthly/README.md)
+    -   [YesWeHack Dojo](monthly/ywh/)
+        -   [06-25: Hex Color Palette](monthly/ywh/0625/hex_color_palette.md)
+    -   [CryptoCat](monthly/cryptocat/)
+        -   [12-24: Summar-AI-ze](monthly/cryptocat/1224/summaraize.md)
 -   [2025](2025/README.md)
-    -   [YesWeHack Dojo](2025/ywh_25/)
-        -   [06-25: Hex Color Palette](2025/ywh_25/june/hex_color_palette.md)
     -   [N0PS](2025/nops_25/)
         -   [Web](2025/nops_25/web/)
             -   [Press Me If U Can](2025/nops_25/web/press_me_if_you_can/press_me_if_you_can.md)
@@ -32,8 +35,6 @@
             -   [Mr. Chatbot](2025/cit_25/web/mr_chatbot/mr_chatbot.md)
             -   [Keeping Up with the Credentials](2025/cit_25/web/keeping_up_with_credentials/keeping_up_with_credentials.md)
 -   [2024](2024/README.md)
-    -   [CryptoCat](2024/cryptocat/README.md)
-        -   [Summar-AI-ze](2024/cryptocat/summaraize/summaraize.md)
     -   [Intigriti](2024/intigriti_24/)
         -   [Warmup](2024/intigriti_24/warmup/)
             -   [BabyFlow](2024/intigriti_24/warmup/babyflow/babyflow.md)
