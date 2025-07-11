@@ -2,7 +2,7 @@
 
 -   [CryptoCat's CTF writeups](README.md)
 -   [Monthly Challenges](monthly/README.md)
-    -   [YesWeHack Dojo](monthly/ywh/)
+    -   [YesWeHack](monthly/ywh/)
         -   [06-25: Hex Color Palette](monthly/ywh/0625/hex_color_palette.md)
     -   [CryptoCat](monthly/cryptocat/)
         -   [12-24: Summar-AI-ze](monthly/cryptocat/1224/summaraize.md)
