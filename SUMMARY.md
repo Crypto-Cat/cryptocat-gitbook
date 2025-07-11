@@ -2,6 +2,8 @@
 
 -   [CryptoCat's CTF writeups](README.md)
 -   [2025](2025/README.md)
+    -   [YesWeHack Dojo](2025/ywh_25/)
+        -   [06-25: Hex Color Palette](2025/ywh_25/june/hex_color_palette.md)
     -   [N0PS](2025/nops_25/)
         -   [Web](2025/nops_25/web/)
             -   [Press Me If U Can](2025/nops_25/web/press_me_if_you_can/press_me_if_you_can.md)
