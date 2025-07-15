@@ -3,7 +3,7 @@
 -   [Crypto: ASE](ictf_22/crypto/ase/ase.md)
 -   [Pwn: Links 1](ictf_22/pwn/links/links_1.md)
 -   [Pwn: Links 2](ictf_22/pwn/links/links_2.md)
--   [Pwn: Links 3](ictf_22/pwn/links_links_3.md)
+-   [Pwn: Links 3](ictf_22/pwn/links/links_3.md)
 -   [Pwn: Open Doors](ictf_22/pwn/open_doors/open_doors.md)
 
 ## SEETF
