@@ -1,5 +1,6 @@
 ## YesWeHack Dojo
 
+-   [07-25: CCTV Manager](ywh/0725/cctv_manager.md)
 -   [06-25: Hex Color Palette](ywh/0625/hex_color_palette.md)
 
 ## CryptoCat's Challenges
