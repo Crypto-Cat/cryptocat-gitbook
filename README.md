@@ -5,7 +5,7 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 
 # CryptoCat's CTF writeups
 
-A gitbook repository to keep track of my CTF writeups, e.g. challenge links, description, summary, videos, writeups, stats etc.
+A blog to keep track of my CTF writeups, e.g. challenge links, description, summary, videos, writeups, stats etc.
 
 Practice your skills by checking out [my favourite free hacking resources](https://cryptocat.me/resources)!
 
