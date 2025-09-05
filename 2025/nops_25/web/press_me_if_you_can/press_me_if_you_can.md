@@ -30,7 +30,7 @@ layout:
 
 We start on a page with a `Press Me` button, that moves when you get too close to it with your mouse. The eyes follow too, cute!
 
-![](images/0.png)
+![](images/0.PNG)
 
 The JS contains all the logic for the animation, movement etc. That's not too important though, we just need to click the button so should find it's declaration.
 
