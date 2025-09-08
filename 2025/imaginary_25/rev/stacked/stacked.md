@@ -29,16 +29,19 @@ The description seems to give us some important information; `94 7 d4 64 7 54 63
 ### Basic File Checks
 
 {% code overflow="wrap" %}
+
 ```bash
 file chal.out
 
 chal.out: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=836f77bf8a51ffeb485379fe5e9e1109e2389838, for GNU/Linux 3.2.0, not stripped
 ```
+
 {% endcode %}
 
 We've got a 64-bit ELF executable. Checking the strings, there's not much more than "REDACTED".
 
 {% code overflow="wrap" %}
+
 ```bash
 strings -n 10 chal.out
 
@@ -54,17 +57,20 @@ REDACTEDREDAC
 GCC: (Ubuntu 11.4.0-1ubuntu1~22.04.2) 11.4.0
 <SNIP>
 ```
+
 {% endcode %}
 
 Let's run the file with `ltrace`, to see if it reveals anything.
 
 {% code overflow="wrap" %}
+
 ```bash
 ltrace /home/crystal/Desktop/chall/chal.out
 
 4 2c 98 39 2a 9c e5 78 51 a2 31 39 9c
 +++ exited (status 0) +++
 ```
+
 {% endcode %}
 
 Nope! It outputs some hex values, but not the same ones we got in the description.
@@ -78,6 +84,7 @@ Next, let's open the binary in ghidra.
 We can see our `flag` variable is "REDACTEDREDAC". I renamed some variables and converted data types in the decompiled code, as seen below.
 
 {% code overflow="wrap" %}
+
 ```c
 {
   uchar transformed;
@@ -146,11 +153,15 @@ We can see our `flag` variable is "REDACTEDREDAC". I renamed some variables and 
   return 0;
 }
 ```
+
 {% endcode %}
 
-The flag goes through many transformations, before eventually being printed to the screen in hex. Essentially, our output (`4 2c 98 39 2a 9c e5 78 51 a2 31 39 9c`) is result of "REDACTEDREDAC" going through this flow. We were told the output of the _real_ flag is `94 7 d4 64 7 54 63 24 ad 98 45 72 35`, so we'll need to use that as an input while reversing each of the operations. Let's take a look at those functions, I'll rename variables manually in ghidra (`l` key) and add short comments as I go, for clarity.
+The flag goes through many transformations, before eventually being printed to the screen in hex. Essentially, our output (`4 2c 98 39 2a 9c e5 78 51 a2 31 39 9c`) is result of "REDACTEDREDAC" going through this flow.
+
+We were told the output of the _real_ flag is `94 7 d4 64 7 54 63 24 ad 98 45 72 35`, so we'll need to use that as an input while reversing each of the operations. Let's take a look at those functions, I'll rename variables manually in ghidra (`l` key) and add short comments as I go, for clarity.
 
 {% code overflow="wrap" %}
+
 ```c
 // add 15 to the byte
 int off(uchar param_1)
@@ -178,6 +189,7 @@ char inc(uchar param_1)
   return flag[(int)globalvar];
 }
 ```
+
 {% endcode %}
 
 Alright, so it will perform a 3 operations on a character before moving to the next one. There doesn't appear to be a rhythm to this, e.g. the first character has an addition, XOR and rotation whereas the second character has three XOR operations.
@@ -189,6 +201,7 @@ Remember, we are reversing the order of the operations - but also the functional
 ### Solve Script
 
 {% code overflow="wrap" %}
+
 ```c
 #include <stdio.h>
 #include <stdint.h>
@@ -291,16 +304,19 @@ int main(void){
     return 0;
 }
 ```
+
 {% endcode %}
 
-I tried to inverse it as much as possible, even if it wasn't really efficient (didn't make sense to use the `inc` function). We can compile and run the binary to recover the flag.
+I tried to inverse the original code as much as possible, even if it wasn't really efficient (didn't make sense to use the `inc` function). We can compile and run the binary to recover the flag.
 
 {% code overflow="wrap" %}
+
 ```bash
 gcc solve.c -o solve; chmod +x solve; ./solve
 
 1n54n3_5k1ll2
 ```
+
 {% endcode %}
 
 Flag: `ictf{1n54n3_5k1ll2}`
