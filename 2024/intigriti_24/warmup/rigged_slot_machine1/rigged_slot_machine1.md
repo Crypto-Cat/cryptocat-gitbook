@@ -32,7 +32,6 @@ This wasn't a challenge I intended to make, it's the result of an unintended sol
 
 `checksec` indicates all binary protections are enabled so we can assume it's not a pwn challenge (warmup lol). Perhaps start by testing the basic functionality of the app.
 
-
 ```bash
 ./rigged_slot1
 Welcome to the Rigged Slot Machine!
@@ -67,7 +66,6 @@ You lost $100.
 Current Balance: $420
 ```
 
-
 Yes, I made this shortly after returning home from Vegas 😂
 
 Since players only receive the binary (no sauce), let's check the winning condition in `ghidra`.
@@ -75,7 +73,6 @@ Since players only receive the binary (no sauce), let's check the winning condit
 ### Static Analysis
 
 I renamed variables already to make it clearer, here's the `main` function.
-
 
 ```c
 setup_alarm(180);
@@ -107,9 +104,7 @@ do {
 } while( true );
 ```
 
-
 The `play` function will spin the slot.
-
 
 ```c
 outcome = rand();
@@ -135,9 +130,7 @@ else {
 result = bet * multiplier - bet;
 ```
 
-
 The `payout` function will print the flag.
-
 
 ```c
 if (*balance < 133743) {
@@ -156,7 +149,6 @@ printf("Congratulations! You\'ve won the jackpot! Here is your flag: %s\n",flag)
 fclose(file);
 ```
 
-
 So, what's the problem? Look at those odds! 1/100 spins will get a 100x multiplier 👀
 
 If I run the program 100 times with a starting bet of $100, the chances are one of those spins will win me $10,000 🤑 That's enough capital to continue betting MAX BET (of course we'll get some 2-5x along the way too).
@@ -164,7 +156,6 @@ If I run the program 100 times with a starting bet of $100, the chances are one 
 ### Solve.py
 
 Here's my solve script. It starts with a $25 bet and then switches to $100 once the balance exceeds $10,000. You can play around with these values and see what works best, e.g. $10 starting bet, then switch to $100 when you reach $5000.
-
 
 ```python
 import sys
@@ -232,13 +223,11 @@ while not got_flag:
     io.close()
 ```
 
-
 Interestingly, solving the challenge locally is slightly different to remote. Notice that for the `remote` exploit, we get the flag by checking the winning balance whereas the `local` flag prints with an EOF error. I'm not sure if this is related to pwntools or something else, but maybe it will cause some confusion in the CTF (especially for a warmup challenge) 😬
 
 ### Performance
 
 Anyway, testing this locally is fast. Obviously it varies for each run due to the random element but with 3 attempts I got an average of 4 seconds\*, with the fastest being 1s.
-
 
 ```bash
 [*] balance: 126825
@@ -254,11 +243,9 @@ user	0m0.580s
 sys	0m0.472s
 ```
 
-
-\*Note that this is the time for all runs, not the winning run. For example, when you run the script it might lose 100 games in a row before it wins. Some of those games may take a few seconds, but could be longer. In other words, if `time` shows over 180 seconds and you still won, it's because the final game didn't exceed the limit.
+_Note:_ this is the time for all runs, not the winning run. For example, when you run the script it might lose 100 games in a row before it wins. Some of those games may take a few seconds, but could be longer. In other words, if `time` shows over 180 seconds and you still won, it's because the final game didn't exceed the limit.
 
 Solving remotely certainly takes longer, but it's possible to solve well within the allocated 180 second time limit. In 3 attempts I got an average of 62 seconds, with the fastest being 34s.
-
 
 ```bash
 [*] balance: 136800
@@ -270,7 +257,6 @@ real	0m33.884s
 user	0m0.866s
 sys	0m0.678s
 ```
-
 
 Flag: `INTIGRITI{ju57_l1k3_7h47_y0u_4r3_4_m1ll10n41r3!}`
 
