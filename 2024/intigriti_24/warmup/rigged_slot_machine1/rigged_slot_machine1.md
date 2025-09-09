@@ -240,7 +240,7 @@ Anyway, testing this locally is fast. Obviously it varies for each run due to th
 
 real	0m1.026s
 user	0m0.580s
-sys	0m0.472s
+sys	    0m0.472s
 ```
 
 _Note:_ this is the time for all runs, not the winning run. For example, when you run the script it might lose 100 games in a row before it wins. Some of those games may take a few seconds, but could be longer. In other words, if `time` shows over 180 seconds and you still won, it's because the final game didn't exceed the limit.
@@ -260,6 +260,6 @@ sys	0m0.678s
 
 Flag: `INTIGRITI{ju57_l1k3_7h47_y0u_4r3_4_m1ll10n41r3!}`
 
-Note: I have to apologise to some players here. After the event I helped debug a players script and it turns out I didn't leave enough time for those really far from the server (India, Australia etc) with poor connections. I _should_ of tested my solution with a VPN connected in various countries before the event, it didn't occur to me but I know for next time! 💜
+I have to apologise to some players here. After the event I helped debug a players script and it turns out I didn't leave enough time for those really far from the server (India, Australia etc) with poor connections. I _should_ of tested my solution with a VPN connected in various countries before the event, it didn't occur to me but I know for next time! 💜
 
 [Someone](https://www.linkedin.com/in/gonçalo-melo-6485592a0) found a nice unintended that works on Rigged slot 1. Using careful timing, you could predict the "random" seed and therefore the outcome of each bet 🧠 Check out the [writeup](https://xstf.pt/2024-11-16-RiggedSlotMachine1) 😎
