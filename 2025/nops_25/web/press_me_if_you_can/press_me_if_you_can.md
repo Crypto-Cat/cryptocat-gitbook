@@ -34,34 +34,28 @@ We start on a page with a `Press Me` button, that moves when you get too close t
 
 The JS contains all the logic for the animation, movement etc. That's not too important though, we just need to click the button so should find it's declaration.
 
-{% code overflow="wrap" %}
 
 ```js
 const btn = document.querySelector("button");
 ```
 
-{% endcode %}
 
 Later in the script, it is disabled.
 
-{% code overflow="wrap" %}
 
 ```js
 btn.disabled = true;
 ```
 
-{% endcode %}
 
 We can modify these properties from the browser console, and click the button.
 
-{% code overflow="wrap" %}
 
 ```js
 btn.disabled = false;
 btn.click();
 ```
 
-{% endcode %}
 
 A POST request is issued, and the response contains our flag (displayed in the console log).
 

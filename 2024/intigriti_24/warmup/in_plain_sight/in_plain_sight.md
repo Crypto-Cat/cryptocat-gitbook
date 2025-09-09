@@ -30,7 +30,6 @@ Players download an image of a cute cat (his name is Yang 💜).
 
 Running a tool like `foremost` or `binwalk` will reveal an embedded file.
 
-{% code overflow="wrap" %}
 
 ```bash
 binwalk -e meow.jpg
@@ -41,11 +40,9 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 2146976       0x20C2A0        End of Zip archive, footer length: 22
 ```
 
-{% endcode %}
 
 If we try to unzip the archive, we'll see it's encrypted.
 
-{% code overflow="wrap" %}
 
 ```bash
 unzip 20BA6E.zip
@@ -53,11 +50,9 @@ Archive:  20BA6E.zip
 [20BA6E.zip] flag.png password:
 ```
 
-{% endcode %}
 
 Returning to the original JPG, check the strings.
 
-{% code overflow="wrap" %}
 
 ```bash
 strings -n 10 meow.jpg
@@ -68,11 +63,9 @@ YoullNeverGetThis719482
 flag.pngUT
 ```
 
-{% endcode %}
 
 Try `YoullNeverGetThis719482` as a password.
 
-{% code overflow="wrap" %}
 
 ```bash
 unzip 20BA6E.zip
@@ -82,7 +75,6 @@ replace flag.png? [y]es, [n]o, [A]ll, [N]one, [r]ename: y
   inflating: flag.png
 ```
 
-{% endcode %}
 
 Opening the image, it appears to be pure white.
 

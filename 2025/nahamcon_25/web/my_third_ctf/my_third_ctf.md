@@ -32,7 +32,6 @@ Didn't find anything, this challenge says "incrementally worse" so maybe we need
 
 Thinking about the hint again - maybe it means each word in the wordlist is rotated by a different value?
 
-{% code overflow="wrap" %}
 
 ```
 word1 -> ROT1
@@ -41,11 +40,9 @@ word3 -> ROT3
 etc..
 ```
 
-{% endcode %}
 
 Unfortunately, this didn't work either! I didn't solve this one but it turns out you needed to try all iterations of ROT with each word, for each directory, e.g.
 
-{% code overflow="wrap" %}
 
 ```python
 /qbhf # ROT1: page
@@ -54,7 +51,6 @@ Unfortunately, this didn't work either! I didn't solve this one but it turns out
 /qbhf/oguucig/wrnhq/lewl # ROT4: hash
 ```
 
-{% endcode %}
 
 Visiting `/qbhf/oguucig/wrnhq/lewl` would recover the flag!
 

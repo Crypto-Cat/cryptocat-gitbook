@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 import requests
 import string
@@ -66,6 +65,5 @@ while restart:
 
         sleep(1)
 ```
-{% endcode %}
 
 Flag: `CHTB{Th3_3xTr4_l3v3l_4Cc3s$_c0nTr0l}`

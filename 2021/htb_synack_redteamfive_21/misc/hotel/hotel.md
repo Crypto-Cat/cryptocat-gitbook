@@ -20,7 +20,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -42,4 +41,3 @@ io.sendline('3')
 # Win?
 io.interactive()
 ```
-{% endcode %}

@@ -32,16 +32,13 @@ We receive an APK file, hopefully it doesn't require any dynamic analysis becaus
 
 For better syntax highlighting, searching etc you might want to dump the files and open the folder in VS-Code, or just copy/paste. Starting with the `MainActivity`, we see some mentions of a `transformedFlag` which is "REDACTED".
 
-{% code overflow="wrap" %}
 ```java
 public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	EdgeToEdge.enable$default(this, null, null, 3, null);
 	final String transformedFlag = MainActivityKt.transformFlag("REDACTED");
 ```
-{% endcode %}
 
-{% code overflow="wrap" %}
 ```java
 public final void invoke(Composer $composer, int $changed) {
 	ComposerKt.sourceInformation($composer, "C24@879L277,24@868L288:MainActivity.kt#8w8ms1");
@@ -51,11 +48,9 @@ public final void invoke(Composer $composer, int $changed) {
 		}
 		final String str = transformedFlag;
 ```
-{% endcode %}
 
 Sounds interesting, but those 2 lines are the only mentioned of the `transformedFlag`. Let's check the other file; `MainActivityKt`.
 
-{% code overflow="wrap" %}
 ```java
 public static final String transformFlag(String flag) {
     Intrinsics.checkNotNullParameter(flag, "flag");
@@ -87,11 +82,9 @@ public static final String transformFlag(String flag) {
     return res;
 }
 ```
-{% endcode %}
 
 Well, there's our flag transformation function! The code is actually really simple, but might look a little confusing, mostly due to the reuse of character sets and variable naming. Let's clean it up a bit and add some comments.
 
-{% code overflow="wrap" %}
 ```java
 public static final String transformFlag(String flag) {
     String alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -115,7 +108,6 @@ public static final String transformFlag(String flag) {
     return res.toString();
 }
 ```
-{% endcode %}
 
 It essentially loops through the flag, shifting each character by a different amount, depending on which character set it comes from (letters/digits/specials).
 
@@ -127,7 +119,6 @@ I always default to Python, so let's \[paradoxically\] change things up a bit by
 
 ### Solve Script
 
-{% code overflow="wrap" %}
 ```java
 public class Solver {
     public static final String reverseTransform(String flag) {
@@ -159,15 +150,12 @@ public class Solver {
     }
 }
 ```
-{% endcode %}
 
-{% code overflow="wrap" %}
 ```bash
 java Solver.java
 
 Reversed flag: ictf{1_l0v3_@ndr0id_stud103}
 ```
-{% endcode %}
 
 Nice! We solved it without ever needing to run the app 😌 I opened Android Studio out of interest and as usual the SDK is missing/broken, need to reinstall and create a new device.. Some other time 🥱
 

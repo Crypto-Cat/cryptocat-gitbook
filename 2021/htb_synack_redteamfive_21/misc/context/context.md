@@ -22,7 +22,6 @@ layout:
 
 #### flag.js
 
-{% code overflow="wrap" %}
 ```js
 var _0x5bf1 = [
     "apply",
@@ -443,11 +442,9 @@ function _0x5d26ac(_0x4a1328) {
     } catch (_0x3a011d) {}
 }
 ```
-{% endcode %}
 
 #### solve.html
 
-{% code overflow="wrap" %}
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -460,4 +457,3 @@ function _0x5d26ac(_0x4a1328) {
     </body>
 </html>
 ```
-{% endcode %}

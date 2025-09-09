@@ -32,7 +32,6 @@ Now is the time to decompile the APK with a tool like `jadx-gui` (maybe you did 
 
 You will find it is a [cordova app](https://cordova.apache.org) and in the `index.html` is the pin, simplez!
 
-{% code overflow="wrap" %}
 
 ```js
 function unlockVault() {
@@ -50,11 +49,9 @@ function unlockVault() {
 }
 ```
 
-{% endcode %}
 
 It retrieves the encrypted key.
 
-{% code overflow="wrap" %}
 
 ```js
 function retrieveencryptedKey() {
@@ -66,7 +63,6 @@ function retrieveencryptedKey() {
 }
 ```
 
-{% endcode %}
 
 It looks something like this (the UI and encrypted format changed a bit but I cba booting `android-studio` in my VM lol).
 
@@ -74,7 +70,6 @@ It looks something like this (the UI and encrypted format changed a bit but I cb
 
 But that's no use, we want the decrypted key! Lets check the `keygen()` function.
 
-{% code overflow="wrap" %}
 
 ```js
 (function (_0x506dbf, _0x170411) {
@@ -178,7 +173,6 @@ function keygen() {
 }
 ```
 
-{% endcode %}
 
 Ewww.. obfuscation 🤮 There's a lot of approaches here. You might try to manually reverse, or throw it into some de-obfuscation tool 🤔
 
@@ -188,7 +182,6 @@ Maybe you focus on values you can see in the original code, e.g. what is `942574
 
 Let's [deobfuscate](https://obf-io.deobfuscate.io).
 
-{% code overflow="wrap" %}
 
 ```js
 function affineEncrypt(_0x1930bc, _0x36e79b, _0x33477e) {
@@ -224,11 +217,9 @@ function keygen() {
 }
 ```
 
-{% endcode %}
 
 Much better! I'll also ask ChatGPT to further deobfuscate, including variable renaming, comments etc.
 
-{% code overflow="wrap" %}
 
 ```js
 // Function to perform Affine encryption on a single byte
@@ -275,11 +266,9 @@ function keygen() {
 }
 ```
 
-{% endcode %}
 
 We can paste that into the devtools console and print out each step.
 
-{% code overflow="wrap" %}
 
 ```js
 let reordered = [parts[3], parts[5], parts[1], parts[4], parts[2], parts[0]].join("");
@@ -292,7 +281,6 @@ console.log(transformedArray);
 return transformedArray.map((byte) => ("0" + byte.toString(16)).slice(-2)).join("");
 ```
 
-{% endcode %}
 
 This time, we get some new values.
 
@@ -302,7 +290,6 @@ Hex decoding `d733634327037353f546c60336f5332757363353f5270366f5863657d6f50353b7
 
 Alright, let's convert the other arrays to ASCII.
 
-{% code overflow="wrap" %}
 
 ```js
 function keygen() {
@@ -336,7 +323,6 @@ function keygen() {
 keygen();
 ```
 
-{% endcode %}
 
 We get our flag!
 

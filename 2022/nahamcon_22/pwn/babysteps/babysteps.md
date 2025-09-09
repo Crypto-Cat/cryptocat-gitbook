@@ -24,7 +24,6 @@ layout:
 
 ## Source
 
-{% code overflow="wrap" %}
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -137,11 +136,9 @@ int main(int argc, char **argv){
 
 }
 ```
-{% endcode %}
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -235,4 +232,3 @@ io.sendline(payload)
 # Got Shell?
 io.interactive()
 ```
-{% endcode %}

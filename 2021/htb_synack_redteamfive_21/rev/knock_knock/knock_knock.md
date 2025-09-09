@@ -26,7 +26,6 @@ layout:
 
 #### backdoor.py
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -42,4 +41,3 @@ io.send(cmd)
 
 io.interactive()
 ```
-{% endcode %}

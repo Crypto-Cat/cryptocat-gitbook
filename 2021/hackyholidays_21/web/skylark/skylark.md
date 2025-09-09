@@ -30,7 +30,6 @@ layout:
 
 #### brute.py
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 import requests
@@ -85,11 +84,9 @@ for count, password in enumerate(wordlist):
 print("Failed to find correct password :(")
 wordlist.close()
 ```
-{% endcode %}
 
 #### hashcrack.py
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 import zlib
@@ -116,4 +113,3 @@ for count in range(99999999999):
 print("Failed to find correct password :(")
 wordlist.close()
 ```
-{% endcode %}

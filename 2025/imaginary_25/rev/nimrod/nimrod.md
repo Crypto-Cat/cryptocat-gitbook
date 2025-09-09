@@ -28,17 +28,14 @@ layout:
 
 The binary is not stripped, so we shouldn't have too hard a time reversing in ghidra.
 
-{% code overflow="wrap" %}
 ```bash
 file nimrod
 
 nimrod: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=d2214d1703d64f0f7620e8d86f2790ebc1f0b861, for GNU/Linux 3.2.0, not stripped
 ```
-{% endcode %}
 
 Try to run the binary with `ltrace` for a quick win, but no such luck 🍀
 
-{% code overflow="wrap" %}
 ```bash
 ltrace ./nimrod
 
@@ -47,11 +44,9 @@ meow
 Incorrect.
 +++ exited (status 0) +++
 ```
-{% endcode %}
 
 I would normally go straight for ghidra, but it's been so long since I opened `gdb-pwndbg` - let's see if it's still working 😆
 
-{% code overflow="wrap" %}
 ```bash
 gdb-pwndbg ./nimrod
 
@@ -62,11 +57,9 @@ Reading symbols from ./nimrod...
 ------- tip of the day (disable with set show-tips off) -------
 Use GDB's pi command to run an interactive Python console where you can use Pwndbg APIs like pwndbg.aglib.memory.read(addr, len), pwndbg.aglib.memory.write(addr, data), pwndbg.aglib.vmmap.get() and so on!
 ```
-{% endcode %}
 
 Wow, so much output these days 😕 Let's check the functions.
 
-{% code overflow="wrap" %}
 ```r
 pwndbg> info functions
 
@@ -88,11 +81,9 @@ Non-debugging symbols:
 0x0000000000001d70  echoBinSafe
 <SNIP>
 ```
-{% endcode %}
 
 There's a lot, we can start by disassembling `main`.
 
-{% code overflow="wrap" %}
 ```r
 pwndbg> disassemble main
 
@@ -108,11 +99,9 @@ Dump of assembler code for function main:
    0x000000000000132b <+43>:	ret
 End of assembler dump.
 ```
-{% endcode %}
 
 It just saves command line args (`cmdLine`, `cmdCount`, `gEnv`) before calling `NimMain`. After `NimMain` returns, it grabs `nim_program_result` (a global) and returns it. The real functionality lies within the `NimMain` function.
 
-{% code overflow="wrap" %}
 ```r
 pwndbg> disassemble NimMain
 
@@ -150,7 +139,6 @@ Dump of assembler code for function NimMain:
    0x0000000000010275 <+165>:	ret
    0x0000000000010276 <+166>:	call   0x11f0
 ```
-{% endcode %}
 
 OK, that's enough GDB for me for now 😂 There are many functions in this program and I want to analyse with ghidra for a better layout _and_ pseudocode, renaming/commenting functionality etc. Once we find some interesting code there, we can always return to our debugger and setup a breakpoint 🔎
 
@@ -158,7 +146,6 @@ OK, that's enough GDB for me for now 😂 There are many functions in this progr
 
 I use a [bash alias](https://github.com/Crypto-Cat/CTF/blob/main/my_bash_aliases.md) to automate importing the binary to ghidra which speeds things up a lot.
 
-{% code overflow="wrap" %}
 ```bash
 ghidra_auto -t nimrod
 
@@ -166,7 +153,6 @@ nimrod: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically lin
 
 Will run analysis in 1 second, press any key to cancel
 ```
-{% endcode %}
 
 There we go, looking better already!
 
@@ -174,7 +160,6 @@ There we go, looking better already!
 
 We could rename some functions and variables, they are needlessly obfuscated to make it look complicated, but let's jump to the `NimMainInner` function.
 
-{% code overflow="wrap" %}
 ```c
 void NimMainInner(void)
 {
@@ -194,7 +179,6 @@ void NimMainInner(void)
   return;
 }
 ```
-{% endcode %}
 
 Again, we could start renaming things - there's already some clues about XOR and an encrypted flag.
 
@@ -202,7 +186,6 @@ Again, we could start renaming things - there's already some clues about XOR and
 
 I've been focusing on web for a while, so I'm interested to see how LLMs help with this. I paste all the pseudocode we've seen so far (`NimMain` and `NimMainInner`) to ChatGPT and ask for some lightly commented conversion to `C`.
 
-{% code overflow="wrap" %}
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -235,11 +218,9 @@ void NimMainInner(void) {
     }
 }
 ```
-{% endcode %}
 
 OK, that's actually pretty cool! It got some stuff wrong.. literally, since "Wrong!" isn't a string in the binary 😆 That's my fault though for not giving it enough context. Let's dump the other functions, feeding the input to ChatGPT as we go.
 
-{% code overflow="wrap" %}
 ```c
 void echoBinSafe(long param_1,long param_2)
 {
@@ -269,9 +250,7 @@ void echoBinSafe(long param_1,long param_2)
   return;
 }
 ```
-{% endcode %}
 
-{% code overflow="wrap" %}
 ```c
 void nsuStrip(long *param_1,char param_2,char param_3,long param_4)
 {
@@ -329,9 +308,7 @@ void nsuStrip(long *param_1,char param_2,char param_3,long param_4)
   return;
 }
 ```
-{% endcode %}
 
-{% code overflow="wrap" %}
 ```c
 long * xorEncrypt__nimrod_46(long *param_1,undefined4 param_2)
 
@@ -449,9 +426,7 @@ LAB_0010ff24:
   return plVar2;
 }
 ```
-{% endcode %}
 
-{% code overflow="wrap" %}
 ```c
 bool eqeq___nimrod_69(ulong *param_1,ulong *param_2)
 {
@@ -505,7 +480,6 @@ LAB_0010f38d:
   raiseOverflow();
 }
 ```
-{% endcode %}
 
 I tell ChatGPT I want a summary of the binary so far, and a working replica in `C`.
 
@@ -529,7 +503,6 @@ The **only cryptographic/validation logic** is in `xorEncrypt__nimrod_46` and th
 
 #### PoC.c
 
-{% code overflow="wrap" %}
 ```c
 #include <stdio.h>
 #include <stdlib.h>
@@ -594,7 +567,6 @@ int main(void) {
     return 0;
 }
 ```
-{% endcode %}
 
 Wow, LLMs changed the game for reversing for sure! The only downside here is the manual effort of copy/pasting each function, but I've seen people doing some crazy integrations (e.g. [blasty](https://x.com/bl4sty/status/1904631424663379973), [LaurieWired](https://x.com/lauriewired/status/1904582573046878333), [itszn](https://x.com/itszn13/status/1903227860648886701), [wilgibbs](https://wilgibbs.com/blog/defcon-finals-mcp/)) which I look forward to exploring in the future.
 
@@ -610,17 +582,14 @@ Let's check with ChatGPT again.
 
 > Nim strings/sequences are not just raw bytes. They’re usually a struct like:
 
-{% code overflow="wrap" %}
 ```c
 [0x0] = length (8 bytes, little-endian)
 [0x8] = other metadata (capacity, typedescriptor pointer, etc.)
 [0x10] = actual string data bytes
 ```
-{% endcode %}
 
 Paste in the assembly output, since we are too lazy to extract the hex ourselves 😴
 
-{% code overflow="wrap" %}
 ```r
 001116e0  22 00 00 00 00 00 00 00   <- length = 0x22 = 34 bytes
 001116e8  22 00 00 00 00 00 00 40   <- capacity / type ptr (not relevant)
@@ -630,11 +599,9 @@ Paste in the assembly output, since we are too lazy to extract the hex ourselves
           e3 98 b5 c9 b8 a0 88 30
           d9 0a
 ```
-{% endcode %}
 
 We'll make one final request; a quick python solve script.
 
-{% code overflow="wrap" %}
 ```python
 encrypted = bytes([
     0x28,0xf8,0x3e,0xe6,0x3e,0x2f,0x43,0x0c,
@@ -649,20 +616,16 @@ ks = bytes([(key >> (8*(i % 4))) & 0xff for i in range(len(encrypted))])
 flag = bytes([c ^ k for c,k in zip(encrypted, ks)])
 print(flag.decode(errors="ignore"))
 ```
-{% endcode %}
 
 Give it a run.
 
-{% code overflow="wrap" %}
 ```bash
 python solve.py
 		<tOj9e2Cԋڏ#
 ```
-{% endcode %}
 
 That does not look like a flag 💀 Oh, we forgot one function in ghidra - it was part of the `xorEncrypt__nimrod_46` function.
 
-{% code overflow="wrap" %}
 ```c
 long * keystream__nimrod_20(int param_1,long param_2)
 {
@@ -701,22 +664,18 @@ long * keystream__nimrod_20(int param_1,long param_2)
   return plVar1;
 }
 ```
-{% endcode %}
 
 That function is just a linear congruential generator (LCG) with params:
 
-{% code overflow="wrap" %}
 ```perl
 state = seed
 repeat len times:
     state = state * 0x19660d + 0x3c6ef35f
     output[i] = (state >> 16) & 0xff
 ```
-{% endcode %}
 
 Alright, let's update the PoC!
 
-{% code overflow="wrap" %}
 ```python
 encrypted = bytes([
     0x28,0xf8,0x3e,0xe6,0x3e,0x2f,0x43,0x0c,
@@ -738,15 +697,12 @@ ks = keystream(0x13371337, len(encrypted))
 flag = bytes([c ^ k for c,k in zip(encrypted, ks)])
 print(flag.decode(errors="ignore"))
 ```
-{% endcode %}
 
-{% code overflow="wrap" %}
 ```bash
 python solve.py
 
 ictf{a_mighty_hunter_bfc16cce9dc8}
 ```
-{% endcode %}
 
 We got the flag! Was that a lesson in pro reversing? Nope, it wasn't even a particularly efficient route to solving, but hopefully there was some useful tips about using LLMs effectively in your workflow. I'll look to make mine more effective in future with the MCP/automation stuff everyone is raving about these days 😁
 

@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -94,6 +93,5 @@ io.sendlineafter('!', payload)
 # Got Shell?
 io.interactive()
 ```
-{% endcode %}
 
 Flag: `flag{a73dc20c1cd1f918ae7b591e8625e349}`

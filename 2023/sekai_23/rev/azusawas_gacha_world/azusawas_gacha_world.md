@@ -40,7 +40,6 @@ Since the game is Unity, we can try to decompile the `Assembly-CSharp.dll` with 
 
 Immediately, I noticed some interesting values, e.g. the `Character` class has a `flag` property.
 
-{% code overflow="wrap" %}
 ```csharp
 namespace RequestClasses
 {
@@ -71,13 +70,11 @@ namespace RequestClasses
 	}
 }
 ```
-{% endcode %}
 
 We can check where the character is referenced, and find some interesting functions like `SendGachaRequest` which makes a JSON web request.
 
 I opened Wireshark and pulled some more cards, finding the request.
 
-{% code overflow="wrap" %}
 ```bash
 POST /gacha HTTP/1.1
 Host: 172.86.64.89:3000
@@ -90,11 +87,9 @@ Content-Length: 39
 
 {"crystals":100,"pulls":0,"numPulls":1}
 ```
-{% endcode %}
 
 The response includes the card name, rarity etc.
 
-{% code overflow="wrap" %}
 ```bash
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -105,13 +100,11 @@ Content-Length: 198
 
 {"characters":[{"name":"......... .........","cardName":"....................................","rarity":"2*","attribute":"Cute","splashArt":"warm-camping-style","avatar":"warm-camping-style-icon"}]}
 ```
-{% endcode %}
 
 Interesting.. I'll save this for later - back to the code.
 
 There's another function called `DisplaySplashArt`, which has a different method to display each card, depending on the rarity.
 
-{% code overflow="wrap" %}
 ```csharp
 public IEnumerator DisplaySplashArt(Character[] characters)
 {
@@ -154,11 +147,9 @@ public IEnumerator DisplaySplashArt(Character[] characters)
 	yield break;
 }
 ```
-{% endcode %}
 
 Comparing the methods, we see that the `DisplayFourStarCharacter` has an interesting section of code.
 
-{% code overflow="wrap" %}
 ```csharp
 string flag = character.flag;
 if (flag != null)
@@ -172,11 +163,9 @@ if (flag != null)
 	this.flagImage.sprite = sprite;
 }
 ```
-{% endcode %}
 
 Looks like all we need to do is get a 4-star card and we've solved the challenge! First, I patched the code so that all cards would be processed as 4-star (I thought maybe the 2-3 star characters could still have a flag property, that wasn't being extracted/displayed). The patched code looked like:
 
-{% code overflow="wrap" %}
 ```csharp
 public IEnumerator DisplaySplashArt(Character[] characters)
 {
@@ -213,21 +202,17 @@ public IEnumerator DisplaySplashArt(Character[] characters)
     yield break;
 }
 ```
-{% endcode %}
 
 It didn't work though - we saw from the web request that the cards are returned from the server though, this isn't going to be a client-side trick. Maybe we just need to brute-force until we get it? Well, we can check the game rules and find that the odds are as follows.
 
-{% code overflow="wrap" %}
 ```bash
 4 star = 0%
 3 star = 8.5%
 2 star = 91.5%
 ```
-{% endcode %}
 
 Sounds like we have literally zero chance of getting a 4 star card. I decided to copy the HTTP request we found earlier to burp suite and play around with the values. After a few attempts I came across this one.
 
-{% code overflow="wrap" %}
 ```bash
 POST /gacha HTTP/1.1
 Host: 172.86.64.89:3000
@@ -240,11 +225,9 @@ Content-Length: 59
 
 {"crystals":99999999999,"pulls":999999999999,"numPulls":10}
 ```
-{% endcode %}
 
 The response contained a happy-birthday character containing a big base64 blob.
 
-{% code overflow="wrap" %}
 ```bash
 {
   "characters": [
@@ -258,7 +241,6 @@ The response contained a happy-birthday character containing a big base64 blob.
       "flag": "redacted due to size"
 ..........
 ```
-{% endcode %}
 
 We can save the base64 blob to a text file and run `base64 -d file_name > flag` and then check the file type with `file flag`.
 

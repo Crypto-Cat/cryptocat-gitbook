@@ -34,13 +34,11 @@ When going to the cart, I realise the ID is unique: `page=cart&id=694`
 
 If we change the ID, it will give access to other users carts. So, let's check the #1 user for the flag.
 
-{% code overflow="wrap" %}
 
 ```
 https://shoe-shop-1.ctf.zone/index.php?page=cart&id=1
 ```
 
-{% endcode %}
 
 ![](images/1.PNG)
 

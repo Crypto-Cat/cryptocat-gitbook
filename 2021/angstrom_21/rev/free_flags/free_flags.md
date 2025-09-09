@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -69,6 +68,5 @@ io.recvuntil("here's the FREE FLAG:\n")
 flag = io.recv()
 success(flag)
 ```
-{% endcode %}
 
 Flag: `actf{what_do_you_mean_bananas_arent_animals}`

@@ -20,7 +20,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -42,4 +41,3 @@ for i in range(200):
     io.sendlineafter(b'? ', chars.encode())
 io.interactive()
 ```
-{% endcode %}

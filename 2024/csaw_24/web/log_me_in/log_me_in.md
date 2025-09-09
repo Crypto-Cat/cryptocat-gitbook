@@ -24,7 +24,6 @@ layout:
 
 ## Source Code
 
-{% code overflow="wrap" %}
 
 ```python
 from flask import make_response, session, Blueprint, request, jsonify, render_template, redirect, send_from_directory
@@ -122,23 +121,19 @@ def logout():
     return response
 ```
 
-{% endcode %}
 
 ## Solution
 
 To get the flag, we need to visit the `/user` endpoint with our UID set to zero.
 
-{% code overflow="wrap" %}
 
 ```python
 msg = flag if userinfo['uid'] == 0 else "No special message at this time..."
 ```
 
-{% endcode %}
 
 We can register an account and log in; notice how the UID is set?
 
-{% code overflow="wrap" %}
 
 ```python
 user = {
@@ -149,11 +144,9 @@ user = {
 token = encode(dict(user))
 ```
 
-{% endcode %}
 
 It uses a custom `encode` function, imported from `utils.py`
 
-{% code overflow="wrap" %}
 
 ```python
 def is_alphanumeric(text):
@@ -191,13 +184,11 @@ def decode(inp: str) -> dict:
         return None
 ```
 
-{% endcode %}
 
 The JSON object is XORd with the key. Sounds like an OTP issue? If we encode two different user objects (`c1` and `c2`) and then XOR them together, we should recover the key!
 
 My first attempt at this failed; the username/display name probably needed to be longer (hinted at by the 50-char length limits). The problem was finding 50 char names that hadn't already been taken lol.
 
-{% code overflow="wrap" %}
 
 ```
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABB = 48674c3731025651282f614a4d5437132579332603202236367628351513723226782c30060a3939302a351b0e313339000f0b28190738107417743b0209702d535e551417281f1c2114361540494e6b36767573360e340e02122a25181b251370220a05280c0d0a083923112904280f3b247604247231760a25071523360c733330114a55604c0f02724d6e7027
@@ -205,27 +196,22 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABB = 48674c3731025651282f614a4d5
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBAA = 48674c3731025651282f614a4d543410267a30250023213535752b3616107131257b2f3305093a3a332936180d32303a030c082b1a043b1377147738010a732e535e551417281f1c2114361540494e6b35757670350d370d011129261b182610732109062b0f0e090b3a20122a072b0c38277507277132750926041620350f703033114a55604c0f02724d6e7027
 ```
 
-{% endcode %}
 
 I used CyberChef to [recover the key](<https://gchq.github.io/CyberChef/#recipe=From_Hex('Auto'/disabled)XOR(%7B'option':'Hex','string':'48674c3731025651282f614a4d5437132579332603202236367628351513723226782c30060a3939302a351b0e313339000f0b28190738107417743b0209702d535e551417281f1c2114361540494e6b36767573360e340e02122a25181b251370220a05280c0d0a083923112904280f3b247604247231760a25071523360c733330114a55604c0f02724d6e7027'%7D,'Standard',false)&input=eyJ1c2VybmFtZSI6ICJBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFCQiIsICJkaXNwbGF5cyI6ICJBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFCQiIsICJ1aWQiOiAwfQ&oeol=FF>):
 
-{% code overflow="wrap" %}
 
 ```
 3E9DTp80EJCpmvvRd8rgBacww7itTR3sg9mqGKxxqktZOprxANJiXFyQ5V5zCH2oqru6sAllMuOfbsnIw742wOuOCSkdYZdR1cKDiMLKIxbPhEiNze7Ee3p7KdFTbwM2qr3fuB9ffPwN@Z
 ```
 
-{% endcode %}
 
 Last step is to [generate a new (signed) cookie with the UID set to zero](<https://gchq.github.io/CyberChef/#recipe=From_Hex('Auto'/disabled)XOR(%7B'option':'Latin1','string':'3E9DTp80EJCpmvvRd8rgBacww7itTR3sg9mqGKxxqktZOprxANJiXFyQ5V5zCH2oqru6sAllMuOfbsnIw742wOuOCSkdYZdR1cKDiMLKIxbPhEiNze7Ee3p7KdFTbwM2qr3fuB9ffPwN@Z'%7D,'Standard',false)To_Hex('None',0)&input=eyJ1c2VybmFtZSI6IkFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUJCIiwiZGlzcGxheXMiOiJBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFCQiIsInVpZCI6MH0&oeol=FF>):
 
-{% code overflow="wrap" %}
 
 ```
 48674c3731025651282f614a4f3737132579332603202236367628351513723226782c30060a3939302a351b0e313339000f0b28190738107417743b020a704d5d50115f0031000d34066d5c40322f0836767573360e340e02122a25181b251370220a05280c0d0a083923112904280f3b247604247231760a25071523350f105d50460f116003561b
 ```
 
-{% endcode %}
 
 Update the cookie in the browser, then visit the `/user` endpoint and you will receive the flag!
 

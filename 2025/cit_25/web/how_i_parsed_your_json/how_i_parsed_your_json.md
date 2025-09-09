@@ -39,31 +39,26 @@ Secondly, we have some `Getting Started` instructions.
 3. Add your data in valid JSON format
 
 Sounds like we need to modify the URL to create a directory first. I tried some different endpoints and request methods but it all failed. Maybe we can just read files?
-{% code overflow="wrap" %}
 
 ```
 http://23.179.17.40:58004/select?record=*&container=/etc/passwd
 ```
 
-{% endcode %}
 
 ![](images/1.PNG)
 
 Yep! So we can try the `secrets.txt`.
-{% code overflow="wrap" %}
 
 ```
 http://23.179.17.40:58004/select?record=*&container=secrets.txt
 ```
 
-{% endcode %}
 
 However, it shows `"Invalid query"`, which is probably due to comment on the page `"File extensions will be removed from queries"`.
 
 First, I simply try two extensions, assuming that the first may be stripped but not the second. Actually, it looks good! The output shows `"Results from secrets.txt"` now, rather than `"Results from secrets"`. It still says `"Invalid query"` though 🤔
 
 Maybe we should look for other important files. It's a Flask app, so let's try some common ones. Remember the double extension: `/app/app.py.py`
-{% code overflow="wrap" %}
 
 ```python
 from flask import Flask, render_template, request
@@ -106,7 +101,6 @@ if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
 ```
 
-{% endcode %}
 
 Notice the code for stripping file extensions and replacing `../`, we can easily bypass that with URL-encoding (`%2e%2e%2f`) or even `..//`
 

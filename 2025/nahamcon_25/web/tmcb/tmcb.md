@@ -40,7 +40,6 @@ We can base64 decode.
 
 Presumably we can write a brute force script to solve this, but I will focus on the JS. We quickly see how the requests function.
 
-{% code overflow="wrap" %}
 
 ```js
 ws.onmessage = function (event) {
@@ -82,11 +81,9 @@ ws.onmessage = function (event) {
 };
 ```
 
-{% endcode %}
 
 I was thinking of using JS to tick all the boxes though 😁 I ask ChatGPT for a quick script.
 
-{% code overflow="wrap" %}
 
 ```js
 (async () => {
@@ -151,7 +148,6 @@ I was thinking of using JS to tick all the boxes though 😁 I ask ChatGPT for a
 })();
 ```
 
-{% endcode %}
 
 Paste this in the browser console, but it will take a few mins (250 batches)
 

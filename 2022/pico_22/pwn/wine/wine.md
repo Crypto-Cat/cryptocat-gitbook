@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 import socket
 
@@ -43,4 +42,3 @@ print(s.send(payload + b'\r\n'))
 print(s.recv(1024))
 s.close()
 ```
-{% endcode %}

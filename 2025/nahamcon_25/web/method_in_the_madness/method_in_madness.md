@@ -30,7 +30,6 @@ The homepage has 6 checkboxes, that we can't click. There's a hint that we shoul
 
 Let's check the JS.
 
-{% code overflow="wrap" %}
 
 ```js
 function updateCheckboxes() {
@@ -71,11 +70,9 @@ updateCheckboxes();
 setInterval(updateCheckboxes, 3000);
 ```
 
-{% endcode %}
 
 There's a GET request to `/poll` and sure enough, if we check the HTTP history in burp we see lots of requests, all returning false.
 
-{% code overflow="wrap" %}
 
 ```json
 {
@@ -88,7 +85,6 @@ There's a GET request to `/poll` and sure enough, if we check the HTTP history i
 }
 ```
 
-{% endcode %}
 
 Tried changing it to a JSON POST request and updating all the values to true, but it failed to update the values. Also tried removing `disabled=""` from each of the checkbox properties and manually ticking all of them.
 
@@ -106,7 +102,6 @@ Tried various HTTP methods, eventually ticked the remaining boxes with:
 
 We hit the `/poll` endpoint again and get the flag!
 
-{% code overflow="wrap" %}
 
 ```json
 {
@@ -120,6 +115,5 @@ We hit the `/poll` endpoint again and get the flag!
 }
 ```
 
-{% endcode %}
 
 Flag: `flag{bd399cb9c3a8b857588d8e13f490b6fd}`

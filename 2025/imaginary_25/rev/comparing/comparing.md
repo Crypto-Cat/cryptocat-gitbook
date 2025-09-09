@@ -30,7 +30,6 @@ The challenge comes with two files; `comparing.cpp` and `output.txt` - let's che
 
 #### comparing.cpp
 
-{% code overflow="wrap" %}
 ```cpp
 #include <iostream>
 #include <algorithm>
@@ -131,11 +130,9 @@ int main() {
     return 0;
 }
 ```
-{% endcode %}
 
 #### output.txt
 
-{% code overflow="wrap" %}
 ```
 9548128459
 491095
@@ -154,13 +151,11 @@ int main() {
 11411511
 1151164611511
 ```
-{% endcode %}
 
 We just need to reverse the input algorithm, and feed it the output to retrieve the redacted flag.
 
 ### PoC (solve.py)
 
-{% code overflow="wrap" %}
 ```python
 def gen_even(a, b, idx):
     s = str(a)+str(b)
@@ -196,14 +191,11 @@ for i in range(0, len(triples), 2):
 flag = "".join(c1[i]+c2[i] for i in range(max_idx+1))
 print(flag)
 ```
-{% endcode %}
 
-{% code overflow="wrap" %}
 ```bash
 python solve.py
 
 ictf{cu3st0m_c0mp@r@t0rs_1e8f9e}
 ```
-{% endcode %}
 
 Flag: `ictf{cu3st0m_c0mp@r@t0rs_1e8f9e}`

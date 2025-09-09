@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 import re
@@ -83,6 +82,5 @@ for i in range(500):
 # Flag?
 success('Flag: %s', re.search(r'CHTB{.*}', p.recv().decode()).group(0))
 ```
-{% endcode %}
 
 Flag: `CHTB{3v3n_4l13n5_u53_3m0j15_t0_c0mmun1c4t3}`

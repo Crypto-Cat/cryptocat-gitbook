@@ -30,7 +30,6 @@ layout:
 
 Another basic login page. The description mentions we need something from another web challenge and the name hints at reused credentials, remember the DB we dumped in the SQLi challenge?
 
-{% code overflow="wrap" %}
 
 ```bash
 +---------+----------+--------------+----------+
@@ -43,7 +42,6 @@ Another basic login page. The description mentions we need something from anothe
 +---------+----------+--------------+----------+
 ```
 
-{% endcode %}
 
 Try to login with `admin:9f3IC3uj9^zZ` and we successfully login and reach `/debug.php`. It says the page is currently under construction and to try again later.
 
@@ -55,17 +53,14 @@ Couldn't see much to do here, no cookies etc. Tried a few things:
 
 The response remained the same 😕 Try SQLi again, maybe there's a different DB.
 
-{% code overflow="wrap" %}
 
 ```bash
 sqlmap -u http://23.179.17.40:58003/index.php --data "username=cat&password=meow&login=Login" --batch
 ```
 
-{% endcode %}
 
 Nope, it's the same! Tried to use `gobuster` along with the cookie to see if there are some other PHP files (this is starting to feel guessy lol).
 
-{% code overflow="wrap" %}
 
 ```bash
 gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://23.179.17.40:58003/ -x php -c "PHPSESSID=3769e9cc271318ef55b31272d2ea9424"
@@ -76,7 +71,6 @@ gobuster dir -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medi
 /debug.php            (Status: 200) [Size: 2432]
 ```
 
-{% endcode %}
 
 Interesting that there does seem to be an admin page, and we are logged in as the admin user but get redirected to the homepage.
 

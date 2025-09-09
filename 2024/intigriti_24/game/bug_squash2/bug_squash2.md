@@ -72,7 +72,6 @@ So yes, intended solution is to send `{"user_id": "insert_id", "bugs_squashed": 
 
 ### solve.py
 
-{% code overflow="wrap" %}
 
 ```python
 import requests
@@ -129,7 +128,6 @@ if __name__ == "__main__":
     play_game(variations)
 ```
 
-{% endcode %}
 
 Run the solve script.
 
@@ -171,7 +169,6 @@ This challenge didn't get a lot of solves and people found it guessy. Thinking b
 
 ### server.py
 
-{% code overflow="wrap" %}
 
 ```python
 from flask import Flask, request, jsonify
@@ -322,4 +319,3 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=False)
 ```
 
-{% endcode %}

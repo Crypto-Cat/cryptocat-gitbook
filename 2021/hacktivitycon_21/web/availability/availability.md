@@ -30,7 +30,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 import requests
 import string
@@ -59,4 +58,3 @@ while restart:
                 exit(0)
             break
 ```
-{% endcode %}

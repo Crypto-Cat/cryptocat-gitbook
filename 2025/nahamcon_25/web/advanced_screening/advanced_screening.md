@@ -30,7 +30,6 @@ From the homepage, we can enter an email address and request an access code.
 
 Doing so returns an error, so let's check the JS. `requestAccessCode()` sends the email address to an API endpoint.
 
-{% code overflow="wrap" %}
 
 ```js
 const response = await fetch('/api/email/', {
@@ -39,11 +38,9 @@ const response = await fetch('/api/email/', {
 	body: JSON.stringify({ email })
 ```
 
-{% endcode %}
 
 `verifyCode` checks if the access code is 6 characters. If so, it sends the value to `/api/validate`. If it gets a response containing a `user_id`, it will send it to `/api/screen-token` and hopefully return a token (`tokenData.hash`) that we can use as a key to access the `/screen` endpoint.
 
-{% code overflow="wrap" %}
 
 ```js
 if (code.length === 6) {
@@ -71,11 +68,9 @@ if (code.length === 6) {
 		}
 ```
 
-{% endcode %}
 
 My first thought; do we need the code at all? Can't we just bypass it and go straight to `screen-token`, assuming that the `user_id` is predictable (I'll start with "1").
 
-{% code overflow="wrap" %}
 
 ```js
 tokenResponse = await fetch("/api/screen-token", {
@@ -85,31 +80,25 @@ tokenResponse = await fetch("/api/screen-token", {
 });
 ```
 
-{% endcode %}
 
 Didn't work. While reviewing burp history I noticed an error message from our earlier email attempt.
 
-{% code overflow="wrap" %}
 
 ```json
 { "error": "Only email addresses from \"movieservice.ctf\" are allowed" }
 ```
 
-{% endcode %}
 
 If we send `{"email":"admin@movieservice.ctf"}`, the request is successful. It seems to work with any `movieservice.ctf` email actually.
 
-{% code overflow="wrap" %}
 
 ```json
 { "message": "Verification Email Sent" }
 ```
 
-{% endcode %}
 
 Let's try sending a 6 digit code.
 
-{% code overflow="wrap" %}
 
 ```js
 response = await fetch("/api/validate/", {
@@ -119,19 +108,15 @@ response = await fetch("/api/validate/", {
 });
 ```
 
-{% endcode %}
 
-{% code overflow="wrap" %}
 
 ```json
 { "error": "Invalid code" }
 ```
 
-{% endcode %}
 
 There's 1 million possibilities for the code, so brute force is obviously not the intended solution. However, I'm going to get some lunch so why not leave intruder running for 30 minutes and see the results 🤷‍♂️😂
 
-{% code overflow="wrap" %}
 
 ```js
 async function verifyCode() {
@@ -154,7 +139,6 @@ async function verifyCode() {
 }
 ```
 
-{% endcode %}
 
 I didn't solve this in time, so checked the writeup afterwards and kicked myself! I already brute forced the `user_id` between 1-100 for the `/api/screen-token` endpoint, but someone said the correct `user_id` was `7`. I tried it again.
 

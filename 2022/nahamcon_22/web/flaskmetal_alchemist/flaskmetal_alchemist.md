@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 import requests
 import string
@@ -56,4 +55,3 @@ while flag[-1] != '}':
             index += 1
             break
 ```
-{% endcode %}

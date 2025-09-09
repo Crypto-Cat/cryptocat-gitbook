@@ -36,7 +36,6 @@ Follow me on [Twitter](https://twitter.com/_CryptoCat) and [LinkedIn](https://ww
 
 Starting with the server setup code, we see that the flag is places in the `/tmp` directory, along with a folder of `templates` and `xml` files.
 
-{% code overflow="wrap" %}
 
 ```python
 os.chdir("/tmp/")
@@ -47,11 +46,9 @@ with open("flag.txt", "w") as f:
     f.write(flag)
 ```
 
-{% endcode %}
 
 There's a sample XML file and DTD.
 
-{% code overflow="wrap" %}
 
 ```python
 with open("xml/sample.xml", 'w') as f:
@@ -79,11 +76,9 @@ with open("xml/config.dtd", 'w') as f:
 ''')
 ```
 
-{% endcode %}
 
 An `index.tpl` file is generated, I'll skip most of the CSS/HTML which does not seem relevant.
 
-{% code overflow="wrap" %}
 
 ```html
 <div class="content">
@@ -99,13 +94,11 @@ An `index.tpl` file is generated, I'll skip most of the CSS/HTML which does not 
 </div>
 ```
 
-{% endcode %}
 
 #### challenge.py
 
 Now onto the challenge code. It imports `jinja2` and `lxml` which should make us think of SSTI and/or XXE vulnerabilities. It specifically loads version `5.3.2` of `lxml` so checking if it's the latest version or there are known vulnerabilities should be added to our TODO list.
 
-{% code overflow="wrap" %}
 
 ```python
 from jinja2 import Environment, FileSystemLoader
@@ -113,11 +106,9 @@ lxml = import_v("lxml", "5.3.2")
 from lxml import etree
 ```
 
-{% endcode %}
 
 Next, the template is loaded. The `autoescape` option will prevent XSS by escaping HTML variables.
 
-{% code overflow="wrap" %}
 
 ```python
 template = Environment(
@@ -126,14 +117,12 @@ template = Environment(
 ).get_template('index.tpl')
 ```
 
-{% endcode %}
 
 A `parse_palette` function is declared. First thing to note is it's susceptibility to XXE attacks:
 
 -   `load_dtd=True` → allows loading external/internal DTDs.
 -   `resolve_entities=True` → allows expanding general and parameter entities.
 
-{% code overflow="wrap" %}
 
 ```python
 def parse_palette(xml_data):
@@ -150,13 +139,11 @@ def parse_palette(xml_data):
     return list(colors)
 ```
 
-{% endcode %}
 
 However, there is some regex on the XML elements to ensure they match a hex colour code format. It must start with a `#`, followed by 3-6 hex characters e.g. `#1337` or `#420420`.
 
 There's one more function; `promptFromXML`. It simply takes a string and passes it to the `parse_palette` function we just looked at.
 
-{% code overflow="wrap" %}
 
 ```python
 def promptFromXML(s: str):
@@ -166,11 +153,9 @@ def promptFromXML(s: str):
     return "Pallet successfully extracted", parse_palette(s)
 ```
 
-{% endcode %}
 
 Finally, the script ties it all together. It takes our user input (note this is URL-encoded by the WAF, hence the `unquote`) and passes it to the `promptFromXML` function. The parsed colours will be returned and then rendered using `template.render`.
 
-{% code overflow="wrap" %}
 
 ```python
 data = unquote("USER_INPUT_GOES_HERE")
@@ -184,13 +169,11 @@ except Exception as e:
 print(template.render(output=parsed_text, colors=colors, image=None))
 ```
 
-{% endcode %}
 
 ### Testing functionality
 
 The `setup.py` code provided a sample XML file. It's a good idea to test it first, just to visualise the intended functionality of the app.
 
-{% code overflow="wrap" %}
 
 ```xml
 <!DOCTYPE colors [
@@ -203,7 +186,6 @@ The `setup.py` code provided a sample XML file. It's a good idea to test it firs
 </colors>
 ```
 
-{% endcode %}
 
 The colours are "successfully extracted" from our XML input and rendered in the template.
 
@@ -232,7 +214,6 @@ However..
 
 > libxml doesn't restrict Parameter Entities, that leads to XXE:
 
-{% code overflow="wrap" %}
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -247,7 +228,6 @@ However..
 <msg>&c;</msg>
 ```
 
-{% endcode %}
 
 The challenge meets both conditions:
 
@@ -258,7 +238,6 @@ The challenge meets both conditions:
 
 Can we do something similar? Let's try and swap out the values.
 
-{% code overflow="wrap" %}
 
 ```xml
 <!DOCTYPE colors [
@@ -272,7 +251,6 @@ Can we do something similar? Let's try and swap out the values.
 <colors><color>&c;</color></colors>
 ```
 
-{% endcode %}
 
 1. `%file;` reads `/tmp/flag.txt` (still allowed for parameter entities).
 2. `%b;` creates a general entity `c` whose SYSTEM URI becomes `meow://<contents-of-flag.txt>`.

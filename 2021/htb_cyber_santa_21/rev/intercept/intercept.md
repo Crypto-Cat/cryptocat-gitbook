@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -41,6 +40,5 @@ for i, byte in enumerate(enc):
 
 success(dec.decode())
 ```
-{% endcode %}
 
 Flag: ` HTB{pl41nt3xt_4sm?wh4t_n3xt_s0urc3_c0d3?}`

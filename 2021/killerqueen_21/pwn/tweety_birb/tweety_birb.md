@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -87,6 +86,5 @@ io.recvline()
 flag = io.recv()
 success(flag)
 ```
-{% endcode %}
 
 Flag: `kqctf{tweet_tweet_did_you_leak_or_bruteforce_..._plz_dont_say_you_tried_bruteforce}`

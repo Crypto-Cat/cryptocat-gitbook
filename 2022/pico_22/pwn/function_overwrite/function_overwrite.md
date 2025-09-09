@@ -24,7 +24,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -67,4 +66,3 @@ io.sendline(b'-250')  # Offset to easy function
 io.recvlines(2)
 info(io.recv().decode())
 ```
-{% endcode %}

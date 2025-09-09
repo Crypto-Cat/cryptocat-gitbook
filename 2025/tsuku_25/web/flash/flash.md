@@ -42,19 +42,16 @@ I thought maybe I could just use a match/replace rule in burp to change the time
 
 Note that each round provides a new session cookie, which we can decode with `flask-unsign`.
 
-{% code overflow="wrap" %}
 ```bash
 flask-unsign --decode --cookie eyJyb3VuZCI6Mywic2Vzc2lvbl9pZCI6ImJhNTkwZjNkNDk4ZjYzOWEyMDY1MTkxODExMGI1MmZjIn0.aBXXmg.LkgczekNJZjwpWpbLu7inYQ_k2M
 
 {'round': 3, 'session_id': 'ba590f3d498f639a20651918110b52fc'}
 ```
-{% endcode %}
 
 ### Source code
 
 The challenge comes with source code, `app.py` is the most interesting.
 
-{% code overflow="wrap" %}
 ```python
 from flask import Flask, session, render_template, request, redirect, url_for, make_response
 import hmac, hashlib, secrets
@@ -162,7 +159,6 @@ def result():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 ```
-{% endcode %}
 
 ### Breaking it down
 
@@ -170,11 +166,9 @@ The Flask app generates a series of 10 pseudo-random 7-digit numbers using a det
 
 At startup, the app reads a secret `SEED` from `./static/seed.txt`. This file is served from Flask's `static/` directory, making it publicly downloadable.
 
-{% code overflow="wrap" %}
 ```
 b7c4c422a93fdc991075b22b79aa12bb19770b1c9b741dd44acbafd4bc6d1aabc1b9378f3b68ac345535673fcf07f089a8492dc1b05343a80b3d002f070771c6
 ```
-{% endcode %}
 
 When we visit `/`, the app generates a new session with a random `session_id` and sets the round to 0. The `session_id` is stored in the Flask session cookie, which is signed but decodable (using `flask-unsign`).
 
@@ -196,7 +190,6 @@ We can use ChatGPT to make a quick solve script 🙏
 
 ### solve.py
 
-{% code overflow="wrap" %}
 ```python
 import requests
 import hmac
@@ -295,11 +288,9 @@ if "TsukuCTF25{" in resp.text:
 else:
     print("❌ Submission failed or incorrect. Try again.")
 ```
-{% endcode %}
 
 We run the script, and receive the flag 🤤
 
-{% code overflow="wrap" %}
 ```bash
 python solve.py
 
@@ -333,7 +324,6 @@ Round 10: 8093972 -> 8093972
 
 🎉 FLAG: TsukuCTF25{Tr4d1on4l_P4th_Trav3rs4l}
 ```
-{% endcode %}
 
 Not sure if I took the intended approach here, since I didn't actually do any path traversal. I feel like I was tricked into doing a crypto challenge 😑
 

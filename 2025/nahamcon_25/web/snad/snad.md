@@ -30,7 +30,6 @@ We load the website and see a particle generator operated with the mouse.
 
 The JS contains a POST request to `/api/verify-ctf-solution` which includes a JSON object (`{'particleData': t}`)
 
-{% code overflow="wrap" %}
 
 ```js
 let t = particles
@@ -51,11 +50,9 @@ let t = particles
     });
 ```
 
-{% endcode %}
 
 I try to send various POST requests using this information but always get `Invalid submission data`. Continuing to read the JS code, there is a `checkFlag` function which calls `retrieveFlag` at the end.
 
-{% code overflow="wrap" %}
 
 ```js
 function checkFlag() {
@@ -87,11 +84,9 @@ function checkFlag() {
 }
 ```
 
-{% endcode %}
 
 I try to execute `retrieveFlag` in the console but it's not that simple! The particles need to be in the correct positions. Here's a script that will do that, we just paste it into the browser console.
 
-{% code overflow="wrap" %}
 
 ```js
 function placeCorrectParticles() {
@@ -108,16 +103,13 @@ function placeCorrectParticles() {
 }
 ```
 
-{% endcode %}
 
 Then call the function.
 
-{% code overflow="wrap" %}
 
 ```js
 placeCorrectParticles();
 ```
 
-{% endcode %}
 
 Flag: `flag{6ff0c72ad11bf174139e970559d9b5d2}`

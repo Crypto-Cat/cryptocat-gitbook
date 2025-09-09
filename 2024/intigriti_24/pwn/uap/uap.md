@@ -28,7 +28,6 @@ Wow, I wish I made a writeup for this a couple of months ago when I made the cha
 
 ### solve.py
 
-{% code overflow="wrap" %}
 ```python
 from pwn import *
 
@@ -90,7 +89,6 @@ io.sendlineafter(b"Enter drone ID to start its route: ", b"1")
 io.recvuntil(b'INTIGRITI')
 info('INTIGRITI' + io.recvline().decode())
 ```
-{% endcode %}
 
 Flag: `INTIGRITI{un1d3n71f13d_fly1n6_vuln3r4b1l17y}`
 

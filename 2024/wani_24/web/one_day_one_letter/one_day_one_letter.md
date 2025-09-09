@@ -28,7 +28,6 @@ layout:
 
 #### content-server.py
 
-{% code overflow="wrap" %}
 
 ```python
 import json
@@ -102,11 +101,9 @@ httpd = HTTPServer(('', 5000), handler)
 httpd.serve_forever()
 ```
 
-{% endcode %}
 
 #### time-server.py
 
-{% code overflow="wrap" %}
 
 ```python
 from http import HTTPStatus
@@ -147,7 +144,6 @@ httpd = HTTPServer(('', 5001), handler)
 httpd.serve_forever()
 ```
 
-{% endcode %}
 
 ### Exploit
 
@@ -157,7 +153,6 @@ When we visit the webpage, we get a single letter from the flag.
 
 Checking HTTP history in burp, there is a POST request.
 
-{% code overflow="wrap" %}
 
 ```json
 {
@@ -167,11 +162,9 @@ Checking HTTP history in burp, there is a POST request.
 }
 ```
 
-{% endcode %}
 
 If we change the timestamp, we get a `401: Unauthorized` error because the signature does not match.
 
-{% code overflow="wrap" %}
 
 ```python
 pubkey = get_pubkey_of_timeserver(timeserver)
@@ -180,11 +173,9 @@ verifier = DSS.new(pubkey, 'fips-186-3')
 verifier.verify(h, signature)
 ```
 
-{% endcode %}
 
 So, let's try to provide our own timeserver and see if we get a hit.
 
-{% code overflow="wrap" %}
 
 ```json
 {
@@ -194,11 +185,9 @@ So, let's try to provide our own timeserver and see if we get a hit.
 }
 ```
 
-{% endcode %}
 
 We do!
 
-{% code overflow="wrap" %}
 
 ```bash
 +-------------------------+----------------------------------+
@@ -211,13 +200,11 @@ We do!
 404		GET	/pubkey
 ```
 
-{% endcode %}
 
 So, if we create our own key pair, we can sign custom forged timestamps with our own private key and then trick the server into verifying the signature against our public key!
 
 Let's generate the keys first - remember that the filename needs to be `pubkey`.
 
-{% code overflow="wrap" %}
 
 ```python
 from Crypto.PublicKey import ECC
@@ -231,7 +218,6 @@ with open('privkey', 'wb') as f:
     f.write(key.export_key(format='PEM'))
 ```
 
-{% endcode %}
 
 Next, we'll use a script that will loop through all 12 characters (days) of the flag, starting from yesterday (`i - 1`).
 
@@ -239,7 +225,6 @@ For each day, the script generates and signs a timestamp (using our private key)
 
 The response is extracted with BeautifulSoup and then printed.
 
-{% code overflow="wrap" %}
 
 ```python
 import requests
@@ -290,11 +275,9 @@ if __name__ == "__main__":
         print(f"Flag for timestamp {timestamp_str}: {flag}")
 ```
 
-{% endcode %}
 
 With a little extra effort, you could automatically extract the flag for each copy/paste, but this will suffice for me! 😁
 
-{% code overflow="wrap" %}
 
 ```bash
 Flag for timestamp 1719053227: FLAG{l???????????}.
@@ -311,6 +294,5 @@ Flag for timestamp 1719917248: FLAG{??????????m?}.
 Flag for timestamp 1720003650: FLAG{???????????e}.
 ```
 
-{% endcode %}
 
 Flag: `FLAG{lyingthetime}`

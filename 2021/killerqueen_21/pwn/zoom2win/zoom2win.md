@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -92,6 +91,5 @@ io.recvline()
 flag = io.recv()
 success(flag)
 ```
-{% endcode %}
 
 Flag: `kqctf{did_you_zoom_the_basic_buffer_overflow_?}`

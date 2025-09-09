@@ -46,7 +46,6 @@ Players can find reference of interesting website visit `https://super-really-re
 
 A bit of a hint that players should focus on browser history but it is encrypted!
 
-{% code overflow="wrap" %}
 
 ```json
 {
@@ -78,7 +77,6 @@ A bit of a hint that players should focus on browser history but it is encrypted
 }
 ```
 
-{% endcode %}
 
 Let's extract the Firefox browser data! It's Windows, so the profiles will be stored at `C:\Users\cat\AppData\Roaming\Mozilla\Firefox\Profiles\`
 
@@ -86,7 +84,6 @@ We can use a tool like [firefox decrypt](https://github.com/unode/firefox_decryp
 
 Players use the password they found earlier to unlock the data (`SevenSuns397260`), then in the cookies/saved passwords will be the flag 😼
 
-{% code overflow="wrap" %}
 
 ```bash
 python firefox_decrypt.py /home/crystal/Desktop/pass_management/profile/
@@ -98,7 +95,6 @@ Username: 'cat'
 Password: 'INTIGRITI{4n_unf0r7un473_53r135_0f_m1574k35}'
 ```
 
-{% endcode %}
 
 Flag: `INTIGRITI{4n_unf0r7un473_53r135_0f_m1574k35}`
 

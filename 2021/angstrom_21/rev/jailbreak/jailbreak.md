@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 
@@ -93,6 +92,5 @@ io.recvlines(2)
 flag = io.recvline()
 success(flag)
 ```
-{% endcode %}
 
 Flag: `actf{guess_kmh_still_has_unintended_solutions}`

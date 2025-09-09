@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 import time
 from pwn import *
@@ -70,4 +69,3 @@ for pos in range(pin_len):  # loop 8 digit pin
 
 log.info(f"Correct pin: {current_pin}")
 ```
-{% endcode %}

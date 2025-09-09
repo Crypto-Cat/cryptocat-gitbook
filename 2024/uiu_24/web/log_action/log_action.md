@@ -38,7 +38,6 @@ The `backend` simply holds a `flag.txt` file - does a vulnerability class pop in
 
 The `frontend` has quite a bit of code, so I'll highlight some significant parts. First is the `auth.ts`. Notice that the admin password is randomised for each login attempt 🧐
 
-{% code overflow="wrap" %}
 
 ```ts
 export const { auth, signIn, signOut } = NextAuth({
@@ -69,13 +68,11 @@ export const { auth, signIn, signOut } = NextAuth({
 });
 ```
 
-{% endcode %}
 
 There's an `/admin` endpoint, although the `tsx` file does nothing other than display "You logged in as admin."
 
 An `auth.config.ts` has some logic surrounding the admin authentication.
 
-{% code overflow="wrap" %}
 
 ```ts
 export const authConfig = {
@@ -100,11 +97,9 @@ export const authConfig = {
 } satisfies NextAuthConfig;
 ```
 
-{% endcode %}
 
 Finally, `actions.ts` contains some more code relating to the authentication.
 
-{% code overflow="wrap" %}
 
 ```ts
 export async function authenticate(
@@ -133,11 +128,9 @@ export async function authenticate(
 }
 ```
 
-{% endcode %}
 
 At this stage, nothing stands out to me as a potential vulnerability. The next step is to check `package.json` and see if there are any vulnerable dependencies.
 
-{% code overflow="wrap" %}
 
 ```json
 "dependencies": {
@@ -150,7 +143,6 @@ At this stage, nothing stands out to me as a potential vulnerability. The next s
   }
 ```
 
-{% endcode %}
 
 Can you guess which one I'm going to look into? That's right, the only one with a fixed version; `next`. All the other libraries are set to use the latest available version, so if one of those had a vulnerability that the challenge authors intended to include, the challenge would break as soon as it's patched.
 
@@ -177,7 +169,6 @@ I checked through the source code again, looking for valid redirects:
 1. `redirect("/admin")` in `actions.ts` and `auth.config.js`, but it's only triggered after a successful login.
 2. `redirect("/login")` in `page.tsx` (logout), which looks promising!
 
-{% code overflow="wrap" %}
 
 ```ts
 action={async () => {
@@ -187,7 +178,6 @@ action={async () => {
 }}
 ```
 
-{% endcode %}
 
 Fortunately, we don't need to be logged in to access the `/logout` endpoint 🙏
 
@@ -210,7 +200,6 @@ We need to exfiltrate data, so let's follow the remainder of the blog post:
 
 Putting it all together, we modify the supplied PoC.
 
-{% code overflow="wrap" %}
 
 ```ts
 Deno.serve((request: Request) => {
@@ -242,20 +231,17 @@ Deno.serve((request: Request) => {
 });
 ```
 
-{% endcode %}
 
 So, we will respond to the initial `HEAD` request with a `200 OK` of content-type `text/x-component`, which triggers a `GET` request to our server. At this point, we issue a `302` redirect to the flag.txt file on the `backend`.
 
 That's it - let's serve the PoC using `deno`.
 
-{% code overflow="wrap" %}
 
 ```bash
 deno run --allow-net --allow-read main.ts
 Listening on http://localhost:8000/
 ```
 
-{% endcode %}
 
 Reissue the request in burp and ensure the requests line up as expected in our server log.
 

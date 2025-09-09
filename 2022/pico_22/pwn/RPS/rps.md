@@ -28,7 +28,6 @@ layout:
 
 ## Solution
 
-{% code overflow="wrap" %}
 ```py
 from pwn import *
 from time import time
@@ -64,4 +63,3 @@ for i in range(5):
 
 io.interactive()  # Flag
 ```
-{% endcode %}
