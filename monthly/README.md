@@ -3,7 +3,7 @@
 -   [07-25: CCTV Manager](ywh/0725/cctv_manager.md)
 -   [06-25: Hex Color Palette](ywh/0625/hex_color_palette.md)
 
-## Intigriti:
+## Intigriti
 
 -   [08-24: Safe Notes](intigriti/0824/safenotes.md)
 -   [04-25: HackDonalds](intigriti/0425/hackdonalds.md)
