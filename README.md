@@ -2,6 +2,8 @@
 description: CryptoCat's blog — CTF writeups, vulnerability research, and bug bounty reports 💜
 ---
 
+# Home
+
 ## CryptoCat's Blog
 
 -   🕹️ **[CTF Writeups](ctf/README.md)**  

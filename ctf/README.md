@@ -1,5 +1,5 @@
 ---
-description: CryptoCat's capture the flag challenge writeups, solve scripts and video walkthroughs 💜
+description: CryptoCat's capture the flag challenge writeups 💜
 ---
 
 # CryptoCat's CTF writeups
