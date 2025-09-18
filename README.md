@@ -2,7 +2,7 @@
 description: CryptoCat's blog — CTF writeups, vulnerability research, and bug bounty reports 💜
 ---
 
-# CryptoCat's Blog
+## CryptoCat's Blog
 
 -   🕹️ **[CTF Writeups](ctf/README.md)**  
     Challenge writeups, solve scripts, and video walkthroughs from CTFs I’ve played.
@@ -10,17 +10,19 @@ description: CryptoCat's blog — CTF writeups, vulnerability research, and bug 
 -   🔬 **[Vulnerability Research](research/README.md)**  
     CVE analysis, patch diffing, reverse engineering, exploit development, and proof of concepts.
 
-## 📚 Want to practice?
+---
+
+### 📚 Want to practice?
 
 Check out [my favourite free hacking resources](https://cryptocat.me/resources) 😎
 
-## 🎥 Prefer videos?
+### 🎥 Prefer videos?
 
 I've got my own [Video Search Tool](https://cryptocat.me/videos)!
 
 [![VIDEO](https://img.youtube.com/vi/jUjlj2z5jJk/0.jpg)](https://youtube.com/@_CryptoCat)
 
-### Playlists
+#### Playlists
 
 -   [CTF Walkthroughs](https://www.youtube.com/playlist?list=PLHUKi1UlEgOLEfaxrnUFUgDPHI6VKf2RK)
 -   [Intro to Binary Exploitation](https://www.youtube.com/playlist?list=PLHUKi1UlEgOIc07Rfk2Jgb5fZbxDPec94)
