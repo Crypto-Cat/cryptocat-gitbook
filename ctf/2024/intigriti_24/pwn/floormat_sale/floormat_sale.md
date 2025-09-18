@@ -22,7 +22,7 @@ layout:
 
 > The Floor Mat Store is running a mega sale, check it out!
 
-If you played last 1337UPLIVE last year, you might remember the [floormat store](https://crypto-cat.gitbook.io/ctf-writeups/2023/intigriti/pwn/floormat_store). Players were required to exploit a format string vulnerability in `printf()` to leak the flag off the stack. This year, the floormat store is having a MEGA SALE!
+If you played last 1337UPLIVE last year, you might remember the [floormat store](https://book.cryptocat.me/blog/ctf/2023/intigriti/pwn/floormat_store). Players were required to exploit a format string vulnerability in `printf()` to leak the flag off the stack. This year, the floormat store is having a MEGA SALE!
 
 ## Solution
 

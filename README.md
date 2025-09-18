@@ -1,16 +1,38 @@
 ---
-description: CryptoCat's capture the flag challenge writeups, solve scripts and video
-    walkthroughs 💜
+description: CryptoCat's blog — CTF writeups, vulnerability research, and bug bounty reports 💜
 ---
 
-# CryptoCat's CTF writeups
+# CryptoCat's Blog
 
-A blog to keep track of my CTF writeups, e.g. challenge links, description, summary, videos, writeups, stats etc.
+-   🕹️ **[CTF Writeups](ctf/README.md)**  
+    Challenge writeups, solve scripts, and video walkthroughs from CTFs I’ve played.
 
-Practice your skills by checking out [my favourite free hacking resources](https://cryptocat.me/resources)!
+-   🔬 **[Vulnerability Research](research/README.md)**  
+    CVE analysis, patch diffing, reverse engineering, exploit development, and proof of concepts.
 
-Prefer some passive learning? Here's a full video playlist of my CTF writeups 👇
+---
 
-[![VIDEO](https://img.youtube.com/vi/AO7CDquZ690/0.jpg)](https://www.youtube.com/playlist?list=PLHUKi1UlEgOLEfaxrnUFUgDPHI6VKf2RK)
+## 📚 Want to practice?
 
-Questions? Join my [discord server](https://discord.cryptocat.me) 🥰
+Check out [my favourite free hacking resources](https://cryptocat.me/resources).
+
+## 🎥 Prefer videos?
+
+Check out my [Video Search Tool](https://cryptocat.me/videos)!
+
+### Playlists
+
+-   [CTF Walkthroughs](https://www.youtube.com/playlist?list=PLHUKi1UlEgOLEfaxrnUFUgDPHI6VKf2RK)
+-   [HackTheBox: Starting Point](https://www.youtube.com/playlist?list=PLHUKi1UlEgOINz5PLYb9yu7evQZ_5MQ21)
+-   [HackTheBox: Challenges](https://www.youtube.com/playlist?list=PLHUKi1UlEgOIn12nvhwwq2aTU8bG-FE0I)
+-   [HackTheBox: Battlegrounds](https://www.youtube.com/playlist?list=PLHUKi1UlEgOInuxpRQUk5mQSJwmy2h278)
+-   [Intro to Binary Exploitation](https://www.youtube.com/playlist?list=PLHUKi1UlEgOIc07Rfk2Jgb5fZbxDPec94)
+-   [ROP Emporium](https://www.youtube.com/playlist?list=PLHUKi1UlEgOKAVRdiMlpX6hgayiY6dTwu)
+-   [Damn Vulnerable Web Application](https://www.youtube.com/playlist?list=PLHUKi1UlEgOJLPSFZaFKMoexpM6qhOb4Q)
+-   [Cyber-Security Certifications](https://www.youtube.com/playlist?list=PLHUKi1UlEgOL4fwv44vGDM5pRz47RRJxL)
+
+[![VIDEO](https://img.youtube.com/vi/jUjlj2z5jJk/0.jpg)](https://youtube.com/@_CryptoCat)
+
+---
+
+💬 Questions? Join my [Discord server](https://discord.cryptocat.me) 🥰

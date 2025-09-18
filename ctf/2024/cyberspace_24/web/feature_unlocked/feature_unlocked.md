@@ -26,7 +26,7 @@ layout:
 
 > The world's coolest app has a brand new feature! Too bad it's not released until after the CTF..
 
-I decided to make web challenge for this CTF. The first part was inspired by a recent challenge I completed in the Wani CTF; [one day, one letter](https://crypto-cat.gitbook.io/ctf-writeups/2024/wani/web/one_day_one_letter) so shout-out to the creator, `KowerKoint` 💜
+I decided to make web challenge for this CTF. The first part was inspired by a recent challenge I completed in the Wani CTF; [one day, one letter](https://book.cryptocat.me/blog/ctf/2024/wani/web/one_day_one_letter) so shout-out to the creator, `KowerKoint` 💜
 
 ## Solution
 
