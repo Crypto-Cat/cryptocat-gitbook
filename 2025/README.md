@@ -9,6 +9,10 @@
 -   [Rev: Weird App](imaginary_25/rev/weird_app/weird_app.md)
 -   [Rev: Stacked](imaginary_25/rev/stacked/stacked.md)
 
+## HackTheAgent (HackAICon)
+
+-   [AI: LLM Hacking (levels 1-5)](hack_the_agent_25/ai/hack_the_agent.md)
+
 ## WHY
 
 -   [Web: Shoe Shop](why_25/web/shoe_shop/shoe_shop.md)
