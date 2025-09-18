@@ -1,6 +1,6 @@
 # Table of contents
 
--   [CTF](ctf/README.md)
+-   [CTF Writeups](ctf/README.md)
     -   [Monthly Challenges](ctf/monthly/README.md)
         -   [YesWeHack](ctf/monthly/ywh/)
             -   [07-25: CCTV Manager](ctf/monthly/ywh/0725/cctv_manager.md)
