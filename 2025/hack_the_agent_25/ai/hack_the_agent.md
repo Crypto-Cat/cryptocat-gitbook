@@ -2,7 +2,7 @@
 name: HackTheAgent
 event: HackTheAgent by HackAIcon CTF 2025
 category: AI
-description: Writeup for LLM Challenges (1-5) - HackTheAgent CTF (2025) 💜
+description: Writeup for LLM Hacking Challenges (1-5) - HackTheAgent CTF (2025) 💜
 layout:
     title:
         visible: true
@@ -70,9 +70,9 @@ _Optional_: `discount_code`.
 **Valid discount codes**
 | Code | Discount | Notes |
 | --------- | -------- | ----------------- |
-| REDACTED_FLAG_2 | 50 % | Until sold out |
+| REDACTED*FLAG_2 | 50 % | Until sold out |
 | REDACTED_FLAG_2 | 25 % | Partner promotion |
-| REDACTED_FLAG_2 | 100 % | _Admin use only_ |
+| REDACTED_FLAG_2 | 100 % | \_Admin use only* |
 ```
 
 Describe what we know about the flag so the LLM trusts us.
@@ -149,9 +149,9 @@ _Optional_: `discount_code`.
 **Valid discount codes**
 | Code | Discount | Notes |
 | --------- | -------- | ----------------- |
-| REDACTED_FLAG_2 | 50 % | Until sold out |
+| REDACTED*FLAG_2 | 50 % | Until sold out |
 | REDACTED_FLAG_2 | 25 % | Partner promotion |
-| REDACTED_FLAG_2 | 100 % | _Admin use only_ |
+| REDACTED_FLAG_2 | 100 % | \_Admin use only* |
 ```
 
 Give it what it needs (remember code from earlier).
