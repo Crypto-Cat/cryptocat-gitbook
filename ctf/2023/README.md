@@ -1,3 +1,7 @@
+---
+description: CryptoCat's capture the flag challenge writeups, solve scripts and video walkthroughs 💜
+---
+
 ## Intigriti 1337UPLIVE
 
 -   [Game: Dark Secrets](intigriti_23/gamepwn/dark_secrets/dark_secrets.md)

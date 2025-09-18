@@ -12,4 +12,6 @@ Prefer some passive learning? Here's a full video playlist of my CTF writeups �
 
 [![VIDEO](https://img.youtube.com/vi/AO7CDquZ690/0.jpg)](https://www.youtube.com/playlist?list=PLHUKi1UlEgOLEfaxrnUFUgDPHI6VKf2RK)
 
-Questions? Join my [discord server](https://discord.cryptocat.me) 🥰
+---
+
+💬 Questions? Join my [Discord server](https://discord.cryptocat.me) 🥰

@@ -1,5 +1,6 @@
 # Table of contents
 
+-   [Home](README.md)
 -   [CTF Writeups](ctf/README.md)
     -   [Monthly Challenges](ctf/monthly/README.md)
         -   [YesWeHack](ctf/monthly/ywh/)
@@ -348,4 +349,4 @@
 -   [Vulnerability Research](research/README.md)
     -   [Novel Research](research/novel/README.md)
     -   [CVE Analysis](research/cve/README.md)
-        -   [CVE-2025-54376: Hoverfly WebSocket Auth Bypass](cve/cve_2025_54376/cve_2025_54376.md)
+        -   [CVE-2025-54376: Hoverfly WebSocket Auth Bypass](research/cve/cve_2025_54376/cve_2025_54376.md)

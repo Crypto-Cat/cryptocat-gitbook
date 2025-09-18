@@ -1,3 +1,7 @@
+---
+description: CryptoCat's vulnerability research blog 💜
+---
+
 # CVE Analysis
 
 ## 2025

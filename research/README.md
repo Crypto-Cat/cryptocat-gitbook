@@ -12,4 +12,6 @@ Prefer passive learning? Check out my [YouTube videos](https://cryptocat.me/vide
 
 [![VIDEO](https://img.youtube.com/vi/71e5iMoDDMA/0.jpg)](https://youtube.com/@_CryptoCat)
 
-Questions? Join my [Discord server](https://discord.cryptocat.me) 🥰
+---
+
+💬 Questions? Join my [Discord server](https://discord.cryptocat.me) 🥰

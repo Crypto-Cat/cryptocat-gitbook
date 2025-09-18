@@ -1,3 +1,7 @@
+---
+description: CryptoCat's capture the flag challenge writeups, solve scripts and video walkthroughs 💜
+---
+
 ## YesWeHack Dojo
 
 -   [07-25: CCTV Manager](ywh/0725/cctv_manager.md)
