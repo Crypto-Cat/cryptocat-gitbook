@@ -4,6 +4,18 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 
 ## AI_GON3_ROGU3 (HackerOne x HackTheBox)
 
+-   [AI: Re-Cars-AI](ai_gon3_rogu3_25/ai/re_cars_ai/re_cars_ai.md)
+-   [AI: GrandMonty AI](ai_gon3_rogu3_25/ai/grandmonty_ai/grandmonty_ai.md)
+-   [AI: Premium Leaks](ai_gon3_rogu3_25/ai/premium_leaks/premium_leaks.md)
+-   [AI: Stock Signals](ai_gon3_rogu3_25/ai/stock_signals/stock_signals.md)
+-   [AI: AllSafe Tickets](ai_gon3_rogu3_25/ai/allsafe_tickets/allsafe_tickets.md)
+-   [AI: Cosmic Crisis](ai_gon3_rogu3_25/ai/cosmic_crisis/cosmic_crisis.md)
+-   [AI: CruiseList AI](ai_gon3_rogu3_25/ai/cruiselist_ai/cruiselist_ai.md)
+-   [AI: Auction Chat](ai_gon3_rogu3_25/ai/auction_chat/auction_chat.md)
+-   [AI: GATE Chat](ai_gon3_rogu3_25/ai/gate_chat/gate_chat.md)
+-   [AI: Pump Signals AI](ai_gon3_rogu3_25/ai/pump_signals_ai/pump_signals_ai.md)
+-   [AI: Performance Crossroads](ai_gon3_rogu3_25/ai/performance_crossroads/performance_crossroads.md)
+
 ## DefCamp
 
 -   [Pwn: Nulle](defcamp_25/pwn/nulle/nulle.md)
