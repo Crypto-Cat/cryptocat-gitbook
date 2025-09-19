@@ -24,8 +24,6 @@ layout:
 
 ## Solution
 
-TODO
-
 ![](./images/0.PNG)
 
 ```
