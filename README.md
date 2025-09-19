@@ -1,5 +1,5 @@
 ---
-description: CryptoCat's blog — CTF writeups, vulnerability research, and bug bounty reports 💜
+description: CryptoCat's blog - CTF writeups, vulnerability research, bug bounty reports 💜
 ---
 
 # CryptoCat's Blog
