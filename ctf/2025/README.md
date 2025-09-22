@@ -4,8 +4,8 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 
 ## K17
 
--   [Rev: Secure Exam Browser](ctf/2025/k17_25/rev/secure_exam_browser/secure_exam_browser.md)
--   [Rev: Bait and Switch](ctf/2025/k17_25/rev/bait_and_switch/bait_and_switch.md)
+-   [Rev: Secure Exam Browser](k17_25/rev/secure_exam_browser/secure_exam_browser.md)
+-   [Rev: Bait and Switch](k17_25/rev/bait_and_switch/bait_and_switch.md)
 
 ## DefCamp
 
