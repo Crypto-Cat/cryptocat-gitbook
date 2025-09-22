@@ -4,7 +4,7 @@ description: CryptoCat's blog - CTF writeups, vulnerability research, bug bounty
 
 # CryptoCat's Blog
 
--   🕹️ **[CTF Writeups](ctf/README.md)**  
+-   🚩 **[CTF Writeups](ctf/README.md)**  
     Challenge writeups, solve scripts, and video walkthroughs from CTFs I’ve played.
 
 -   🔬 **[Vulnerability Research](research/README.md)**  
