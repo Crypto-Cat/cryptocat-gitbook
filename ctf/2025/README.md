@@ -2,6 +2,11 @@
 description: CryptoCat's capture the flag challenge writeups, solve scripts and video walkthroughs 💜
 ---
 
+## K17
+
+-   [Rev: Secure Exam Browser](ctf/2025/k17_25/rev/secure_exam_browser/secure_exam_browser.md)
+-   [Rev: Bait and Switch](ctf/2025/k17_25/rev/bait_and_switch/bait_and_switch.md)
+
 ## DefCamp
 
 -   [Pwn: Nulle](defcamp_25/pwn/nulle/nulle.md)
