@@ -54,14 +54,14 @@ Clicking the ✔ button on the navbar takes us to a "redeem a gift" screen, but 
 
 ### Static Analysis
 
-Opening the binary in ghidra, reviews _a lot_ of functions and references to golang. There's so many that it took ghidra forever to do the auto analysis.
+Opening the binary in ghidra reveals _a lot_ of functions, and references to golang. There's so many that it took ghidra forever to do the auto analysis.
 
 ![](images/4.PNG)
 ![](images/5.PNG)
 
-Luckily we did some basic file checks and we already know what functionality to investigate first. I tried searching for strings "human", "verif", "1337" etc, but no luck. I also see mentions of crypto - maybe the flag is encrypted, but there's no network element (I already ran wireshark).
+Luckily, we did some basic file checks and we already know what functionality to investigate first. I tried searching for strings "human", "verif", "1337" etc, but no luck. I also see mentions of crypto - maybe the flag is encrypted, but there's no network element (I already ran wireshark).
 
-I throw the `main()` function at ChatGPT and ask if there's a better way to reverse go binaries (I suspect there is).
+We can throw the `main()` function at ChatGPT and ask if there's a better way to reverse go binaries (I suspect there is).
 
 ```bash
 go tool nm ./bait-and-switch | egrep "make(HomePage|ProductsPage|GiftPage|CartPage|Toolbar)" -n
@@ -203,7 +203,7 @@ x $r8 + 0x78
 0xc000d75c80:	0x0000000000000004
 ```
 
-We also need the code to _actually_ be 4 digits (`1337`) so let's we'll continue to our next breakpoint at `0xb4377f`
+We also need the code to _actually_ be 4 digits (`1337`) so let's continue to our next breakpoint at `0xb4377f`
 
 ```c
 LEGEND: STACK | HEAP | CODE | DATA | WX | RODATA
@@ -235,7 +235,7 @@ x $r10
 0xc0014067a0:	0x0000000000333331
 ```
 
-It's `0x333331`, because we are one digit short. Let's do another live modification.
+It's `0x333331` because we are one digit short. Let's do another live modification.
 
 ```bash
 set {unsigned int}($r10) = 0x37333331
@@ -249,11 +249,11 @@ x $r10
 0xc0014067a0:	0x0000000037333331
 ```
 
-Hit continue and boom, we did it! 🥳
+Hit continue and boom - we did it! 🥳
 
 ![](images/7.PNG)
 
-It's not possible to copy and paste the flag, so here's a shortcut.
+It's not possible to copy and paste the flag, so here's a shortcut to find it in memory.
 
 ```bash
 search K17
