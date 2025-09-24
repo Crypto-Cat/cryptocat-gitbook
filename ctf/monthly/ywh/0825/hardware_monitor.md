@@ -88,7 +88,7 @@ end
 puts ERB.new(IO.read("views/index.html")).result_with_hash({logs: File.read("logs/error.log")})
 ```
 
-### Testing functionality
+### Directory Traversal
 
 Since the vulnerable file is called `bakup.rb`, let's try to request this first.
 
