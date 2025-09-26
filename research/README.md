@@ -10,7 +10,7 @@ Practice your skills by checking out [my favourite free hacking resources](https
 
 Prefer passive learning? Check out my [YouTube videos](https://cryptocat.me/videos) 👇
 
-[![VIDEO](https://img.youtube.com/vi/71e5iMoDDMA/0.jpg)](https://youtube.com/@_CryptoCat)
+[![VIDEO](https://img.youtube.com/vi/--SaQKmcyiU/0.jpg)](https://youtube.com/@_CryptoCat)
 
 ---
 
