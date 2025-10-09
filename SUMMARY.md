@@ -354,5 +354,5 @@
 -   [Vulnerability Research](research/README.md)
     -   [Novel Research](research/novel/README.md)
     -   [CVE Analysis](research/cve/README.md)
-        -   [CVE-2025-24813: Tomcat DefaultServlet Partial PUT → File Injection & Potential RCE](research/cve/cve_2025_24813/cve_2025_24813.md)
-        -   [CVE-2025-54376: Hoverfly WebSocket Auth Bypass → Unauthenticated Log Streaming](research/cve/cve_2025_54376/cve_2025_54376.md)
+        -   [CVE-2025-24813: Tomcat DefaultServlet Partial PUT](research/cve/cve_2025_24813/cve_2025_24813.md)
+        -   [CVE-2025-54376: Hoverfly WebSocket Auth Bypass](research/cve/cve_2025_54376/cve_2025_54376.md)
