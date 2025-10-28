@@ -4,6 +4,7 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 
 ## YesWeHack Dojo
 
+-   [09-25: Chainfection](ywh/0925/chainfection.md)
 -   [08-25: Hardware Monitor](ywh/0825/hardware_monitor.md)
 -   [07-25: CCTV Manager](ywh/0725/cctv_manager.md)
 -   [06-25: Hex Color Palette](ywh/0625/hex_color_palette.md)
