@@ -15,6 +15,7 @@
             -   [04-23: We Like To Sell Bricks](ctf/monthly/intigriti/0423/we_like_to_sell_bricks.md)
         -   [CryptoCat](ctf/monthly/cryptocat/)
             -   [12-24: Summar-AI-ze](ctf/monthly/cryptocat/1224/summaraize.md)
+            -   [10-25: Ultimate Calculator 3000](ctf/monthly/cryptocat/1025/ultimate_calculator.md)
     -   [2025](ctf/2025/README.md)
         -   [K17](ctf/2025/k17_25/)
             -   [Rev](ctf/2025/k17_25/rev/)
