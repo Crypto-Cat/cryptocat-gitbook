@@ -519,3 +519,7 @@ python solve.py
 ```
 
 Hope you enjoyed this one, see you for "monthly" challenge #3 next year! 😂🥰
+
+## Community Writeups
+
+-   [Paweł Łukasik](https://allthingsreversed.io/20251023-ultimate-calculator-3000.html)
