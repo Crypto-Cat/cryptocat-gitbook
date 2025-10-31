@@ -18,7 +18,7 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 
 ## CryptoCat's Challenges
 
-These are "monthly" (plz don't ask when is the next one 🥲) challenges that I make/host myself (excluding the challs I make for other CTFs/companies), join my [discord](https://discord.cryptocat.me) for more info 💜
+These are "monthly" (plz don't ask when is the next one 🥲) challenges that I host myself (excluding challs I make for other CTFs/companies). You can join my [discord server](https://discord.cryptocat.me) for more info 💜
 
 -   [10-25: Ultimate Calculator 3000](cryptocat/1025/ultimate_calculator.md)
 -   [12-24: Summar-AI-ze](cryptocat/1224/summaraize.md)
