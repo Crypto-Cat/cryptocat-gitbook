@@ -163,7 +163,9 @@ I responded by carefully explaining the vulnerability, steps to reproduce, impac
 ## Patch 2
 
 I didn't receive a response, but hoped they finally got the message 🙏 The next day, while I was going to pay for my own prescription, I noticed something interesting.
+
 ![](idor_mass_pii-images/8.PNG) ![](idor_mass_pii-images/9.PNG)
+
 Oh dear. They might as well have put a big banner on the website stating "WE ARE VULNERABLE!" 😬
 
 ![](idor_mass_pii-images/meme4.gif)
