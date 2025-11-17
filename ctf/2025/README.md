@@ -2,6 +2,10 @@
 description: CryptoCat's capture the flag challenge writeups, solve scripts and video walkthroughs 💜
 ---
 
+## PwnSec
+
+-   [Rev: Malayo](pwnsec_25/rev/malayo/malayo.md)
+
 ## K17
 
 -   [Rev: Secure Exam Browser](k17_25/rev/secure_exam_browser/secure_exam_browser.md)
