@@ -11,7 +11,7 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 -   [Web: Bug Report Repo](intigriti_23/web/bug_report_repo/bug_report_repo.md)
 -   [Web: My Music](intigriti_23/web/my_music/my_music.md)
 
-## Imaginary
+## Imaginary (iCTF)
 
 -   [Web: Blank](imaginary_23/web/blank/blank.md)
 -   [Web: IDORiot](imaginary_23/web/idoriot/idoriot.md)
