@@ -160,7 +160,7 @@
         -   [Google](ctf/2023/google_23/)
             -   [Pwn](ctf/2023/google_23/pwn/)
                 -   [Write-Flag-Where](ctf/2023/google_23/pwn/write-flag-where/write-flag-where.md)
-        -   [Cyber Apocalypse](ctf/2023/cyber_apocalypse_23/)
+        -   [HTB Cyber Apocalypse](ctf/2023/cyber_apocalypse_23/)
             -   [AI](ctf/2023/cyber_apocalypse_23/ai/)
                 -   [Last Hope](ctf/2023/cyber_apocalypse_23/ai/last_hope/last_hope.md)
                 -   [Mysterious Learning](ctf/2023/cyber_apocalypse_23/ai/mysterious-learning.md)

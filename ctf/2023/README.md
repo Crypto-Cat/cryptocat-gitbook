@@ -24,7 +24,7 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 
 -   [Pwn: Write-Flag-Where](google_23/pwn/write-flag-where/write-flag-where.md)
 
-## Cyber Apocalypse
+## HTB Cyber Apocalypse
 
 -   [AI: Last Hope](cyber_apocalypse_23/ai/last_hope/last_hope.md)
 -   [AI: Mysterious Learning](cyber_apocalypse_23/ai/mysterious-learning.md)
