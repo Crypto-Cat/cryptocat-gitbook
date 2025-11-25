@@ -6,5 +6,6 @@ description: CryptoCat's vulnerability research blog 💜
 
 ## 2025
 
+-   [CVE-2025-31344: giflib Heap-based Buffer Overflow](cve_2025_31344/cve_2025_31344.md)
 -   [CVE-2025-24813: Tomcat DefaultServlet Partial PUT](cve_2025_24813/cve_2025_24813.md)
 -   [CVE-2025-54376: Hoverfly WebSocket Auth Bypass](cve_2025_54376/cve_2025_54376.md)

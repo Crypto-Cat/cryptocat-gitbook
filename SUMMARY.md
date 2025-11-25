@@ -362,4 +362,5 @@
     -   [CVE Analysis](research/cve/README.md)
         -   [CVE-2025-24813: Tomcat DefaultServlet Partial PUT](research/cve/cve_2025_24813/cve_2025_24813.md)
         -   [CVE-2025-54376: Hoverfly WebSocket Auth Bypass](research/cve/cve_2025_54376/cve_2025_54376.md)
+        -   [CVE-2025-31344: giflib Heap-based Buffer Overflow](research/cve/cve_2025_31344/cve_2025_31344.md)
     -   [Novel Research](research/novel/README.md)

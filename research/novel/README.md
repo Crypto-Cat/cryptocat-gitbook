@@ -1,5 +1,5 @@
 # Novel Research
 
-## 2025
+## 2026
 
 TODO 🫠
