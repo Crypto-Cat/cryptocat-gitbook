@@ -1136,3 +1136,7 @@ As I mentioned earlier, this challenge was inspired by [Brother Printers CVEs](h
 Finally, a shout-out to [STAR Labs](https://x.com/starlabs_sg), who recently published a [writeup](https://starlabs.sg/blog/2025/11-breaking-into-a-brother-mfc-j1010dw) about the exploit chain they _almost_ submitted to Pwn2Own Ireland 2025. It leveraged several of the existing CVEs, combined with some new discoveries. Unfortunately, the vendor dropped a patch on the final day of Pwn2Own registration which broke the chain 😤
 
 ![Print2Own](./images/meme.jpg "Print2Own")
+
+## Community Writeups
+
+-   [Paweł Łukasik](https://allthingsreversed.io/20251116-Mother-printers-writeup.html)
