@@ -258,7 +258,7 @@ curl --data-urlencode 'username=admin' --data-urlencode 'password=dBSEME&P*YRTVP
 * Connection #0 to host 127.0.0.1 left intact
 ```
 
-That was easy! Now we have a problem, though: how are we going to find the password for the remote printer? The serial and password were both hardcoded into the local binary. It's time we opened `printer_build` in Ghidra to see how the whole thing is put together.
+That was easy! Now we have a problem though: how are we going to find the password for the remote printer? The serial and password were both hardcoded into the local binary. It's time we opened `printer_build` in Ghidra to see how the whole thing is put together.
 
 Since the binary is also stripped (like the real firmware!), we'll start off at the `entry` function and move into `main`
 
@@ -525,7 +525,7 @@ Unfortunately for us, the value is initialised as zero.
 
 ![superuser flag logic](images/14.PNG "superuser flag logic")
 
-If we check the references for write operations we will find one; `FUN_00402dba` sets the value to `1` ✅
+Checking the references for write operations; `FUN_00402dba` sets the value to `1` ✅
 
 ![Function enabling superuser](images/15.PNG "Function enabling superuser")
 
@@ -1131,6 +1131,8 @@ Run it against the remote server -> profit 💲
 
 ## Conclusion
 
-As I mentioned earlier, this challenge was inspired by [Brother Printers CVEs](https://github.com/sfewer-r7/BrotherVulnerabilities) discovered by [Stephen Fewer](https://x.com/stephenfewer). When I read the whitepaper, I thought it was a really crazy chain of vulnerabilities with serious impact. I decided to make a [video](https://www.youtube.com/watch?v=--SaQKmcyiU) on the topic, and wanted to follow it up with a practical challenge that demonstrates some of the CVEs; a mini "Print2Own". Finally, a shout-out to [STAR Labs](https://x.com/starlabs_sg), who recently published a [writeup](https://starlabs.sg/blog/2025/11-breaking-into-a-brother-mfc-j1010dw) about the exploit chain they _almost_ submitted to Pwn2Own Ireland 2025. It leveraged several of the existing CVEs, combined with some new discoveries. Unfortunately, the vendor dropped a patch on the final day of Pwn2Own registration which broke the chain 😤
+As I mentioned earlier, this challenge was inspired by [Brother Printers CVEs](https://github.com/sfewer-r7/BrotherVulnerabilities) discovered by [Stephen Fewer](https://x.com/stephenfewer). When I read the whitepaper, I thought it was a really crazy chain of vulnerabilities with serious impact. I decided to make a [video](https://www.youtube.com/watch?v=--SaQKmcyiU) on the topic, and wanted to follow it up with a practical challenge that demonstrates some of the CVEs; a mini Pwn2Own (without the RCE - although I nearly added it to the SSRF step).
+
+Finally, a shout-out to [STAR Labs](https://x.com/starlabs_sg), who recently published a [writeup](https://starlabs.sg/blog/2025/11-breaking-into-a-brother-mfc-j1010dw) about the exploit chain they _almost_ submitted to Pwn2Own Ireland 2025. It leveraged several of the existing CVEs, combined with some new discoveries. Unfortunately, the vendor dropped a patch on the final day of Pwn2Own registration which broke the chain 😤
 
 ![Print2Own](./images/meme.jpg "Print2Own")
