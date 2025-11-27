@@ -30,8 +30,6 @@ I tried to ensure the challenge architecture would recreate the original vulnera
 
 ## Solution
 
-### Open Directory Listing
-
 When we visit the URL provided, we'll find a website for a printer manufacturer called "Mother Printers Inc" 🖨
 
 ![Mother Printers Inc landing page](./images/0.PNG "Mother Printers Inc landing page")
@@ -43,6 +41,8 @@ We can't access the admin page as it requires local access. We'll return to that
 Now that you're awake, I'll switch back to dark mode. There's a firmware page that has a download link 🔗
 
 ![Firmware download page](./images/2.PNG "Printer firmware download page")
+
+### Open Directory Listing
 
 When downloading the file, we should observe the endpoint (`/printer_release/printer`). A "release" often has multiple files; let's try to access `/printer_release/` directly.
 
