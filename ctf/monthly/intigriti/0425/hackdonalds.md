@@ -23,7 +23,7 @@ layout:
 | -------------------------------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------- |
 | [Intigriti April Challenge (2024)](https://hackdonalds.intigriti.io) | Bastien + [CryptoCat](https://twitter.com/_CryptoCat) | NextJS Middleware Auth Bypass, CVE-2025-29927, XXE |
 
-[![](https://img.youtube.com/vi/TODO/0.jpg)](https://www.youtube.com/watch?v=TODO "Next.js Middleware Auth Bypass (CVE-2025-29927) and XXE Local File Read")
+[![](https://img.youtube.com/vi/KwD_TKZr0YY/0.jpg)](https://www.youtube.com/watch?v=KwD_TKZr0YY "Next.js Middleware Auth Bypass (CVE-2025-29927) and XXE Local File Read")
 
 ## Challenge Description
 
@@ -166,7 +166,3 @@ Nice, so we can try enumerating all of these files starting with the `/app/` dir
 There we have our flag: `INTIGRITI{XXE_1n_Ic3Cr34m_M4ch1n3s}` 🚩
 
 Some players retrieved the same file from `/proc/self/cwd/package.json` or simply `package.json`
-
-## Community Writeups
-
-1. [TODO]
