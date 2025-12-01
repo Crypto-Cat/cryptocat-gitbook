@@ -18,6 +18,10 @@ layout:
 
 # Mother Printers
 
+## Video Walkthrough
+
+[![VIDEO](https://img.youtube.com/vi/ebNYtX_8lOY/0.jpg)](https://www.youtube.com/watch?v=ebNYtX_8lOY "Hacking Mother Printers - From Serial Leak to Admin SSRF (Print2Own Challenge)")
+
 ## Challenge Description
 
 > Print2Own: https://app.hackinghub.io/hubs/mother-printers
