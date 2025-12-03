@@ -4,6 +4,7 @@
 -   [CTF Writeups](ctf/README.md)
     -   [Monthly Challenges](ctf/monthly/README.md)
         -   [YesWeHack](ctf/monthly/ywh/)
+            -   [10-25: Ghost Whisper](ctf/monthly/ywh/1025/ghost_whisper.md)
             -   [09-25: Chainfection](ctf/monthly/ywh/0925/chainfection.md)
             -   [08-25: Hardware Monitor](ctf/monthly/ywh/0825/hardware_monitor.md)
             -   [07-25: CCTV Manager](ctf/monthly/ywh/0725/cctv_manager.md)
