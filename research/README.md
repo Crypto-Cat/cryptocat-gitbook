@@ -4,19 +4,24 @@ description: CryptoCat's vulnerability research blog 💜
 
 # CryptoCat's Vulnerability Research
 
-A blog to keep track of CVE analysis, patch diffing, reverse engineering, exploit development (PoCs), video walkthroughs etc.
+-   🔍 **[CVE Analysis](cve/README.md)**  
+    Deep dives into vulnerabilities, patch diffing, exploit primitives, and real-world impact.
 
-Practice your skills by checking out [my favourite free hacking resources](https://cryptocat.me/resources)!
-
-Prefer passive learning? Check out my [YouTube videos](https://cryptocat.me/videos) 👇
-
-[![VIDEO](https://img.youtube.com/vi/--SaQKmcyiU/0.jpg)](https://youtube.com/@_CryptoCat)
-
-#### Research
-
--   [CVE Analysis](cve/)
--   [Novel Research](novel/)
+-   🧪 **[Novel Research](novel/README.md)**  
+    Independent research, interesting bugs, reversing notes, and exploits.
 
 ---
 
-💬 Questions? Join my [Discord server](https://discord.cryptocat.me) 🥰
+### 📚 Want to practice?
+
+Check out my favourite free hacking resources: https://cryptocat.me/resources 😎
+
+### 🎥 Prefer videos?
+
+Browse my custom YouTube Video Search Tool: https://cryptocat.me/videos 👇
+
+[![VIDEO](https://img.youtube.com/vi/--SaQKmcyiU/0.jpg)](https://youtube.com/@_CryptoCat)
+
+---
+
+💬 Questions? Join my Discord: https://discord.cryptocat.me 🥰

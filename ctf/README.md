@@ -2,25 +2,38 @@
 description: CryptoCat's capture the flag challenge writeups 💜
 ---
 
-# CryptoCat's CTF writeups
+# CryptoCat's CTF Writeups
 
-A blog to keep track of my CTF writeups, e.g. challenge links, description, summary, videos, writeups, stats etc.
+-   🚩 **[Monthly Challenges](monthly/README.md)**  
+    Recurring challenge sets, warmups, and themed problem collections.
 
-Practice your skills by checking out [my favourite free hacking resources](https://cryptocat.me/resources)!
+-   5️⃣ **[2025 CTFs](2025/README.md)**  
+    Full writeups, solve scripts, and stats from 2025 events.
 
-Prefer some passive learning? Here's a full video playlist of my CTF writeups 👇
+-   4️⃣ **[2024 CTFs](2024/README.md)**  
+    Challenge explanations, walkthroughs, and techniques.
 
-[![VIDEO](https://img.youtube.com/vi/ebNYtX_8lOY/0.jpg)](https://www.youtube.com/playlist?list=PLHUKi1UlEgOLEfaxrnUFUgDPHI6VKf2RK)
+-   3️⃣ **[2023 CTFs](2023/README.md)**  
+    Notes, approaches, and lessons learned.
 
-#### Writeups
+-   2️⃣ **[2022 CTFs](2022/README.md)**  
+    Writeups, payloads, and exploitation breakdowns.
 
--   [Monthly Challenges](monthly/)
--   [2025 CTFs](2025/)
--   [2024 CTFs](2024/)
--   [2023 CTFs](2023/)
--   [2022 CTFs](2022/)
--   [2021 CTFs](2021/)
+-   1️⃣ **[2021 CTFs](2021/README.md)**  
+    Early writeups, methodology building, and foundational challenges.
 
 ---
 
-💬 Questions? Join my [Discord server](https://discord.cryptocat.me) 🥰
+### 📚 Want to practice?
+
+Check out my favourite free hacking resources: https://cryptocat.me/resources 😎
+
+### 🎥 Prefer videos?
+
+Full playlist of my CTF walkthroughs 👇
+
+[![VIDEO](https://img.youtube.com/vi/ebNYt_8lOY/0.jpg)](https://www.youtube.com/playlist?list=PLHUKi1UlEgOLEfaxrnUFUgDPHI6VKf2RK)
+
+---
+
+💬 Questions? Join my Discord: https://discord.cryptocat.me 🥰
