@@ -12,6 +12,11 @@ Prefer passive learning? Check out my [YouTube videos](https://cryptocat.me/vide
 
 [![VIDEO](https://img.youtube.com/vi/--SaQKmcyiU/0.jpg)](https://youtube.com/@_CryptoCat)
 
+#### Research
+
+-   [CVE Analysis](cve/)
+-   [Novel Research](novel/)
+
 ---
 
 💬 Questions? Join my [Discord server](https://discord.cryptocat.me) 🥰
