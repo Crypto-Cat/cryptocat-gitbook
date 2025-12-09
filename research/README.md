@@ -5,10 +5,10 @@ description: CryptoCat's vulnerability research blog 💜
 # CryptoCat's Vulnerability Research
 
 -   🔍 **[CVE Analysis](cve/README.md)**  
-    Deep dives into vulnerabilities, patch diffing, exploit primitives, etc.
+    Deep dives into vulnerabilities, patch diffing, exploit primitives etc.
 
 -   🧪 **[Novel Research](novel/README.md)**  
-    Independent research, interesting bugs, reversing notes, etc.
+    Independent research, interesting bugs, reversing notes etc.
 
 ---
 

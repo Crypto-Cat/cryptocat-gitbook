@@ -4,23 +4,17 @@ description: CryptoCat's capture the flag challenge writeups 💜
 
 # CryptoCat's CTF Writeups
 
--   🚩 **[Monthly Challenges](monthly/README.md)**  
-    Recurring challenge sets, warmups, and themed problem collections.
+-   🚩 **[Monthly Challenges](monthly/README.md)**
 
--   5️⃣ **[2025](2025/README.md)**  
-    Solutions from 2025 events.
+-   5️⃣ **[2025](2025/README.md)**
 
--   4️⃣ **[2024](2024/README.md)**  
-    Solutions from 2024 events.
+-   4️⃣ **[2024](2024/README.md)**
 
--   3️⃣ **[2023](2023/README.md)**  
-    Solutions from 2023 events.
+-   3️⃣ **[2023](2023/README.md)**
 
--   2️⃣ **[2022](2022/README.md)**  
-    Solutions from 2022 events.
+-   2️⃣ **[2022](2022/README.md)**
 
--   1️⃣ **[2021](2021/README.md)**  
-    Solutions from 2021 events.
+-   1️⃣ **[2021](2021/README.md)**
 
 ---
 
