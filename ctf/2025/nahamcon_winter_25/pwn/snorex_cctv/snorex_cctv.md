@@ -759,4 +759,4 @@ If conditions would have allowed, I would have liked to make the challenge close
 
 ![](./images/4.PNG)
 
-Even then, it's vastly over simplified due to [reasons..](#y%20u%20do%20dis?) Anyway, I hope you enjoyed it all the same - see you for the next one 😺
+Even then, it's vastly over simplified due to [reasons..](#y-u-do-dis?) Anyway, I hope you enjoyed it all the same - see you for the next one 😺
