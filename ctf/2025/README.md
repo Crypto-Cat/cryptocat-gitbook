@@ -2,6 +2,12 @@
 description: CryptoCat's capture the flag challenge writeups, solve scripts and video walkthroughs 💜
 ---
 
+## NahamCon (Winter)
+
+-   [Misc: Hacky Christmas](nahamcon_winter_25/misc/hacky_christmas/hacky_christmas.md)
+-   [Pwn: VulnBank](nahamcon_winter_25/pwn/vuln_bank/vuln_bank.md)
+-   [Pwn: Snorex 2K CCTV](nahamcon_winter_25/pwn/snorex_cctv/snorex_cctv.md)
+
 ## PwnSec
 
 -   [Rev: Malayo](pwnsec_25/rev/malayo/malayo.md)
