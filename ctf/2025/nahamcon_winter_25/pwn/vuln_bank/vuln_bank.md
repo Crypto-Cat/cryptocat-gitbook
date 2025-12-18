@@ -26,7 +26,7 @@ layout:
 
 ## Solution
 
-I wasn't planning to make this challenge, but I heard there was a lack of pwn challenges and every CTF needs a buffer overflow 😸 Like [Snorex CCTV](https://book.cryptocat.me/blog/ctf/2025/nahamcon-winter/pwn/snorex_cctv), I wanted it to be reasonably easy due to the time constraints (dev/test time and competition duration) and the expected audience (web-leaning).
+I wasn't planning to make this challenge, but I heard there was a lack of pwn challenges and every CTF needs a buffer overflow 😸 Like [Snorex CCTV](https://book.cryptocat.me/blog/ctf/2025/nahamcon-winter/pwn/snorex_cctv), I wanted it to be reasonably easy due to the time constraints (dev/test time and competition duration) and the expected audience (web-leaning). If you did struggle with this one, why not check out my [FREE Intro to Binary Exploitation video course](https://www.youtube.com/playlist?list=PLHUKi1UlEgOIc07Rfk2Jgb5fZbxDPec94)!
 
 ### Basic File Checks
 

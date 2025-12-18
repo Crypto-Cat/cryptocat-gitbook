@@ -465,7 +465,7 @@ log.info(io.recvn(rlen).decode(errors="ignore").strip())
 io.close()
 ```
 
-It won't work on the first try ([because..](#Debugging))
+It won't work on the first try ([because..](#debugging))
 
 ```bash
 python exploit.py DEBUG
