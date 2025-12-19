@@ -577,7 +577,7 @@ Flag: `flag{h3y_7h47_w4s_7074lly_0u7_0f_b0unds}`
 
 ### Debugging
 
-For those interested, I did a little debugging to try and work out what was going on. I could have coded the challenge better tbh, I was testing/making changes up to the last minute 🥲 Anyway, if you open the binary with pwndbg:
+For those interested, I did a little debugging to try and work out what was going on. I could have coded the challenge better tbh, I was testing/making changes up to the last minute 🤦‍♂️ Anyway, if you open the binary with pwndbg:
 
 ```bash
 gdb -q ./snorex_sonia
