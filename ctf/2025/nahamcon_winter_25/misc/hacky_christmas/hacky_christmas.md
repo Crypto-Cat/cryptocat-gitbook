@@ -18,6 +18,10 @@ layout:
 
 # Hacky Christmas
 
+## Video Walkthrough
+
+[![VIDEO](https://img.youtube.com/vi/fs9WeNkUB4M/0.jpg)](https://www.youtube.com/watch?v=fs9WeNkUB4M "Hacky Christmas: Game Hacking (NahamCon 2025)")
+
 ## Description
 
 > Crypto Claus is trapped inside walls of ice! If you don't get him out soon, and take care of those 1 MILLION gingerbread bombers.. Christmas will be cancelled! 😿
