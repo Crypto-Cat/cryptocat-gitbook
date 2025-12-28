@@ -27,7 +27,7 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 ## HTB Cyber Apocalypse
 
 -   [AI: Last Hope](cyber_apocalypse_23/ai/last_hope/last_hope.md)
--   [AI: Mysterious Learning](cyber_apocalypse_23/ai/mysterious-learning.md)
+-   [AI: Mysterious Learning](cyber_apocalypse_23/ai/mysterious_learnings/mysterious_learnings.md)
 -   [Crypto: Perfect Synchronization](cyber_apocalypse_23/crypto/perfect_syncronization/perfect_syncronization.md)
 -   [Pwn: Getting Started](cyber_apocalypse_23/pwn/getting_started/getting_started.md)
 -   [Pwn: Labyrinth](cyber_apocalypse_23/pwn/labyrinth/labyrinth.md)

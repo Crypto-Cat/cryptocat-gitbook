@@ -46,10 +46,10 @@ description: CryptoCat's capture the flag challenge writeups, solve scripts and 
 -   [Pwn: Flag Leak](pico_22/pwn/flag_leak/flag_leak.md)
 -   [Pwn: Function Overwrite](pico_22/pwn/function_overwrite/function_overwrite.md)
 -   [Pwn: ROPfu](pico_22/pwn/ropfu/ropfu.md)
--   [Pwn: RPS](pico_22/pwn/rps.md)
+-   [Pwn: RPS](pico_22/pwn/rps/rps.md)
 -   [Pwn: Stack Cache](pico_22/pwn/stack_cache/stack_cache.md)
 -   [Pwn: Wine](pico_22/pwn/wine/wine.md)
--   [Pwn: X-Sixty-What](pico_22/pwn/x-sixty-what.md)
+-   [Pwn: X-Sixty-What](pico_22/pwn/x_sixty_what/x_sixty_what.md)
 -   [Rev: Wizardlike](pico_22/rev/wizardlike/wizardlike.md)
 -   [Web: Noted](pico_22/web/noted/noted.md)
 
