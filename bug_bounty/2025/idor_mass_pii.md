@@ -126,7 +126,7 @@ Given the triviality of the issue and the sensitivity of the data involved, I st
 Could you please connect me with someone technical or responsible for the website/app security, as a matter of urgency?
 ```
 
-One week later I still heard nothing and the vulnerability remained untouched. Around this time, I received an email stating my doctor was moving to a new clinic and I would need to register an account ([more on this later](#A%20Secure%20Alternative?)). I responded by asking what would happen to my account on the old website, citing my concerns around the serious vulnerability they were failing to address.
+One week later I still heard nothing and the vulnerability remained untouched. Around this time, I received an email stating my doctor was moving to a new clinic and I would need to register an account ([more on this later](#a-secure-alternative)). I responded by asking what would happen to my account on the old website, citing my concerns around the serious vulnerability they were failing to address.
 
 The doctor asked for details, mentioning that they would be at the clinic the following day and could speak with the IT technician. I reiterated the issue in simplified terms.
 
@@ -262,7 +262,7 @@ Users aren't supposed to be able to right-click or open devtools? There's plenty
 
 # A Secure Alternative?
 
-I [mentioned earlier](#Repeated%20Contact) that my doctor indicated he was leaving the clinic and that I could transfer to the new one. Upon registering to the site, I was asked to upload a lot of sensitive information - including a copy of my NHS medical records, and passport. Considering how insecure the last clinic/pharmacy was, I was understandably concerned and expressed this to my doctor, who responded:
+I [mentioned earlier](#repeated-contact) that my doctor indicated he was leaving the clinic and that I could transfer to the new one. Upon registering to the site, I was asked to upload a lot of sensitive information - including a copy of my NHS medical records, and passport. Considering how insecure the last clinic/pharmacy was, I was understandably concerned and expressed this to my doctor, who responded:
 
 > It is a GDPR complaint encrypted service. Much more safe and secure compared to the other portal you have been using
 

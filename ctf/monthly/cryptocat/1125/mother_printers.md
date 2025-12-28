@@ -839,7 +839,7 @@ Accessing /jobs/manage before overflow: Unauthorized
 Accessing /jobs/manage after overflow: {"status":"ok","flag":"NO_FLAG_SET"}
 ```
 
-We can repeat this against the remote server for the real flag. Remember to update the hardcoded creds, or reintroduce the password generation function (see [PoC](#PoC) for the full chain).
+We can repeat this against the remote server for the real flag. Remember to update the hardcoded creds, or reintroduce the password generation function (see [PoC](#poc) for the full chain).
 
 ### SSRF (admin endpoint)
 
@@ -1144,3 +1144,4 @@ Finally, a shout-out to [STAR Labs](https://x.com/starlabs_sg), who recently pub
 ## Community Writeups
 
 -   [Paweł Łukasik](https://allthingsreversed.io/20251116-Mother-printers-writeup.html)
+-   [Antonio](https://antonio-cybersec.vercel.app/writeups/43ef651f-697e-4dd2-9d84-caf3bd3101f8?hash=953dc9b902518989a5f94b6fcf0886bd355d50a980120edf4e79e681133325b0)
