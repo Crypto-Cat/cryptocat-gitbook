@@ -40,7 +40,7 @@ layout:
 
 I ([CryptoCat](https://youtube.com/@_CryptoCat)) never made a monthly challenge for Intigriti before, so I figured [Defcon](https://defcon.org/html/defcon-32/dc-32-index.html) would be a good time for my debut. My inspiration for this challenge mostly came from watching the [Critical Thinking - Bug Bounty Podcast](https://www.youtube.com/@criticalthinkingpodcast) 💜
 
-First, I'll walk you through the intended solution I had in mind when designing and implementing the challenge. At the end of the writeup, I'll highlight any interesting unintended solutions that may arise, and of course, I'll link all the excellent [community writeups](0824.md#community-writeups)! The challenge is provided with source code but I'll highlight relevant snippets throughout, rather than presenting it all up front.
+First, I'll walk you through the intended solution I had in mind when designing and implementing the challenge. At the end of the writeup, I'll highlight any interesting unintended solutions that may arise, and of course, I'll link all the excellent [community writeups](#community-writeups)! The challenge is provided with source code but I'll highlight relevant snippets throughout, rather than presenting it all up front.
 
 ### Recon
 

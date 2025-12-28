@@ -136,13 +136,13 @@ If we replace the parsed input with a payload to read `/etc/passwd`
 
 We successfully retrieve the file contents!
 
-![](images/10.png)
+![](images/10.PNG)
 
 #### Local File Read (Source Code Disclosure)
 
 Where is the flag though? In a real world scenario, we might look for common files of interest (plenty of wordlists online). Since we know this is a NextJS app, why don't we ask ChatGPT what the common location is and what interesting files it might have?
 
-![](images/11.png)
+![](images/11.PNG)
 
 Nice, so we can try enumerating all of these files starting with the `/app/` directory 😼
 
@@ -161,7 +161,7 @@ Nice, so we can try enumerating all of these files starting with the `/app/` dir
 </machine>
 ```
 
-![](images/12.png)
+![](images/12.PNG)
 
 There we have our flag: `INTIGRITI{XXE_1n_Ic3Cr34m_M4ch1n3s}` 🚩
 

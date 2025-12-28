@@ -477,7 +477,7 @@ $("#homepage").attr({
 });
 ```
 
-Many players studied jQuery to understand the underlying cause of this error, a process made significantly easier through the use of [sourceMaps](https://web.dev/articles/source-maps), which negates the need to debug minified JS code. You can find several examples in [Community Writeups](0124.md#community-writeups) but [this one](https://jorianwoltjer.com/blog/h/hacking/intigriti-xss-challenge/intigriti-january-xss-challenge-0124#debugging-minimized-javascript-libraries) is nice 👌
+Many players studied jQuery to understand the underlying cause of this error, a process made significantly easier through the use of [sourceMaps](https://web.dev/articles/source-maps), which negates the need to debug minified JS code. You can find several examples in [Community Writeups](#community-writeups) but [this one](https://jorianwoltjer.com/blog/h/hacking/intigriti-xss-challenge/intigriti-january-xss-challenge-0124#debugging-minimized-javascript-libraries) is nice 👌
 
 TLDR; the loop inside `attr` will crash when trying to process strings. That includes our `owner` and `homepage` prototypes. In fact, `homepage` _must_ be a string in order to meet this requirement.
 
