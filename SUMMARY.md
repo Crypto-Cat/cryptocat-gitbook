@@ -206,7 +206,7 @@
             -   [Pwn](ctf/2023/angstrom_23/pwn/)
                 -   [Leek](ctf/2023/angstrom_23/pwn/leek/leek.md)
     -   [2022](ctf/2022/README.md)
-        -   [Imaginary (iCTF)](ctf/2022/imaginary-ictf/)
+        -   [Imaginary (iCTF)](ctf/2022/ictf_22/)
             -   [Crypto](ctf/2022/ictf_22/crypto/)
                 -   [ASE](ctf/2022/ictf_22/crypto/ase/ase.md)
             -   [Pwn](ctf/2022/ictf_22/pwn/)
